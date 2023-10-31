@@ -10,14 +10,14 @@ import 'package:tyedapp/Constant/Constants/routes/routesName.dart';
 import '../../Widgets/CustomAppbar2.dart';
 import '../../Widgets/CustomButton.dart';
 
-class PaymentMethodProcess extends StatefulWidget {
-  const PaymentMethodProcess({Key? key}) : super(key: key);
+class PaymentMethodProcess extends StatelessWidget {
+  TextEditingController nameController=TextEditingController();
+  TextEditingController cardNumberController=TextEditingController();
+  TextEditingController exDateController=TextEditingController();
+  TextEditingController ccvController=TextEditingController();
 
-  @override
-  State<PaymentMethodProcess> createState() => _PaymentMethodProcessState();
-}
+  PaymentMethodProcess({super.key});
 
-class _PaymentMethodProcessState extends State<PaymentMethodProcess> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,7 +29,7 @@ class _PaymentMethodProcessState extends State<PaymentMethodProcess> {
               CustomAppBar2(
                 height: Get.height * 0.1,
                 titleText: 'Card Info',
-                customWidth: 0.2,
+
               ),
               SizedBox(
                 height: Get.height * 0.02,
@@ -57,7 +57,8 @@ class _PaymentMethodProcessState extends State<PaymentMethodProcess> {
                     SizedBox(height: Get.height * 0.01),
                     SizedBox(
                       height: Get.height * 0.05,
-                      child: TextField(
+                      child: TextFormField(controller: nameController,
+                        keyboardType: TextInputType.name,
                         decoration: InputDecoration(
                             prefixIcon: Transform.scale(
                               scale: 0.4,
@@ -85,7 +86,8 @@ class _PaymentMethodProcessState extends State<PaymentMethodProcess> {
                         SizedBox(height: Get.height * 0.01),
                         SizedBox(
                           height: Get.height * 0.05,
-                          child: TextField(
+                          child: TextField(controller: cardNumberController,
+                            keyboardType: TextInputType.number,
                             decoration: InputDecoration(
                                 prefixIcon: Transform.scale(
                                   scale: 0.4,
@@ -118,7 +120,8 @@ class _PaymentMethodProcessState extends State<PaymentMethodProcess> {
                                   SizedBox(
                                       height: Get.height * 0.05,
                                       width: Get.width * 0.33,
-                                      child: TextFormField(
+                                      child: TextFormField(controller: exDateController,
+                                        keyboardType: TextInputType.datetime,
                                         decoration: InputDecoration(
                                           contentPadding: EdgeInsets.all(6),
                                           hintText: "01/2022",
@@ -153,7 +156,7 @@ class _PaymentMethodProcessState extends State<PaymentMethodProcess> {
                                       SizedBox(
                                           height: Get.height * 0.05,
                                           width: Get.width * 0.33,
-                                          child: TextFormField(
+                                          child: TextFormField(controller: ccvController,
                                             decoration: InputDecoration(
                                               contentPadding: EdgeInsets.all(6),
                                               hintText: "0 0 0",
@@ -181,7 +184,7 @@ class _PaymentMethodProcessState extends State<PaymentMethodProcess> {
                     Center(
                       child: CustomElevatedButton(
                         onpress: () {
-                          Get.toNamed(RoutesName.DownloadScreen);
+                         Get.toNamed(RoutesName.YourPasscode,arguments: Get.arguments);
                         },
                         text: "Pay Now",
                         height: Get.height * 0.05,

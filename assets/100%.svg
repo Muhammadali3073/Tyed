@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="97" height="97" viewBox="0 0 97 97">
+  <defs>
+    <filter id="Ellipse_2741" x="0" y="0" width="97" height="97" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Ellipse_2742" x="7" y="7" width="84" height="84" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-2"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-2"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="Group_11361" data-name="Group 11361" transform="translate(-166 -75)">
+    <g id="Group_9169" data-name="Group 9169" transform="translate(1 -162)">
+      <g transform="matrix(1, 0, 0, 1, 165, 237)" filter="url(#Ellipse_2741)">
+        <circle id="Ellipse_2741-2" data-name="Ellipse 2741" cx="39.5" cy="39.5" r="39.5" transform="translate(9 6)" fill="#fff"/>
+      </g>
+      <g transform="matrix(1, 0, 0, 1, 165, 237)" filter="url(#Ellipse_2742)">
+        <g id="Ellipse_2742-2" data-name="Ellipse 2742" transform="translate(16 13)" fill="#fff" stroke="#f34d4d" stroke-linecap="round" stroke-width="2">
+          <circle cx="33" cy="33" r="33" stroke="none"/>
+          <circle cx="33" cy="33" r="32" fill="none"/>
+        </g>
+      </g>
+      <text id="_100_" data-name="100%" transform="translate(194 289)" fill="#131415" font-size="16" font-family="SegoeUI, Segoe UI"><tspan x="0" y="0">100%</tspan></text>
+    </g>
+  </g>
+</svg>

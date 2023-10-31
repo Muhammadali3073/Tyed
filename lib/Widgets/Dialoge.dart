@@ -5,14 +5,14 @@ import 'package:get/get.dart';
 import 'package:tyedapp/Constant/Constants/colors/Constants.dart';
 import 'RoundedButton.dart';
 
-class PersonController extends GetxController {
+class ShowDialogue {
   String? title;
   String? content;
   VoidCallback? onpress;
   RxList<dynamic> count = [0].obs;
   final index = 1.obs;
-  Rx<TextEditingController> details = TextEditingController().obs;
-  showCustomDialog(BuildContext context,
+
+  static showCustomDialog(BuildContext context,
       {String? title, String? content, VoidCallback? onpress}) {
     showDialog(
       context: context,
@@ -20,12 +20,12 @@ class PersonController extends GetxController {
         return AlertDialog(
           title: title != null
               ? Center(
-                  child: Text(
-                    title,
-                    style: const TextStyle(
-                        fontSize: 14, color: Color.fromRGBO(19, 20, 21, 1)),
-                  ),
-                )
+            child: Text(
+              title,
+              style: const TextStyle(
+                  fontSize: 14, color: Color.fromRGBO(19, 20, 21, 1)),
+            ),
+          )
               : null, // Check if title is provided, otherwise null
           contentPadding: EdgeInsets.all(8), // Adjust padding as needed
           content: SizedBox(
@@ -76,15 +76,7 @@ class PersonController extends GetxController {
       },
     );
   }
-
-  void setCount(int a, int b) {
-    count[b] = a;
-    update();
-  }
-
-  void setIndex(int a) {
-    count.value.add(0);
-    index.value = a;
-    update();
-  }
 }
+
+
+

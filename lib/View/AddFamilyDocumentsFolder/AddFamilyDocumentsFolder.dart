@@ -16,15 +16,8 @@ class FamilyDocumentsFolder extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          toolbarHeight: Get.height * 0.1,
-          leading: IconButton(
-              onPressed: () {
-                Get.back();
-              },
-              icon: Icon(
-                Icons.arrow_back_ios_new,
-                // size: 14,
-              )),
+          toolbarHeight: Get.height * 0.12,
+
           elevation: 0,
           backgroundColor: Colors.transparent,
           flexibleSpace: CustomAppBar2(

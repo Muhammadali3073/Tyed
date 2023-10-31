@@ -47,6 +47,7 @@ class _MyAppState extends State<MyApp> {
   Get.put(SignupController(), tag: 'signupController');
   @override
   Widget build(BuildContext context) {
+
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       initialRoute: widget.isLogin

@@ -6,6 +6,8 @@ class SignUpModel {
   String? userAddress;
   String? userDOB;
   String? userPassword;
+  String? userId;
+  String? profileImage;
   DateTime? timeStamp;
 
   SignUpModel(
@@ -16,8 +18,9 @@ class SignUpModel {
       this.userAddress,
       this.userDOB,
       this.userPassword,
-        this.timeStamp
-     });
+      this.timeStamp,
+      this.userId,
+      this.profileImage});
 
   SignUpModel.fromJson(Map<String, Object?> json)
       : this(
@@ -28,6 +31,8 @@ class SignUpModel {
           userAddress: json['address'] as String,
           userDOB: json['dOB'] as String,
           userPassword: json['password'] as String,
+          userId: json['userId'] as String,
+          profileImage: json['profileImage'] as String,
           timeStamp: json['timeStamp'] as DateTime,
         );
 
@@ -41,6 +46,8 @@ class SignUpModel {
       'dOB': userDOB,
       'password': userPassword,
       'timeStamp': timeStamp,
+      'profileImage': profileImage,
+      'userId': userId
     };
   }
 }

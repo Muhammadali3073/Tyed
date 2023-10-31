@@ -5,9 +5,12 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:tyedapp/Constant/Constants/colors/Constants.dart';
 
+import '../Constant/Constants/routes/routesName.dart';
+
 class CustomPdfRow extends StatelessWidget {
   Widget? column1;
   Widget? column2;
+
   CustomPdfRow({Key? key, this.column1, this.column2});
 
   @override
@@ -26,17 +29,19 @@ class CustomPdfRow extends StatelessWidget {
         children: [
           Align(
             alignment: Alignment.topLeft,
-            child: Container(
-              decoration: BoxDecoration(
-                color: AppColorsConstants.AppMainColor,
-                borderRadius: BorderRadius.only(
-                  bottomRight: Radius.circular(27),
+            child: InkWell(onTap:()=>Get.toNamed(RoutesName.PdfViewer) ,
+              child: Container(
+                decoration: BoxDecoration(
+                  color: AppColorsConstants.AppMainColor,
+                  borderRadius: BorderRadius.only(
+                    bottomRight: Radius.circular(27),
+                  ),
                 ),
-              ),
-              height: Get.height * 0.075,
-              width: Get.width * 0.18,
-              child: Center(
-                child: SvgPicture.asset("assets/pdficon.svg"),
+                height: Get.height * 0.075,
+                width: Get.width * 0.18,
+                child: Center(
+                  child: SvgPicture.asset("assets/pdficon.svg"),
+                ),
               ),
             ),
           ),

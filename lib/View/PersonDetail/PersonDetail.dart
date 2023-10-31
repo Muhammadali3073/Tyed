@@ -19,8 +19,8 @@ class PersonDetails extends StatefulWidget {
 }
 
 class _PersonDetailsState extends State<PersonDetails> {
-  final PersonController controller = Get.put(PersonController());
-  final PersonDetailController persondetail = Get.put(PersonDetailController());
+
+  final PersonDetailController personDetailController = Get.put(PersonDetailController(),tag: 'personDetailController');
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +28,7 @@ class _PersonDetailsState extends State<PersonDetails> {
       child: Scaffold(
         backgroundColor: AppColorsConstants.SecondaryColor,
         appBar: const CustomAppBar(
-          svgImagePath: 'assets/10percent.svg',
+          svgImagePath: 'assets/10%.svg',
         ),
         body: Padding(
           padding: const EdgeInsets.symmetric(
@@ -47,9 +47,8 @@ class _PersonDetailsState extends State<PersonDetails> {
                     style: AppTextConstant.SimpleStyle,
                   ),
                   CustomTextField(
-                    onChanged: (value) {
-                      persondetail.fullname.value = value;
-                    },
+controller: personDetailController.personNameController,
+                    keyboardType: TextInputType.name,
                     hintText: "Person Name",
                   ),
                   Text(
@@ -57,28 +56,25 @@ class _PersonDetailsState extends State<PersonDetails> {
                     style: AppTextConstant.SimpleStyle,
                   ),
                   CustomTextField(
-                      onChanged: (value) {
-                        persondetail.spousefullname.value = value;
-                      },
-                      hintText: "Person Name"),
+                      controller: personDetailController.spouseNameController,keyboardType: TextInputType.name,
+                      hintText: "Spouse Name"),
                   Text(
                     "What is your address?",
                     style: AppTextConstant.SimpleStyle,
                   ),
                   CustomTextField(
-                      onChanged: (value) {
-                        persondetail.address.value = value;
-                      },
+                      controller: personDetailController.addressController,keyboardType: TextInputType.text,
                       hintText: "eg city,street,state"),
                   Text(
                     "When are you getting tyed?",
                     style: AppTextConstant.SimpleStyle,
                   ),
-                  CustomTextField(
-                      onChanged: (value) {
-                        persondetail.calender.value = value;
-                        // ignore: avoid_print
-                      },
+                  CustomTextField(  onTap: () {
+                    personDetailController.selectDOB(context);
+                  },
+                      controller: personDetailController.dateController,
+                      keyboardType: TextInputType.datetime,
+                      readOnly: true,
                       hintText: "DD  MM YYY"),
                   SizedBox(
                     height: Get.height * 0.023,
@@ -87,7 +83,7 @@ class _PersonDetailsState extends State<PersonDetails> {
                     alignment: Alignment.bottomCenter,
                     child: CustomElevatedButton(
                         onpress: () {
-                          controller.showCustomDialog(context,
+                          ShowDialogue.    showCustomDialog(context,
                               title: "Separate Assets", onpress: () {
                             Get.toNamed(RoutesName.AssetsScreen);
                           },

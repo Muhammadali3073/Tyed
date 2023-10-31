@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:tyedapp/Constant/Constants/colors/Constants.dart';
 
 class ContactRow extends StatelessWidget {
   final String? title;
@@ -12,6 +13,9 @@ class ContactRow extends StatelessWidget {
   final double? radius;
   final Color? colors;
   final Widget? iconsdata;
+  final bool isSelected ;
+
+
   ContactRow(
       {super.key,
       this.contact,
@@ -21,7 +25,9 @@ class ContactRow extends StatelessWidget {
       this.width,
       this.height,
       this.style,
+        required this.isSelected,
       this.radius});
+
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +35,8 @@ class ContactRow extends StatelessWidget {
         borderRadius: BorderRadius.circular(30),
         elevation: 4,
         child: Container(
-            decoration: BoxDecoration(boxShadow: [
+            decoration: BoxDecoration(border: Border.all(color: isSelected==true?AppColorsConstants.AppMainColor:Colors.white),
+                boxShadow: [
               BoxShadow(
                 color: Colors.grey.shade100,
               )

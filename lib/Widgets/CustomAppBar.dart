@@ -32,7 +32,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                   onPressed: () {
                     Get.back();
                   },
-                  icon: const Icon(size: 15, Icons.arrow_back_ios_new)),
+                  icon:  Icon(size: 15, Icons.arrow_back_ios_new,color: Colors.white,)),
             ),
           ),
           flexibleSpace: ClipPath(

@@ -17,7 +17,7 @@ class RectangularTextButton extends StatelessWidget {
       this.title,
       required this.index,
       this.indexx});
-  final PersonController controller = Get.put(PersonController());
+
   int? indexx;
   int index;
   @override
@@ -32,10 +32,7 @@ class RectangularTextButton extends StatelessWidget {
               height: 45,
               decoration: BoxDecoration(
                 color: Color.fromRGBO(255, 250, 251, 1),
-                border: controller.count[index] == indexx
-                    ? Border.all(
-                        width: 1.5, color: Colors.pinkAccent.withOpacity(0.6))
-                    : Border(),
+
               ),
             ),
           )),

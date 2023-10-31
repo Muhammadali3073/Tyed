@@ -18,14 +18,6 @@ class DocumentsFolder extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           toolbarHeight: Get.height * 0.1,
-          leading: IconButton(
-              onPressed: () {
-                Get.back();
-              },
-              icon: Icon(
-                Icons.arrow_back_ios_new,
-                // size: 14,
-              )),
           elevation: 0,
           backgroundColor: Colors.transparent,
           flexibleSpace: CustomAppBar2(
@@ -77,26 +69,7 @@ class DocumentsFolder extends StatelessWidget {
                               AppTextConstant.BoldStyle.copyWith(fontSize: 14))
                     ],
                   )),
-                  PopupMenuItem(
-                      onTap: () {
-                        Get.toNamed(RoutesName.ShareDocumentsScreen);
-                      },
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Transform.scale(
-                              scale: 1,
-                              child: SvgPicture.asset(
-                                "assets/share.svg",
-                                height: Get.height * 0.03,
-                                width: Get.width * 0.03,
-                              )),
-                          SizedBox(width: Get.width * 0.02),
-                          Text("Share",
-                              style: AppTextConstant.BoldStyle.copyWith(
-                                  fontSize: 14))
-                        ],
-                      )),
+
                   PopupMenuItem(
                       onTap: () {
                         Get.toNamed(RoutesName.ChangePasscode);

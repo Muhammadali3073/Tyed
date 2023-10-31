@@ -63,7 +63,7 @@ class _YourTiedAgreementState extends State<YourTiedAgreement> {
                                   height: 17,
                                   colors: AppColorsConstants.AppMainColor,
                                   onpress: () {
-                                    Get.toNamed(RoutesName.PaymentMethod);
+                                    Get.toNamed(RoutesName.PaymentMethod,);
                                     // Add your onPressed logic here
                                   },
                                 ),

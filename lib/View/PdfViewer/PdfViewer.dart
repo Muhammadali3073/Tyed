@@ -1,12 +1,12 @@
 // ignore_for_file: library_private_types_in_public_api
 
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+
 import 'package:get/get.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
-import 'package:tyedapp/Constant/Constants/colors/Constants.dart';
 
-import '../../Widgets/CustomButton.dart';
+
+
 
 class PdfViewer extends StatefulWidget {
   const PdfViewer({Key? key}) : super(key: key);
@@ -64,44 +64,30 @@ class _PdfVierState extends State<PdfViewer> {
                 ),
               ),
             ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: Get.width * 0.05),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.only(bottom: Get.height * 0.03),
-                        child: SvgPicture.asset('assets/blackiconbackward.svg'),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Row(
+
+                  children: [
+
+                    Padding(
+                      padding:  EdgeInsets.symmetric(vertical: Get.height*0.02),
+                      child: SizedBox(
+                        height: Get.height ,
+                        width: Get.width ,
+                        child: SfPdfViewer.asset('assets/sample.pdf'),
                       ),
-                      SizedBox(
-                        height: Get.height * 0.5,
-                        width: Get.width * 0.55,
-                        child: Padding(
-                          padding: EdgeInsets.only(top: Get.height * 0.05),
-                          child: SfPdfViewer.asset('assets/sample.pdf'),
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(bottom: Get.height * 0.03),
-                        child: SvgPicture.asset('assets/blackiconforward.svg'),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
+                    ),
+
+                  ],
+                ),
+              ],
             ),
             SizedBox(
               height: Get.height * 0.05,
             ),
-            CustomElevatedButton(
-                onpress: () {},
-                text: "Edit",
-                height: Get.height * 0.05,
-                width: Get.width * 0.4,
-                colors: AppColorsConstants.AppMainColor),
+
           ],
         ),
       ),

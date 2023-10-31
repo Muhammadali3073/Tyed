@@ -32,7 +32,7 @@ class _ContactListScreenState extends State<ContactListScreen> {
     "+8750348943",
     "+8750348943",
   ];
-
+  List<bool> selectedItems = List.filled(4, false);
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -91,9 +91,14 @@ class _ContactListScreenState extends State<ContactListScreen> {
                   padding:
                       const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
                   child: InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      setState(() {
+                        selectedItems[index] = !selectedItems[index];
+                      });
+                    },
                     child: ContactRow(
                       contact: contact[index],
+                      isSelected: selectedItems[index],
                       title: title[index],
                     ),
                   ),

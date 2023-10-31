@@ -34,7 +34,6 @@ class SignupController extends GetxController {
         toFirestore: (users, _) => users.toJson(),
       );
 
-
   // Sign Up Method
   signUpHandler(
       {userFirstName,
@@ -63,6 +62,7 @@ class SignupController extends GetxController {
 
         if (user.toString().isNotEmpty) {
           addUser(user.uid,
+              profileImage: '',
               userFirstName: userFirstName,
               userLastName: userLastName,
               userEmail: userEmail,
@@ -84,7 +84,8 @@ class SignupController extends GetxController {
 
   // Add user data in fire-store
   Future<void> addUser(userID,
-      {userFirstName,
+      {profileImage,
+      userFirstName,
       userLastName,
       userEmail,
       userPhoneNumber,
@@ -95,6 +96,8 @@ class SignupController extends GetxController {
     return await userData
         .doc(userID)
         .set(SignUpModel(
+            userId: userID,
+            profileImage: profileImage,
             userFirstName: userFirstName,
             userLastName: userLastName,
             userEmail: userEmail,
@@ -120,7 +123,7 @@ class SignupController extends GetxController {
   selectDOB(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
       context: context,
-      initialDate: DateTime.now(),
+      initialDate: DateTime(2000),
       firstDate: DateTime(1950),
       lastDate: DateTime(2101),
     );

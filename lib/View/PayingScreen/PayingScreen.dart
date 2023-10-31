@@ -32,46 +32,48 @@ class _PersonDetailsState extends State<PayingScreen> {
     "Line of credit",
     "Other debt"
   ];
-  final PersonController controller = Get.put(PersonController());
-  List<bool> selectedItems = List.generate(1, (index) => false);
+RxInt selectedIndex=0.obs;
+ TextEditingController detailPaymentController=TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(
-        svgImagePath: 'assets/30percent.svg',
-      ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: EdgeInsets.only(bottom: 5),
-                child: Text(
-                  "What debt are you responsible for paying?",
-                  style: AppTextConstant.SimpleStyle,
-                ),
+        appBar: CustomAppBar(
+          svgImagePath: 'assets/60%.svg',
+        ),
+        body: Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: Get.width * 0.025,
+          ),
+          child: SingleChildScrollView(
+            child:
+            Column(crossAxisAlignment: CrossAxisAlignment.start, children: [ Padding(
+              padding: EdgeInsets.only(bottom: 5),
+              child: Text(
+                "What debt are you responsible for paying?",
+                style: AppTextConstant.SimpleStyle,
               ),
+            ),
               Container(
                 decoration: BoxDecoration(
                   color:
-                      Colors.white, // Set the background color of the container
+                  Colors.white, // Set the background color of the container
+
                   boxShadow: [
                     BoxShadow(
                       color:
-                          Colors.grey.withOpacity(0.2), // Color of the shadow
+                      Colors.grey.withOpacity(0.2), // Color of the shadow
+
                       spreadRadius: 5, // Spread radius
+
                       blurRadius: 7, // Blur radius
+
                       offset: const Offset(0, 2), // Offset of the shadow
                     ),
                   ],
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 10,
-                  ),
+                  padding: EdgeInsets.symmetric(horizontal: Get.width * 0.03),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -80,7 +82,7 @@ class _PersonDetailsState extends State<PayingScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            "Separate Debt",
+                            "What assets belong only to you?",
                             style: AppTextConstant.SimpleStyle,
                           ),
                           Image.asset("assets/group3.png")
@@ -93,47 +95,75 @@ class _PersonDetailsState extends State<PayingScreen> {
                           shrinkWrap: true,
                           itemCount: images.length,
                           itemBuilder: (context, index) {
-                            return Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 4),
-                              child: GestureDetector(
-                                onTap: () {},
-                                child: RectangularTextButton(
-                                  index: 0,
-                                  widget: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          Transform.scale(
-                                              scaleX: 1.5,
-                                              scaleY: 1.5,
-                                              child: SvgPicture.asset(
-                                                images[index],
-                                              )),
-                                          Padding(
-                                            padding:
-                                                const EdgeInsets.only(left: 20),
-                                            child: Text(
-                                              title[index],
-                                              style:
-                                                  AppTextConstant.SimpleStyle,
-                                            ),
-                                          ),
-                                        ]),
-                                  ),
+                            return Obx(() => Padding(
+                              padding: EdgeInsets.symmetric(vertical: 4),
+                              child:InkWell( onTap: (){
+                                selectedIndex.value=index;
+                              },
+                                  child:Container(
+                                width: Get.width,
+                                height: Get.height * 0.065,
+                                decoration: BoxDecoration(border: Border.all(color: selectedIndex.value==index?AppColorsConstants.AppMainColor:Colors.white),
+                                  color: Colors
+                                      .white, // Set the background color of the container
+
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey.withOpacity(
+                                          0.2), // Color of the shadow
+
+                                      spreadRadius: 5, // Spread radius
+
+                                      blurRadius: 7, // Blur radius
+
+                                      offset:
+                                      Offset(0, 2), // Offset of the shadow
+                                    ),
+                                  ],
                                 ),
-                              ),
-                            );
+                                child: Row(
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal: Get.width * 0.02,
+                                          vertical: Get.height * 0.01),
+                                      child: Row(
+                                          mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                          children: [
+                                            Transform.scale(
+                                                scaleX: 1.2,
+                                                scaleY: 1.2,
+                                                child: SvgPicture.asset(
+                                                  images[index],
+                                                )),
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 20),
+                                              child: Text(
+                                                title[index],
+                                                style:
+                                                AppTextConstant.SimpleStyle,
+                                              ),
+                                            ),
+                                          ]),
+                                    ),
+                                  ],
+                                ),
+                              )),
+                            ));
                           },
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 3),
-                        child: Text(
-                          "What are the details of this credit card?",
-                          style: AppTextConstant.SimpleStyle,
-                        ),
+                      SizedBox(
+                        height: Get.height * 0.014,
+                      ),
+                      Obx(() => Text(
+                        "What are the details of this ${title[selectedIndex.value]}?",
+                        style: AppTextConstant.SimpleStyle,
+                      ),),
+                      SizedBox(
+                        height: Get.height * 0.008,
                       ),
                       Container(
                         decoration: BoxDecoration(
@@ -150,23 +180,28 @@ class _PersonDetailsState extends State<PayingScreen> {
                           ],
                         ),
                         child: TextFormField(
+                          controller: detailPaymentController,
+                          keyboardType: TextInputType.text,
                           decoration: InputDecoration(border: InputBorder.none),
-                          maxLines: 4,
+                          maxLines: 5,
                         ),
                       ),
                       SizedBox(
-                        height: Get.height * 0.02,
-                      )
+                        height: Get.height * 0.03,
+                      ),
                     ],
                   ),
                 ),
               ),
               SizedBox(
-                height: Get.height * 0.005,
+                height: Get.height * 0.008,
               ),
-              const RoundedButton2(),
+              RoundedButton2(
+                title: "Add another separate asset",
+                onpress: () {},
+              ),
               SizedBox(
-                height: Get.height * 0.02,
+                height: Get.height * 0.03,
               ),
               Align(
                 alignment: Alignment.bottomCenter,
@@ -180,10 +215,8 @@ class _PersonDetailsState extends State<PayingScreen> {
                   colors: AppColorsConstants.AppMainColor,
                 ),
               ),
-            ],
+            ]),
           ),
-        ),
-      ),
-    );
+        ));
   }
 }

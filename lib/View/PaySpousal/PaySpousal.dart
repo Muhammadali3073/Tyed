@@ -9,7 +9,7 @@ import 'package:tyedapp/Constant/Constants/routes/routesName.dart';
 import '../../Widgets/CustomAppBar.dart';
 import '../../Widgets/CustomButton.dart';
 import '../../Widgets/CustomContainer.dart';
-import '../../Widgets/YesNoScreen.dart';
+
 
 class PaySpousal extends StatefulWidget {
   const PaySpousal({super.key});
@@ -19,17 +19,15 @@ class PaySpousal extends StatefulWidget {
 }
 
 class _PaySpousalState extends State<PaySpousal> {
-  String? selectedValue = "Yes";
-  Color selectedColor =
-      AppColorsConstants.AppMainColor; // Custom color for selected RadioButton
-  Color unselectedColor =
-      Colors.black; // Custom color for unselected RadioButton
+  RxString selectedValue = "Yes, specify".obs;
+  RxString selectedValue1 = "Yes".obs;
+  TextEditingController supportDetailController=TextEditingController();
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Obx(() => Scaffold(
       backgroundColor: AppColorsConstants.SecondaryColor,
       appBar: const CustomAppBar(
-        svgImagePath: 'assets/80percent.svg',
+        svgImagePath: 'assets/90%.svg',
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -37,21 +35,110 @@ class _PaySpousalState extends State<PaySpousal> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              Align(
+                  alignment: Alignment.topLeft,
+                  child: Text(
+                    "If the tyed marriage ends, will either of you pay spousal support to the other?",
+                    style: AppTextConstant.SimpleStyle,
+                  )),
               SizedBox(
-                height: Get.height * 0.24,
-                child: CustomColumn(
-                  yesText: "No",
-                  noText: "Yes,specify",
-                  title:
-                      "If the tyed marriage ends, will either of you pay spousalsupport to the other?",
-                  selectedValue: selectedValue,
-                  onChanged: (value) {
-                    setState(() {
-                      selectedValue = value;
-                    });
-                  },
-                  textStyle: AppTextConstant.SimpleStyle,
+                height: Get.height * 0.012,
+              ), Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(32),
+                  color:
+                  Colors.white, // Set the background color of the container
+                  boxShadow: [
+                    BoxShadow(
+                      color:
+                      Colors.grey.withOpacity(0.2), // Color of the shadow
+                      spreadRadius: 5, // Spread radius
+                      blurRadius: 7, // Blur radius
+                      offset: Offset(0, 2), // Offset of the shadow
+                    ),
+                  ],
                 ),
+                height: Get.height * 0.06,
+                width: Get.width,
+                child:
+                Row(
+                  children: [
+                    Radio(
+                      activeColor: AppColorsConstants
+                          .AppMainColor, // Use your custom color here
+                      value: "No",
+                      groupValue:selectedValue.value,
+                      onChanged: (value) {
+                        selectedValue.value ='No';
+
+                      },
+                    ),
+                    Text(
+                      "No",
+                      style: TextStyle(
+                        color: selectedValue.value ==
+                            'No'
+                            ? AppColorsConstants
+                            .AppMainColor // Use your custom color here
+                            : Colors.black, // Use your custom color here
+                        fontSize: 12,
+                      ),
+                    ),
+                  ],
+
+
+
+                ),
+              ),SizedBox(
+                height: Get.height * 0.015,
+              ), Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(32),
+                  color:
+                  Colors.white, // Set the background color of the container
+                  boxShadow: [
+                    BoxShadow(
+                      color:
+                      Colors.grey.withOpacity(0.2), // Color of the shadow
+                      spreadRadius: 5, // Spread radius
+                      blurRadius: 7, // Blur radius
+                      offset: Offset(0, 2), // Offset of the shadow
+                    ),
+                  ],
+                ),
+                height: Get.height * 0.06,
+                width: Get.width,
+                child:
+                Row(
+                  children: [
+                    Radio(
+                      activeColor: AppColorsConstants
+                          .AppMainColor, // Use your custom color here
+                      value: "Yes, specify",
+                      groupValue: selectedValue.value,
+                      onChanged: (value) {
+                        selectedValue.value ='Yes, specify';
+
+                      },
+                    ),
+                    Text(
+                      "Yes, specify",
+                      style: TextStyle(
+                        color:selectedValue.value == 'Yes, specify'
+                            ? AppColorsConstants
+                            .AppMainColor // Use your custom color here
+                            : Colors.black, // Use your custom color here
+                        fontSize: 12,
+                      ),
+                    ),
+                  ],
+                ),
+
+
+
+              ),
+              SizedBox(
+                height: Get.height * 0.015,
               ),
               Text(
                 'What spousal support will be provided?',
@@ -61,31 +148,115 @@ class _PaySpousalState extends State<PaySpousal> {
                 height: Get.height * 0.01,
               ),
               CustomContainer(
-                child: TextFormField(
+                child: TextFormField(controller: supportDetailController,
                   decoration: InputDecoration(border: InputBorder.none),
                   maxLines: 4,
                 ),
               ),
               SizedBox(
                 height: Get.height * 0.02,
-              ),
-              SizedBox(
-                height: Get.height * 0.25,
-                child: CustomColumn(
-                  yesText: "Yes", noText: "No",
-                  title:
-                      "Will spousal support end if the spouse receiving support enters a new commitment or common-law relationship?",
-                  selectedValue: selectedValue, // Provide selectedValue
-                  onChanged: (value) {
-                    setState(() {
-                      selectedValue = value;
-                    });
-                  },
-                  textStyle: TextStyle(fontSize: 12), // Provide textStyle
+              ),Text(
+                'Will spousal support end if the spouse receiving support enters a new commitment or common-law relationship?',
+                style: AppTextConstant.SimpleStyle,
+              ),SizedBox(
+                height: Get.height * 0.015,
+              ), Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(32),
+                  color:
+                  Colors.white, // Set the background color of the container
+                  boxShadow: [
+                    BoxShadow(
+                      color:
+                      Colors.grey.withOpacity(0.2), // Color of the shadow
+                      spreadRadius: 5, // Spread radius
+                      blurRadius: 7, // Blur radius
+                      offset: Offset(0, 2), // Offset of the shadow
+                    ),
+                  ],
                 ),
+                height: Get.height * 0.06,
+                width: Get.width,
+                child:
+                Row(
+                  children: [
+                    Radio(
+                      activeColor: AppColorsConstants
+                          .AppMainColor, // Use your custom color here
+                      value: "Yes",
+                      groupValue: selectedValue1.value,
+                      onChanged: (value) {
+                        selectedValue1.value ='Yes';
+
+                      },
+                    ),
+                    Text(
+                      "Yes",
+                      style: TextStyle(
+                        color:selectedValue1.value == 'Yes'
+                            ? AppColorsConstants
+                            .AppMainColor // Use your custom color here
+                            : Colors.black, // Use your custom color here
+                        fontSize: 12,
+                      ),
+                    ),
+                  ],
+                ),
+
+
+
               ),
               SizedBox(
-                height: Get.height * 0.03,
+                height: Get.height * 0.015,
+              ),Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(32),
+                  color:
+                  Colors.white, // Set the background color of the container
+                  boxShadow: [
+                    BoxShadow(
+                      color:
+                      Colors.grey.withOpacity(0.2), // Color of the shadow
+                      spreadRadius: 5, // Spread radius
+                      blurRadius: 7, // Blur radius
+                      offset: Offset(0, 2), // Offset of the shadow
+                    ),
+                  ],
+                ),
+                height: Get.height * 0.06,
+                width: Get.width,
+                child:
+                Row(
+                  children: [
+                    Radio(
+                      activeColor: AppColorsConstants
+                          .AppMainColor, // Use your custom color here
+                      value: "No",
+                      groupValue: selectedValue1.value,
+                      onChanged: (value) {
+                        selectedValue1.value ='No';
+
+                      },
+                    ),
+                    Text(
+                      "No",
+                      style: TextStyle(
+                        color:selectedValue1.value == 'No'
+                            ? AppColorsConstants
+                            .AppMainColor // Use your custom color here
+                            : Colors.black, // Use your custom color here
+                        fontSize: 12,
+                      ),
+                    ),
+                  ],
+                ),
+
+
+
+              ),
+
+              SizedBox(
+                height: Get.height * 0.04,
               ),
               Align(
                 alignment: Alignment.bottomCenter,
@@ -102,6 +273,6 @@ class _PaySpousalState extends State<PaySpousal> {
           ),
         ),
       ),
-    );
+    ));
   }
 }

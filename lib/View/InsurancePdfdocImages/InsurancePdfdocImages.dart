@@ -11,6 +11,7 @@ import 'package:tyedapp/Constant/Constants/routes/routesName.dart';
 import '../../Widgets/CustomAppbar2.dart';
 import '../../Widgets/CustomButton.dart';
 
+
 class Insurancepdfdocimages extends StatefulWidget {
   const Insurancepdfdocimages({super.key});
 
@@ -19,10 +20,13 @@ class Insurancepdfdocimages extends StatefulWidget {
 }
 
 class _InsurancepdfdocimagesState extends State<Insurancepdfdocimages> {
-  List<dynamic> Pdf = [];
-  List<dynamic> Images = [];
-  List<dynamic> Doc = [];
+
+  List<dynamic> pdfList = [];
+  List<dynamic> imagesList = [];
+  List<dynamic> docList = [];
   var _openResult = 'Unknown';
+
+
   Future<void> openFile(String filepath) async {
     String filePath = filepath.toString();
     final result = await OpenFilex.open(filePath);
@@ -39,9 +43,9 @@ class _InsurancepdfdocimagesState extends State<Insurancepdfdocimages> {
         child: Column(
           children: [
             CustomAppBar2(
-              height: Get.height * 0.095,
-              titleText: 'Insurance',
-              customWidth: 0.19,
+              height: Get.height * 0.1,
+              titleText: '${Get.arguments}',
+
             ),
             SizedBox(
               height: Get.height * 0.02,
@@ -71,30 +75,22 @@ class _InsurancepdfdocimagesState extends State<Insurancepdfdocimages> {
                         height: Get.height * 0.015,
                       ),
                       Text(
-                        'New Document',
+                        'Name Document',
                         style: TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 12),
                       ),
                       SizedBox(
                         height: Get.height * 0.009,
                       ),
-                      Container(
-                        width: Get.width,
-                        decoration: BoxDecoration(
-                          color: Color.fromRGBO(254, 235, 235, 1),
-                          borderRadius: BorderRadius.all(Radius.circular(20)),
+                      Center(
+                        child: TextFormField(
+                          decoration: InputDecoration(enabledBorder: InputBorder.none,
+                            isCollapsed: true, filled: true,fillColor:    Color.fromRGBO(255, 250, 251, 1),
+                            border: OutlineInputBorder( borderRadius: BorderRadius.all(Radius.circular(20)),),
+                              hintText: '${Get.arguments}',hintStyle: TextStyle(fontSize: 12,color: Color.fromRGBO(204, 204, 204, 1)),
+                          contentPadding: EdgeInsets.symmetric(horizontal: Get.width*0.03,vertical:Get.height*0.01 ),
+                             ),
                         ),
-                        height: Get.height * 0.05,
-                        child: Align(
-                            alignment: Alignment.centerLeft,
-                            child: Padding(
-                              padding: EdgeInsets.only(left: Get.width * 0.04),
-                              child: Text(
-                                "car Insurance",
-                                style:
-                                    TextStyle(fontSize: 12, color: Colors.grey),
-                              ),
-                            )),
                       ),
                       SizedBox(
                         height: Get.height * 0.015,
@@ -120,11 +116,13 @@ class _InsurancepdfdocimagesState extends State<Insurancepdfdocimages> {
                                   allowedExtensions: [
                                     'pdf',
                                   ],
-                                );
-                                Pdf.add(result1?.files.last.path.toString());
-                                print(result1?.files.last.path.toString());
+                                );if(result1!.files.toString().isNotEmpty){
+                                  pdfList.add(result1?.files.last.path.toString());
+                                }
+
+
                                 setState(() {
-                                  print(Pdf[0]);
+                                  print(pdfList[0]);
                                 });
                               },
                               child: Container(
@@ -145,28 +143,28 @@ class _InsurancepdfdocimagesState extends State<Insurancepdfdocimages> {
                                     Align(
                                         alignment: Alignment.center,
                                         child: Transform.scale(
-                                            scaleX: 0.8,
-                                            scaleY: 0.8,
+                                            scaleX: 1.3,
+                                            scaleY: 1.3,
                                             child: SvgPicture.asset(
-                                              'assets/uploaddocuments.svg',
+                                              'assets/uploaddocuments.svg',height: Get.height*0.07,
                                             ))),
                                   ],
                                 ),
                               ),
                             ),
                             SizedBox(
-                              width: Get.width * 0.005,
+                              width: Get.width*0.02,
                             ),
                             Expanded(
                               child: ListView.builder(
-                                itemCount: Pdf.length,
+                                itemCount: pdfList.length,
                                 scrollDirection: Axis.horizontal,
                                 itemBuilder: (context, index) {
                                   return Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 1.19),
-                                    child: Container(
-                                      width: Get.width * 0.23,
+                                    padding:  EdgeInsets.symmetric(
+                                        horizontal: Get.width*0.02),
+                                    child: Container(height: Get.height*0.3,
+                                      width: Get.width * 0.24,
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(12),
                                         color: Colors.white,
@@ -183,11 +181,11 @@ class _InsurancepdfdocimagesState extends State<Insurancepdfdocimages> {
                                           Align(
                                             alignment: Alignment.center,
                                             child: Transform.scale(
-                                              scaleX: 0.8,
-                                              scaleY: 0.8,
+                                              scaleX: 1.2,
+                                              scaleY: 1.2,
                                               child: InkWell(
                                                   onTap: () =>
-                                                      openFile(Pdf[index]),
+                                                      openFile(pdfList[index]),
                                                   child: Stack(
                                                     children: [
                                                       Align(
@@ -195,7 +193,10 @@ class _InsurancepdfdocimagesState extends State<Insurancepdfdocimages> {
                                                               .topRight,
                                                           child: InkWell(
                                                             onTap: () {
-                                                              print('dfd');
+                                                              pdfList.remove(pdfList[index]);
+                                                             setState(() {
+
+                                                             });
                                                             },
                                                             child: Container(
                                                               height: 15,
@@ -278,11 +279,13 @@ class _InsurancepdfdocimagesState extends State<Insurancepdfdocimages> {
                                   type: FileType.custom,
                                   allowedExtensions: ['png', 'jpeg'],
                                 );
-                                Images.add(result1?.files.last.path.toString());
-                                print(result1?.files.last.path.toString());
-                                setState(() {
-                                  print(Images[0]);
-                                });
+                              if(result1!.files.toString().isNotEmpty){
+                                imagesList .add(result1?.files.last.path.toString());
+                              }
+                              setState(() {
+                                print(imagesList[0]);
+                              });
+
                               },
                               child: Container(
                                 width: Get.width * 0.23,
@@ -302,28 +305,29 @@ class _InsurancepdfdocimagesState extends State<Insurancepdfdocimages> {
                                     Align(
                                         alignment: Alignment.center,
                                         child: Transform.scale(
-                                            scaleX: 0.8,
-                                            scaleY: 0.8,
+                                            scaleX: 1.3,
+                                            scaleY: 1.3,
                                             child: SvgPicture.asset(
-                                              'assets/uploaddocuments.svg',
+                                              'assets/uploaddocuments.svg',height: Get.height*0.07,
                                             ))),
                                   ],
                                 ),
                               ),
                             ),
                             SizedBox(
-                              width: Get.width * 0.005,
+                              width: Get.width*0.02,
                             ),
                             Expanded(
                               child: ListView.builder(
-                                itemCount: Images.length,
+                                itemCount: imagesList.length,
                                 scrollDirection: Axis.horizontal,
                                 itemBuilder: (context, index) {
                                   return Padding(
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 1.19),
                                     child: Container(
-                                      width: Get.width * 0.23,
+                                      height: Get.height*0.3,
+                                      width: Get.width * 0.24,
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(12),
                                         color: Colors.white,
@@ -340,13 +344,62 @@ class _InsurancepdfdocimagesState extends State<Insurancepdfdocimages> {
                                           Align(
                                             alignment: Alignment.center,
                                             child: Transform.scale(
-                                              scaleX: 0.8,
-                                              scaleY: 0.8,
+                                              scaleX: 1.2,
+                                              scaleY: 1.2,
                                               child: InkWell(
                                                   onTap: () =>
-                                                      openFile(Images[index]),
-                                                  child: Text(
-                                                      'File ${index + 1}')),
+                                                      openFile(imagesList[index]),
+                                                  child:Align(
+                                                      alignment: Alignment
+                                                          .topRight,
+                                                      child: InkWell(
+                                                        onTap: () {
+                                                          imagesList.remove(imagesList[index]);
+                                                          setState(() {
+
+                                                          });
+                                                        },
+                                                        child: Container(
+                                                          height: 15,
+                                                          width: 15,
+                                                          decoration:
+                                                          BoxDecoration(
+                                                            borderRadius:
+                                                            BorderRadius
+                                                                .circular(
+                                                                100),
+                                                            boxShadow: [
+                                                              BoxShadow(
+                                                                offset:
+                                                                const Offset(
+                                                                    0,
+                                                                    3),
+                                                                spreadRadius:
+                                                                2,
+                                                                blurRadius:
+                                                                2,
+                                                                color: Colors
+                                                                    .grey
+                                                                    .withOpacity(
+                                                                    0.2),
+                                                              )
+                                                            ],
+                                                            color: Colors
+                                                                .white,
+                                                          ),
+                                                          child: Center(
+                                                            child: Text(
+                                                              "x",
+                                                              style: TextStyle(
+                                                                  fontSize:
+                                                                  10,
+                                                                  fontWeight:
+                                                                  FontWeight
+                                                                      .bold),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      )),),
                                             ),
                                           ),
                                         ],
@@ -382,11 +435,13 @@ class _InsurancepdfdocimagesState extends State<Insurancepdfdocimages> {
                                   type: FileType.custom,
                                   allowedExtensions: ['doc', 'docx'],
                                 );
-                                Doc.add(result1?.files.last.path.toString());
-                                print(result1?.files.last.path.toString());
-                                setState(() {
-                                  print(Doc[0]);
-                                });
+                              if(result1!.files.toString().isNotEmpty){
+                                docList.add(result1?.files.last.path.toString());
+                              }
+                              setState(() {
+                                print(docList[0]);
+                              });
+
                               },
                               child: Container(
                                 width: Get.width * 0.23,
@@ -406,28 +461,29 @@ class _InsurancepdfdocimagesState extends State<Insurancepdfdocimages> {
                                     Align(
                                         alignment: Alignment.center,
                                         child: Transform.scale(
-                                            scaleX: 0.8,
-                                            scaleY: 0.8,
+                                            scaleX: 1.3,
+                                            scaleY: 1.3,
                                             child: SvgPicture.asset(
-                                              'assets/uploaddocuments.svg',
+                                              'assets/uploaddocuments.svg',height: Get.height*0.07,
                                             ))),
                                   ],
                                 ),
                               ),
                             ),
                             SizedBox(
-                              width: Get.width * 0.005,
+                              width: Get.width*0.02,
                             ),
                             Expanded(
                               child: ListView.builder(
-                                itemCount: Doc.length,
+                                itemCount: docList.length,
                                 scrollDirection: Axis.horizontal,
                                 itemBuilder: (context, index) {
                                   return Padding(
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 1.19),
                                     child: Container(
-                                      width: Get.width * 0.23,
+                                      height: Get.height*0.3,
+                                      width: Get.width * 0.24,
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(12),
                                         color: Colors.white,
@@ -444,13 +500,62 @@ class _InsurancepdfdocimagesState extends State<Insurancepdfdocimages> {
                                           Align(
                                             alignment: Alignment.center,
                                             child: Transform.scale(
-                                              scaleX: 0.8,
-                                              scaleY: 0.8,
+                                              scaleX: 1.2,
+                                              scaleY: 1.2,
                                               child: InkWell(
                                                   onTap: () =>
-                                                      openFile(Doc[index]),
-                                                  child: Text(
-                                                      'File ${index + 1}')),
+                                                      openFile(docList[index]),
+                                                  child: Align(
+                                                      alignment: Alignment
+                                                          .topRight,
+                                                      child: InkWell(
+                                                        onTap: () {
+                                                          docList.remove(docList[index]);
+                                                          setState(() {
+
+                                                          });
+                                                        },
+                                                        child: Container(
+                                                          height: 15,
+                                                          width: 15,
+                                                          decoration:
+                                                          BoxDecoration(
+                                                            borderRadius:
+                                                            BorderRadius
+                                                                .circular(
+                                                                100),
+                                                            boxShadow: [
+                                                              BoxShadow(
+                                                                offset:
+                                                                const Offset(
+                                                                    0,
+                                                                    3),
+                                                                spreadRadius:
+                                                                2,
+                                                                blurRadius:
+                                                                2,
+                                                                color: Colors
+                                                                    .grey
+                                                                    .withOpacity(
+                                                                    0.2),
+                                                              )
+                                                            ],
+                                                            color: Colors
+                                                                .white,
+                                                          ),
+                                                          child: Center(
+                                                            child: Text(
+                                                              "x",
+                                                              style: TextStyle(
+                                                                  fontSize:
+                                                                  10,
+                                                                  fontWeight:
+                                                                  FontWeight
+                                                                      .bold),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ))),
                                             ),
                                           ),
                                         ],
@@ -476,7 +581,7 @@ class _InsurancepdfdocimagesState extends State<Insurancepdfdocimages> {
             ),
             CustomElevatedButton(
               onpress: () {
-                Get.toNamed(RoutesName.PaymentMethod);
+                Get.toNamed(RoutesName.AddPeopleScreen);
                 // Get.to(YesNoScreen4());
               },
               text: "Upload",

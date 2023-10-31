@@ -7,12 +7,12 @@ class CustomOptionContainer extends StatelessWidget {
   final String text;
   final VoidCallback? onpress;
   final Color? color;
-  bool? isSelected;
+
 
   // ignore: use_key_in_widget_constructors
   CustomOptionContainer({
     required this.text,
-    required this.isSelected,
+
     this.onpress,
     this.color,
   });

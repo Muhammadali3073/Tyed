@@ -5,8 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:tyedapp/Constant/Constants/colors/Constants.dart';
 import 'package:tyedapp/Constant/Constants/founts/Constants.dart';
-
-import 'package:tyedapp/View/YourPasscode/yourPasscode.dart';
+import 'package:tyedapp/Constant/Constants/routes/routesName.dart';
 
 import '../../Widgets/ContactRow.dart';
 import '../../Widgets/CustomAppbar2.dart';
@@ -77,15 +76,13 @@ class _ShareDocumentsScreenState extends State<ShareDocumentsScreen> {
                                 crossAxisSpacing: 8,
                                 mainAxisSpacing: 10),
                         itemBuilder: (context, index) {
-                          return ContactRow(
+                          return ContactRow(isSelected: false,
                               radius: 15,
                               style: const TextStyle(fontSize: 9),
                               width: Get.width * 0.45,
                               contact: contact[index],
                               title: title[index],
-                              iconsdata: Padding(
-                                padding:
-                                    const EdgeInsets.only(left: 15, top: 4),
+                              iconsdata: Expanded(
                                 child: Align(
                                     alignment: Alignment.topRight,
                                     child: InkWell(
@@ -302,7 +299,7 @@ class _ShareDocumentsScreenState extends State<ShareDocumentsScreen> {
                                           return Padding(
                                             padding: const EdgeInsets.only(
                                                 bottom: 8),
-                                            child: ContactRow(
+                                            child: ContactRow(isSelected: false,
                                               height: Get.height * 0.05,
                                               radius: 15,
                                               style:
@@ -333,7 +330,7 @@ class _ShareDocumentsScreenState extends State<ShareDocumentsScreen> {
               ),
               CustomElevatedButton(
                 onpress: () {
-                  Get.to(YourPasscode());
+                  Get.toNamed(RoutesName.PaymentMethod,arguments: 'Family');
                 },
                 text: "Share",
                 height: Get.height * 0.04,

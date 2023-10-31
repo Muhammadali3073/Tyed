@@ -233,7 +233,7 @@ class _ChangePasscodeState extends State<ChangePasscode> {
                               return Padding(
                                 padding:
                                     const EdgeInsets.symmetric(vertical: 3),
-                                child: ContactRow(
+                                child: ContactRow(isSelected: false,
                                     height: Get.height * 0.048,
                                     radius: 17,
                                     style: const TextStyle(fontSize: 9),

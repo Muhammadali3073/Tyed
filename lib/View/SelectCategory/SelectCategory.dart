@@ -1,39 +1,22 @@
-// ignore_for_file: file_names
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tyedapp/Constant/Constants/colors/Constants.dart';
-
+import 'package:tyedapp/Constant/Constants/routes/routesName.dart';
 import 'package:tyedapp/View/InsurancePdfdocImages/InsurancePdfdocImages.dart';
-
 import '../../Widgets/CustomAppbar2.dart';
 import '../../Widgets/CustomButton.dart';
 
-class SelectCategory extends StatefulWidget {
-  // ignore: use_key_in_widget_constructors
-  const SelectCategory({Key? key});
-
-  @override
-  State<SelectCategory> createState() => _SelectCategoryState();
-}
-
-class _SelectCategoryState extends State<SelectCategory> {
-  int? selectedRadio; // Track the selected option
-
-  @override
-  void initState() {
-    super.initState();
-    // Automatically select "Insurance" on initialization
-    selectedRadio = 0;
-  }
-
-  final options = [
+class SelectCategory extends StatelessWidget {
+  // Track the selected option
+  final RxString selectedRadio = "Insurance".obs;
+  final RxList<String> options = [
     "Insurance",
     "Bank Statement",
     "Tax Reports",
     "Bills",
-    "Others"
-  ];
+    "Others",
+  ].obs;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,45 +36,37 @@ class _SelectCategoryState extends State<SelectCategory> {
               child: ListView.builder(
                 shrinkWrap: true,
                 padding: EdgeInsets.zero,
-                itemCount: 5,
+                itemCount: options.length,
                 itemBuilder: (context, index) {
-                  final options = [
-                    "Insurance",
-                    "Bank Statement",
-                    "Tax Reports",
-                    "Bills",
-                    "Others"
-                  ];
                   return Padding(
                     padding: const EdgeInsets.symmetric(vertical: 5),
                     child: Container(
                       decoration: BoxDecoration(
                         color: Colors.white,
-                        borderRadius: BorderRadius.circular(
-                            30), // Adjust the border radius as needed
+                        borderRadius: BorderRadius.circular(30),
                         boxShadow: const [
                           BoxShadow(
-                            color: Colors.grey, // Shadow color
-                            offset: Offset(0, 3), // Offset of the shadow
-                            blurRadius: 5, // Spread of the shadow
+                            color: Colors.grey,
+                            offset: Offset(0, 3),
+                            blurRadius: 5,
                           ),
                         ],
                       ),
-                      child: Row(
+                      child: Obx(() => Row(
                         children: [
                           Radio(
                             activeColor: AppColorsConstants.AppMainColor,
-                            value: index,
-                            groupValue: selectedRadio,
+                            value: options[index],
+                            groupValue: selectedRadio.value,
                             onChanged: (value) {
-                              setState(() {
-                                selectedRadio = value;
-                              });
+
+                              selectedRadio.value = value!;
                             },
                           ),
+
                           Text(options[index]),
                         ],
-                      ),
+                      )),
                     ),
                   );
                 },
@@ -103,13 +78,15 @@ class _SelectCategoryState extends State<SelectCategory> {
           ),
           CustomElevatedButton(
             onpress: () {
-              Get.to(Insurancepdfdocimages());
+              Get.toNamed(RoutesName.Insurancepdfdocimages,arguments: selectedRadio.value);
+
             },
             text: "Next",
             height: Get.height * 0.05,
             width: Get.width * 0.4,
             colors: AppColorsConstants.AppMainColor,
           ),
+
         ],
       ),
     );

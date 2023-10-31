@@ -1,5 +1,7 @@
 // ignore_for_file: file_names, must_be_immutable, prefer_const_constructors_in_immutables
 
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -20,11 +22,11 @@ class PaymentMethod extends StatefulWidget {
 }
 
 class _PaymentMethodState extends State<PaymentMethod> {
-  bool? isSelectedDebitCard = false;
-  bool? isSelectedCreditCard = false;
+  RxBool? isSelectedDebitCard = false.obs;
+  RxBool? isSelectedCreditCard = false.obs;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Obx(() => Scaffold(
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -42,12 +44,10 @@ class _PaymentMethodState extends State<PaymentMethod> {
                   Image.asset('assets/paymentmethodimage.png'),
                   SizedBox(height: Get.height * 0.04),
                   CustomOptionContainer(
-                    isSelected: isSelectedDebitCard, // Use isSelected directly
+
                     onpress: () {
-                      setState(() {
-                        isSelectedDebitCard = true;
-                        isSelectedCreditCard = false; // Toggle isSelected value
-                      });
+                      isSelectedDebitCard!.value=true;
+                      isSelectedCreditCard!.value=false;
                     },
                     color: isSelectedDebitCard == true
                         ? AppColorsConstants.AppMainColor
@@ -56,15 +56,13 @@ class _PaymentMethodState extends State<PaymentMethod> {
                   ),
                   SizedBox(height: Get.height * 0.02),
                   CustomOptionContainer(
-                    isSelected: isSelectedCreditCard, // Use isSelected directly
+
                     onpress: () {
-                      setState(() {
-                        isSelectedCreditCard = true;
-                        isSelectedDebitCard = false; // Toggle isSelected value
-                      });
+                      isSelectedDebitCard!.value=false;
+                      isSelectedCreditCard!.value=true;
                     },
                     color: isSelectedCreditCard == true
-                        ? Colors.amber
+                        ? AppColorsConstants.AppMainColor
                         : Colors.white,
                     text: 'By Debit Card',
                   ),
@@ -73,7 +71,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
                   ),
                   CustomElevatedButton(
                     onpress: () {
-                      Get.toNamed(RoutesName.PaymentMethodProcess);
+                      Get.toNamed(RoutesName.PaymentMethodProcess,arguments: Get.arguments);
                     },
                     text: "Continue",
                     height: Get.height * 0.05,
@@ -86,6 +84,6 @@ class _PaymentMethodState extends State<PaymentMethod> {
           ],
         ),
       ),
-    );
+    ));
   }
 }

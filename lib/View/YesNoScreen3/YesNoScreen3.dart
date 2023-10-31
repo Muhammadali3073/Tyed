@@ -2,12 +2,13 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:tyedapp/Constant/Constants/colors/Constants.dart';
+import 'package:tyedapp/Constant/Constants/founts/Constants.dart';
+import 'package:tyedapp/Constant/Constants/routes/routesName.dart';
 
-import '../../Constant/Constants/colors/Constants.dart';
-import '../../Constant/Constants/routes/routesName.dart';
+
 import '../../Widgets/CustomAppBar.dart';
 import '../../Widgets/CustomButton.dart';
-import '../../viewModel/YesNoScreen3Controller/YesNoScreen3Controller.dart';
 
 class YesNoScreen3 extends StatefulWidget {
   const YesNoScreen3({super.key});
@@ -16,36 +17,35 @@ class YesNoScreen3 extends StatefulWidget {
 }
 
 class _YesNoScreenState extends State<YesNoScreen3> {
-  String? selectedValue = "Yes";
-  Color selectedColor =
-      AppColorsConstants.AppMainColor; // Custom color for selected RadioButton
-  Color unselectedColor =
-      Colors.black; // Custom color for unselected RadioButton
-  final YesNo3Controller yesNo3Controller = Get.put(YesNo3Controller());
+  RxString selectedValue = "Yes".obs;
+
+
+
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Obx(() => Scaffold(
       appBar: const CustomAppBar(
-        svgImagePath: 'assets/30percent.svg',
+        svgImagePath: 'assets/70%.svg',
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Column(
           children: [
-            const Align(
+            Align(
                 alignment: Alignment.topLeft,
                 child: Text(
                   "Do either of you have children?",
-                  style: TextStyle(fontSize: 13),
+                  style: AppTextConstant.SimpleStyle,
                 )),
             SizedBox(
-              height: Get.height * 0.013,
+              height: Get.height * 0.015,
             ),
             Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(32),
                 color:
-                    Colors.white, // Set the background color of the container
+                Colors.white, // Set the background color of the container
                 boxShadow: [
                   BoxShadow(
                     color: Colors.grey.withOpacity(0.2), // Color of the shadow
@@ -57,35 +57,35 @@ class _YesNoScreenState extends State<YesNoScreen3> {
               ),
               height: Get.height * 0.06,
               width: Get.width,
-              child: Row(
+              child:
+              Row(
                 children: [
-                  Obx(
-                    () => Row(
-                      children: [
-                        Radio(
-                          activeColor: AppColorsConstants
-                              .AppMainColor, // Use your custom color here
-                          value: "Yes",
-                          groupValue: yesNo3Controller.selectedValue.value,
-                          onChanged: (value) {
-                            yesNo3Controller.selectedValue(value!);
-                          },
-                        ),
-                        Text(
-                          "Yes",
-                          style: TextStyle(
-                            color: yesNo3Controller.selectedValue.value == 'Yes'
-                                ? AppColorsConstants
-                                    .AppMainColor // Use your custom color here
-                                : Colors.black, // Use your custom color here
-                            fontSize: 12,
-                          ),
-                        ),
-                      ],
+                  Radio(
+                    activeColor: AppColorsConstants
+                        .AppMainColor, // Use your custom color here
+                    value: "Yes",
+                    groupValue: selectedValue.value,
+
+                    onChanged: (value) {
+                      selectedValue.value="Yes";
+                    },
+                  ),
+                  Text(
+                    "Yes",
+                    style: TextStyle(
+                      color: selectedValue.value == 'Yes'
+                      // color: controller.selectedValue.value == 'Yes'
+                          ? AppColorsConstants
+                          .AppMainColor // Use your custom color here
+                          : Colors.black, // Use your custom color here
+                      fontSize: 12,
                     ),
                   ),
                 ],
               ),
+
+
+
             ),
             SizedBox(
               height: Get.height * 0.016,
@@ -94,7 +94,7 @@ class _YesNoScreenState extends State<YesNoScreen3> {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(32),
                 color:
-                    Colors.white, // Set the background color of the container
+                Colors.white, // Set the background color of the container
                 boxShadow: [
                   BoxShadow(
                     color: Colors.grey.withOpacity(0.2), // Color of the shadow
@@ -106,35 +106,35 @@ class _YesNoScreenState extends State<YesNoScreen3> {
               ),
               height: Get.height * 0.06,
               width: Get.width,
-              child: Row(
+              child:
+              Row(
                 children: [
-                  Obx(
-                    () => Row(
-                      children: [
-                        Radio(
-                          activeColor: AppColorsConstants
-                              .AppMainColor, // Use your custom color here
-                          value: "No",
-                          groupValue: yesNo3Controller.selectedValue.value,
-                          onChanged: (value) {
-                            yesNo3Controller.setSelectedValue(value!);
-                          },
-                        ),
-                        Text(
-                          "No",
-                          style: TextStyle(
-                            color: yesNo3Controller.selectedValue.value == 'No'
-                                ? AppColorsConstants
-                                    .AppMainColor // Use your custom color here
-                                : Colors.black, // Use your custom color here
-                            fontSize: 12,
-                          ),
-                        ),
-                      ],
+                  Radio(
+                    activeColor: AppColorsConstants
+                        .AppMainColor, // Use your custom color here
+                    value: "No",
+                    groupValue: selectedValue.value,
+
+                    onChanged: (value) {
+
+                      selectedValue.value = "No";
+                    },
+                  ),
+                  Text(
+                    "No",
+                    style: TextStyle(
+                      color: selectedValue.value == 'No'
+                          ? AppColorsConstants
+                          .AppMainColor // Use your custom color here
+                          : Colors.black, // Use your custom color here
+                      fontSize: 12,
                     ),
                   ),
                 ],
               ),
+
+
+
             ),
             SizedBox(
               height: Get.height * 0.06,
@@ -151,6 +151,6 @@ class _YesNoScreenState extends State<YesNoScreen3> {
           ],
         ),
       ),
-    );
+    ));
   }
 }

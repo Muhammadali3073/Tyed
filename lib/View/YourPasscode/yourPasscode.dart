@@ -20,9 +20,10 @@ class _YourPasscodeState extends State<YourPasscode> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 18),
+        padding: const EdgeInsets.symmetric(horizontal: 20),
         child: SingleChildScrollView(
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               SizedBox(
                 height: Get.height * 0.02,
@@ -45,12 +46,7 @@ class _YourPasscodeState extends State<YourPasscode> {
                 height: Get.height * 0.03,
               ),
               CustomPaint(
-                painter: DrawDottedhorizontalline(),
-                child: const SizedBox(
-                  width: double
-                      .infinity, // Set the width to span the entire screen
-                  height: 2, // Set the desired height of the divider
-                ),
+                painter: DrawDottedHorizontalLine(),
               ),
               SizedBox(
                 height: Get.height * 0.02,
@@ -117,7 +113,8 @@ class _YourPasscodeState extends State<YourPasscode> {
               ),
               CustomElevatedButton(
                 onpress: () {
-                  Get.toNamed(RoutesName.SavedDocumentsScreen);
+                  Get.arguments == 'Tyed'?
+                  Get.toNamed(RoutesName.DownloadScreen) : Get.toNamed(RoutesName.FamilyDocumentsFolder);
                 },
                 text: "Done",
                 height: Get.height * 0.05,
@@ -132,9 +129,9 @@ class _YourPasscodeState extends State<YourPasscode> {
   }
 }
 
-class DrawDottedhorizontalline extends CustomPainter {
+class DrawDottedHorizontalLine extends CustomPainter {
   final Paint _paint;
-  DrawDottedhorizontalline() : _paint = Paint() {
+  DrawDottedHorizontalLine() : _paint = Paint() {
     _paint.color = Color.fromRGBO(204, 204, 204, 1); //dots color
     _paint.strokeWidth = 2; //dots thickness
     _paint.strokeCap = StrokeCap.square; //dots corner edges
@@ -154,3 +151,5 @@ class DrawDottedhorizontalline extends CustomPainter {
     return false;
   }
 }
+
+

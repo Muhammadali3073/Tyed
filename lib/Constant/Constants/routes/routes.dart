@@ -23,22 +23,22 @@ import 'package:tyedapp/View/SaveDocumentsScreen/SaveDocumentsScreen.dart';
 import 'package:tyedapp/View/SelectCategory/SelectCategory.dart';
 import 'package:tyedapp/View/ShareDocumentsScreen/ShareDocumentsScreen.dart';
 import 'package:tyedapp/View/Signup/SignUpScreen.dart';
-import 'package:tyedapp/View/YesNoScreen2/YesNoScreen2.dart';
-import 'package:tyedapp/View/YesNoScreen3/YesNoScreen3.dart';
-import 'package:tyedapp/View/YesNoScreen4/YesNoScreen4.dart';
-import 'package:tyedapp/View/YesNoScreens/YesNo1.dart';
 import 'package:tyedapp/View/YouTiedAgreement/YourTiedAgreement.dart';
-import 'package:tyedapp/View/YourAndSpouseSign/YourAndSpouseSign.dart';
 import 'package:tyedapp/View/YourPasscode/yourPasscode.dart';
 import '../../../View/AddFamilyDocumentsFolder/AddFamilyDocumentsFolder.dart';
 import '../../../View/DocumentsFolder/DocumentsFolder.dart';
+import '../../../View/InsurancePdfdocImages/InsurancePdfdocImages.dart';
 import '../../../View/MainScreen/MainScreen.dart';
 import '../../../View/Onboardscreen/OnboardScreen.dart';
 import '../../../View/Signin/SignInScreen.dart';
+import '../../../View/YesNoScreen2/YesNoScreen2.dart';
+import '../../../View/YesNoScreen3/YesNoScreen3.dart';
+import '../../../View/YesNoScreen4/YesNoScreen4.dart';
 import '../../../View/YesNoScreen5/YesNoScreen5.dart';
+import '../../../View/YesNoScreens/YesNo1.dart';
 import '../../../Widgets/BottomNavBar.dart';
 import 'routesName.dart';
-
+var arguments;
 class AppRoutes {
   static final List<GetPage> routes = [
     GetPage(
@@ -68,24 +68,23 @@ class AppRoutes {
     GetPage(name: RoutesName.YesNoScreen4, page: () => YesNoScreen4()),
     GetPage(name: RoutesName.YesNoScreen5, page: () => YesNoScreen5()),
     GetPage(name: RoutesName.PaySpousal, page: () => PaySpousal()),
+    GetPage(name: RoutesName.Insurancepdfdocimages, page: () => Insurancepdfdocimages(),arguments: arguments ),
     GetPage(name: RoutesName.InheritScreen, page: () => InheritScreen()),
     GetPage(name: RoutesName.AgreementScreen, page: () => AgreementScreen()),
     GetPage(
         name: RoutesName.FamilyDocumentsFolder,
         page: () => FamilyDocumentsFolder()),
-    GetPage(
-        name: RoutesName.YourAndSpouseSign, page: () => YourAndSpouseSign()),
-    // GetPage(name: RoutesName.CheckOutScreen, page: () => CheckOutScreen()),
-    GetPage(name: RoutesName.PaymentMethod, page: () => PaymentMethod()),
+
+    GetPage(name: RoutesName.PaymentMethod, page: () => PaymentMethod(),arguments: arguments),
     GetPage(
         name: RoutesName.PaymentMethodProcess,
-        page: () => PaymentMethodProcess()),
+        page: () => PaymentMethodProcess(),arguments: arguments),
     GetPage(name: RoutesName.DownloadScreen, page: () => DownloadScreen()),
     // GetPage(name: RoutesName.BrowseFiles, page: () => BrowseFiles()),
     GetPage(
         name: RoutesName.FamilyDocCheckout, page: () => FamilyDocCheckout()),
     GetPage(name: RoutesName.SelectCategory, page: () => SelectCategory()),
-    GetPage(name: RoutesName.AddPeopleScreen, page: () => AddPeopleScreen()),
+    GetPage(name: RoutesName.AddPeopleScreen, page: () => AddPeopleScreen(),arguments: arguments),
     GetPage(
         name: RoutesName.ContactListScreen, page: () => ContactListScreen()),
     GetPage(

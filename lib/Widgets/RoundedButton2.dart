@@ -3,13 +3,16 @@ import 'package:flutter/material.dart';
 import 'RoundedButton.dart';
 
 class RoundedButton2 extends StatelessWidget {
+  final String ?title;
+  final VoidCallback? onpress;
   const RoundedButton2({
+    this.title,this.onpress,
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
-    return RoundedButton(
+    return RoundedButton(onpress: onpress,
       widget: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
         Container(
           decoration: BoxDecoration(
@@ -31,9 +34,9 @@ class RoundedButton2 extends StatelessWidget {
             color: Colors.red,
           ),
         ),
-        const Text(
-          "Add another separate asset",
-          style: TextStyle(fontSize: 11, color: Color.fromRGBO(243, 77, 77, 1)),
+         Text(
+          "$title",  style: TextStyle(fontSize: 11, color: Color.fromRGBO(243, 77, 77, 1)),
+
         )
       ]),
       width: 170,

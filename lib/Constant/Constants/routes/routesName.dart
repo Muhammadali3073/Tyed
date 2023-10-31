@@ -13,6 +13,7 @@ class RoutesName {
   static const String AssetsScreen = '/AssetsScreen';
   static const String YesNoScreen = '/YesNoScreen';
   static const String PayingScreen = '/PayingScreen';
+  static const String Insurancepdfdocimages = '/Insurancepdfdocimages';
   static const String YesNoScreen2 = '/YesNoScreen2';
   static const String YesNoScreen3 = '/YesNoScreen3';
   static const String YesNoScreen4 = '/YesNoScreen4';
@@ -20,7 +21,7 @@ class RoutesName {
   static const String PaySpousal = '/PaySpousal';
   static const String InheritScreen = '/InheritScreen';
   static const String AgreementScreen = '/AgreementScreen';
-  static const String YourAndSpouseSign = '/YourAndSpouseSign';
+  // static const String YourAndSpouseSign = '/YourAndSpouseSign';
   // static const String CheckOutScreen = '/CheckOutScreen';
   static const String PaymentMethod = '/PaymentMethod';
   static const String PaymentMethodProcess = '/PaymentMethodProcess';

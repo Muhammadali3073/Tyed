@@ -11,7 +11,8 @@ import '../../Widgets/CustomAppbar2.dart';
 import '../../Widgets/CustomButton.dart';
 
 class AddPeopleScreen extends StatelessWidget {
-  const AddPeopleScreen({super.key});
+   AddPeopleScreen({super.key});
+
 
   @override
   Widget build(BuildContext context) {
@@ -22,15 +23,15 @@ class AddPeopleScreen extends StatelessWidget {
             height: Get.height * 0.1,
             titleText: "Share",
             style: TextStyle(fontSize: 14),
-            customWidth: 0.23,
+
           ),
           SizedBox(
-            height: Get.height * 0.02,
+            height: Get.height * 0.017,
           ),
           ElevatedButton(
               style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.white,
-                  fixedSize: Size(Get.width * 0.8, Get.height * 0.04),
+                  fixedSize: Size(Get.width * 0.87, Get.height * 0.04),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30))),
               onPressed: () {
@@ -45,7 +46,7 @@ class AddPeopleScreen extends StatelessWidget {
                 ],
               )),
           SizedBox(
-            height: Get.height * 0.02,
+            height: Get.height * 0.017,
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 5),

@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 
 import 'package:tyedapp/View/MainScreen/MainScreen.dart';
 import 'package:tyedapp/View/EditProfile/EditProfileScreen.dart';
@@ -60,32 +61,32 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
             items: [
               BottomNavigationBarItem(
                 activeIcon: Transform.scale(
-                    scaleX: .8,
-                    scaleY: .8,
+                    scaleX: .9,
+                    scaleY: .9,
                     child: SvgPicture.asset("assets/activehome.svg")),
                 icon: SvgPicture.asset("assets/Home.svg"),
                 label: '',
               ),
               BottomNavigationBarItem(
                 activeIcon: Transform.scale(
-                    scaleX: .8,
-                    scaleY: .8,
+                      scaleX: .9,
+                    scaleY: .9                                            ,
                     child: SvgPicture.asset("assets/Group 11352.svg")),
                 icon: SvgPicture.asset("assets/unactivedocs.svg"),
                 label: '',
               ),
               BottomNavigationBarItem(
                 activeIcon: Transform.scale(
-                    scaleX: .8,
-                    scaleY: .8,
+                    scaleX: .9,
+                    scaleY: .9,
                     child: SvgPicture.asset("assets/activeclipboard.svg")),
                 icon: SvgPicture.asset("assets/clipboard-task-list-ltr_1.svg"),
                 label: '',
               ),
               BottomNavigationBarItem(
                 activeIcon: Transform.scale(
-                    scaleX: .8,
-                    scaleY: .8,
+                    scaleX: .9,
+                    scaleY: .9,
                     child: SvgPicture.asset("assets/activepro.svg")),
                 icon: SvgPicture.asset("assets/Iconly-Bulk-Profile.svg"),
                 label: '',
