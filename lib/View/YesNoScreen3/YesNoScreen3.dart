@@ -9,6 +9,7 @@ import 'package:tyedapp/Constant/Constants/routes/routesName.dart';
 
 import '../../Widgets/CustomAppBar.dart';
 import '../../Widgets/CustomButton.dart';
+import '../../viewModel/TyedQuestionsController/TyedQuestionsController.dart';
 
 class YesNoScreen3 extends StatefulWidget {
   const YesNoScreen3({super.key});
@@ -17,6 +18,8 @@ class YesNoScreen3 extends StatefulWidget {
 }
 
 class _YesNoScreenState extends State<YesNoScreen3> {
+  TyedQuestionsController tyedQuestionsController =
+  Get.find(tag: 'tyedQuestionsController');
   RxString selectedValue = "Yes".obs;
 
 
@@ -35,7 +38,9 @@ class _YesNoScreenState extends State<YesNoScreen3> {
             Align(
                 alignment: Alignment.topLeft,
                 child: Text(
-                  "Do either of you have children?",
+                  tyedQuestionsController
+                      .tyedQuestionsRxModel.value!.youHaveChildren
+                      .toString() ??"Do either of you have children?",
                   style: AppTextConstant.SimpleStyle,
                 )),
             SizedBox(

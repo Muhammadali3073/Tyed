@@ -21,7 +21,8 @@ class FamilyDocumentsFolder extends StatelessWidget {
           elevation: 0,
           backgroundColor: Colors.transparent,
           flexibleSpace: CustomAppBar2(
-            titleText: "Add family Document",
+            isBack: true,
+            titleText: "Add Family Document",
             height: Get.height * 0.11,
           ),
         ),

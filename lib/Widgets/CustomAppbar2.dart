@@ -9,12 +9,15 @@ class CustomAppBar2 extends StatelessWidget {
   final double? height;
   final Widget? icon;
   final TextStyle? style;
-  const CustomAppBar2(
+  bool? isBack;
+
+  CustomAppBar2(
       {this.titleText,
       this.icon,
       this.style,
       this.customWidth,
-      this.height}); // Default to 12% of the screen width
+      this.height,
+      this.isBack}); // Default to 12% of the screen width
 
   @override
   Widget build(BuildContext context) {
@@ -41,15 +44,24 @@ class CustomAppBar2 extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            IconButton(
-              onPressed: () {
-                Get.back();
-              },
-              icon: const Icon(
-                Icons.arrow_back_ios_new,
-                size: 14,
-              ),
-            ),
+            isBack != true
+                ? IconButton(
+                    onPressed: () {
+                      Get.back();
+                    },
+                    icon: const Icon(
+                      Icons.arrow_back_ios_new,
+                      size: 14,
+                    ),
+                  )
+                : IconButton(
+                    onPressed: () {},
+                    icon: Icon(
+                      Icons.arrow_back_ios_new,
+                      size: 14,
+                      color: Colors.white,
+                    ),
+                  ),
             Text(
               titleText!,
               style: style ?? TextStyle(fontWeight: FontWeight.bold),

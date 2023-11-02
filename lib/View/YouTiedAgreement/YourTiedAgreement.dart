@@ -28,8 +28,9 @@ class _YourTiedAgreementState extends State<YourTiedAgreement> {
           child: Column(
             children: [
               CustomAppBar2(
+                isBack: true,
                 height: Get.height * 0.1,
-                titleText: 'Your tyed agreement',
+                titleText: 'Your Tyed Agreement',
               ),
               SizedBox(
                 height: Get.height * 0.015,

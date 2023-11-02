@@ -1,7 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="15.352" height="15.352" viewBox="0 0 15.352 15.352">
-  <g id="Group_11356" data-name="Group 11356" transform="translate(-28 -341.682)">
-    <g id="Group_11355" data-name="Group 11355">
-      <path id="Fill_1" data-name="Fill 1" d="M11.007,0H4.352A4.215,4.215,0,0,0,0,4.544v6.271a4.213,4.213,0,0,0,4.352,4.536h6.655a4.207,4.207,0,0,0,4.344-4.536V4.544A4.209,4.209,0,0,0,11.007,0" transform="translate(28 341.682)" fill="#f34d4d" opacity="0.4"/>
-    </g>
+  <g id="Group_11355" data-name="Group 11355" transform="translate(-28 -341.682)">
+    <path id="Fill_1" data-name="Fill 1" d="M11.007,0H4.352A4.215,4.215,0,0,0,0,4.544v6.271a4.213,4.213,0,0,0,4.352,4.536h6.655a4.207,4.207,0,0,0,4.344-4.536V4.544A4.209,4.209,0,0,0,11.007,0" transform="translate(28 341.682)" fill="#f34d4d" opacity="0.4"/>
+    <path id="Combined_Shape" data-name="Combined Shape" d="M0,5.039V2.409a.521.521,0,1,1,1.041,0v2.63A.521.521,0,1,1,0,5.039ZM0,.521a.522.522,0,1,1,.517.521A.523.523,0,0,1,0,.521Z" transform="translate(35.152 345.878)" fill="#f34d4d"/>
   </g>
 </svg>

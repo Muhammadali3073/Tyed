@@ -7,6 +7,8 @@ import 'package:tyedapp/Constant/Constants/colors/Constants.dart';
 import 'package:tyedapp/Constant/Constants/routes/routesName.dart';
 
 import '../../Widgets/MainScreenWidget.dart';
+import '../../viewModel/EditProfileScreenController/EditProfileScreenController.dart';
+import '../../viewModel/GetUserDataController/GetUserDataController.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -16,6 +18,16 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
+  GetUserDataController getUserDataController =
+      Get.find(tag: 'getUserDataController');
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    getUserDataController.getUserData();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,7 +56,7 @@ class _MainScreenState extends State<MainScreen> {
                           style: TextStyle(color: Colors.white),
                         ),
                         Text(
-                          'Welcome to tyed',
+                          'Welcome to Tyed',
                           style: TextStyle(
                               fontWeight: FontWeight.bold, color: Colors.white),
                         ),
@@ -53,27 +65,42 @@ class _MainScreenState extends State<MainScreen> {
                     Expanded(
                       child: Align(
                         alignment: Alignment.topRight,
-                        child: CircleAvatar(
-                          radius: 22,
-                          child: Container(
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              image: DecorationImage(
-                                image: AssetImage(
-                                    'assets/user photo.png'), // Provide your image path here
-                                fit: BoxFit.cover, // Center-crop the image
-                              ),
-                            ),
+                        child: getUserDataController.getUserDataRxModel.value!
+                            .profileImage!.isNotEmpty
+                            ? Container(
+                          height: Get.height * 0.13,
+                          width: Get.width * 0.13,
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                                fit: BoxFit.scaleDown,
+                                image: NetworkImage(getUserDataController
+                                    .getUserDataRxModel
+                                    .value!
+                                    .profileImage
+                                    .toString())),
+                            color: Colors.grey.withOpacity(0.5),
+                            shape: BoxShape.circle,
                           ),
-                        ),
-                      ),
+                        )
+                            : Container(
+                          height: Get.height * 0.13,
+                          width: Get.width * 0.13,
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                                image: AssetImage(
+                                  'assets/user photo.png',
+                                )),
+                            color: Colors.white,
+                            shape: BoxShape.circle,
+                          ),
+                        )),
                     ),
                   ],
                 ),
               ),
-              SizedBox(
-                height: Get.height * 0.03,
-              ),
+              // SizedBox(
+              //   height: Get.height * 0.03,
+              // ),
               Container(
                 height: Get.height,
                 decoration: BoxDecoration(
@@ -90,7 +117,7 @@ class _MainScreenState extends State<MainScreen> {
                         Get.toNamed(RoutesName.CommitmentMilestone);
                       },
                       child: CustomCard(
-                        text: 'tyed Marriage\n Agreement',
+                        text: 'Tyed Marriage\nAgreement',
                         imagePath: 'assets/mainpageimage1.svg',
                       ),
                     ),

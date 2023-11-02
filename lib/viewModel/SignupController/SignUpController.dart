@@ -7,7 +7,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:tyedapp/models/SignUpModel.dart';
+import 'package:tyedapp/models/sign_up_model.dart';
 
 import '../../Constant/Constants/routes/routesName.dart';
 import '../../validations/validations.dart';
@@ -29,8 +29,8 @@ class SignupController extends GetxController {
   // Set Fire-store date to Model
   final userData = FirebaseFirestore.instance
       .collection('users')
-      .withConverter<SignUpModel>(
-        fromFirestore: (snapshot, _) => SignUpModel.fromJson(snapshot.data()!),
+      .withConverter<UserModel>(
+        fromFirestore: (snapshot, _) => UserModel.fromJson(snapshot.data()!),
         toFirestore: (users, _) => users.toJson(),
       );
 
@@ -95,7 +95,7 @@ class SignupController extends GetxController {
       timeStamp}) async {
     return await userData
         .doc(userID)
-        .set(SignUpModel(
+        .set(UserModel(
             userId: userID,
             profileImage: profileImage,
             userFirstName: userFirstName,

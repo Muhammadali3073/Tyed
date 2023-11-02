@@ -1,6 +1,7 @@
 // ignore_for_file: file_names
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:tyedapp/Constant/Constants/colors/Constants.dart';
@@ -11,10 +12,10 @@ import '../../Widgets/CustomAppbar2.dart';
 import '../../Widgets/CustomButton.dart';
 
 class PaymentMethodProcess extends StatelessWidget {
-  TextEditingController nameController=TextEditingController();
-  TextEditingController cardNumberController=TextEditingController();
-  TextEditingController exDateController=TextEditingController();
-  TextEditingController ccvController=TextEditingController();
+  TextEditingController nameController = TextEditingController();
+  TextEditingController cardNumberController = TextEditingController();
+  TextEditingController exDateController = TextEditingController();
+  TextEditingController ccvController = TextEditingController();
 
   PaymentMethodProcess({super.key});
 
@@ -29,7 +30,6 @@ class PaymentMethodProcess extends StatelessWidget {
               CustomAppBar2(
                 height: Get.height * 0.1,
                 titleText: 'Card Info',
-
               ),
               SizedBox(
                 height: Get.height * 0.02,
@@ -57,7 +57,8 @@ class PaymentMethodProcess extends StatelessWidget {
                     SizedBox(height: Get.height * 0.01),
                     SizedBox(
                       height: Get.height * 0.05,
-                      child: TextFormField(controller: nameController,
+                      child: TextFormField(
+                        controller: nameController,
                         keyboardType: TextInputType.name,
                         decoration: InputDecoration(
                             prefixIcon: Transform.scale(
@@ -86,7 +87,8 @@ class PaymentMethodProcess extends StatelessWidget {
                         SizedBox(height: Get.height * 0.01),
                         SizedBox(
                           height: Get.height * 0.05,
-                          child: TextField(controller: cardNumberController,
+                          child: TextField(
+                            controller: cardNumberController,
                             keyboardType: TextInputType.number,
                             decoration: InputDecoration(
                                 prefixIcon: Transform.scale(
@@ -106,6 +108,7 @@ class PaymentMethodProcess extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Padding(
                                     padding:
@@ -119,9 +122,13 @@ class PaymentMethodProcess extends StatelessWidget {
                                   ),
                                   SizedBox(
                                       height: Get.height * 0.05,
-                                      width: Get.width * 0.33,
-                                      child: TextFormField(controller: exDateController,
+                                      width: Get.width * 0.35,
+                                      child: TextFormField(
+                                        controller: exDateController,
                                         keyboardType: TextInputType.datetime,
+                                        inputFormatters: [
+                                          LengthLimitingTextInputFormatter(7),
+                                        ],
                                         decoration: InputDecoration(
                                           contentPadding: EdgeInsets.all(6),
                                           hintText: "01/2022",
@@ -156,7 +163,8 @@ class PaymentMethodProcess extends StatelessWidget {
                                       SizedBox(
                                           height: Get.height * 0.05,
                                           width: Get.width * 0.33,
-                                          child: TextFormField(controller: ccvController,
+                                          child: TextFormField(
+                                            controller: ccvController,
                                             decoration: InputDecoration(
                                               contentPadding: EdgeInsets.all(6),
                                               hintText: "0 0 0",
@@ -184,7 +192,8 @@ class PaymentMethodProcess extends StatelessWidget {
                     Center(
                       child: CustomElevatedButton(
                         onpress: () {
-                         Get.toNamed(RoutesName.YourPasscode,arguments: Get.arguments);
+                          Get.toNamed(RoutesName.YourPasscode,
+                              arguments: Get.arguments);
                         },
                         text: "Pay Now",
                         height: Get.height * 0.05,

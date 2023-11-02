@@ -10,19 +10,19 @@ import 'package:tyedapp/Constant/Constants/routes/routesName.dart';
 import '../../Widgets/CustomAppBar.dart';
 import '../../Widgets/CustomButton.dart';
 import '../../Widgets/Dialoge.dart';
-
+import '../../viewModel/TyedQuestionsController/TyedQuestionsController.dart';
 
 class YesNoScreen extends StatefulWidget {
   const YesNoScreen({super.key});
+
   @override
   State<YesNoScreen> createState() => _YesNoScreenState();
 }
 
 class _YesNoScreenState extends State<YesNoScreen> {
-
+  TyedQuestionsController tyedQuestionsController =
+      Get.find(tag: 'tyedQuestionsController');
   RxString selectedValue = "Yes".obs;
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +37,10 @@ class _YesNoScreenState extends State<YesNoScreen> {
               Align(
                   alignment: Alignment.topLeft,
                   child: Text(
-                    "Do you co-own any assets?",
+                    tyedQuestionsController
+                            .tyedQuestionsRxModel.value!.coOwnAssets
+                            .toString() ??
+                        "Do you co-own any assets?",
                     style: AppTextConstant.SimpleStyle,
                   )),
               SizedBox(
@@ -47,11 +50,11 @@ class _YesNoScreenState extends State<YesNoScreen> {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(32),
                   color:
-                  Colors.white, // Set the background color of the container
+                      Colors.white, // Set the background color of the container
                   boxShadow: [
                     BoxShadow(
                       color:
-                      Colors.grey.withOpacity(0.2), // Color of the shadow
+                          Colors.grey.withOpacity(0.2), // Color of the shadow
                       spreadRadius: 5, // Spread radius
                       blurRadius: 7, // Blur radius
                       offset: Offset(0, 2), // Offset of the shadow
@@ -60,34 +63,28 @@ class _YesNoScreenState extends State<YesNoScreen> {
                 ),
                 height: Get.height * 0.06,
                 width: Get.width,
-                child:
-                  Row(
-                        children: [
-                          Radio(
-                            activeColor: AppColorsConstants
-                                .AppMainColor, // Use your custom color here
-                            value: "Yes",
-                            groupValue:selectedValue.value,
-                            onChanged: (value) {
-selectedValue.value ='Yes';
-
-                            },
-                          ),
-                          Text(
-                            "Yes",
-                            style: TextStyle(
-                              color: selectedValue.value ==
-                                  'Yes'
-                                  ? AppColorsConstants
-                                  .AppMainColor // Use your custom color here
-                                  : Colors.black, // Use your custom color here
-                              fontSize: 12,
-                            ),
-                          ),
-                        ],
-                      
-                    
-                 
+                child: Row(
+                  children: [
+                    Radio(
+                      activeColor: AppColorsConstants
+                          .AppMainColor, // Use your custom color here
+                      value: "Yes",
+                      groupValue: selectedValue.value,
+                      onChanged: (value) {
+                        selectedValue.value = 'Yes';
+                      },
+                    ),
+                    Text(
+                      "Yes",
+                      style: TextStyle(
+                        color: selectedValue.value == 'Yes'
+                            ? AppColorsConstants
+                                .AppMainColor // Use your custom color here
+                            : Colors.black, // Use your custom color here
+                        fontSize: 12,
+                      ),
+                    ),
+                  ],
                 ),
               ),
               SizedBox(
@@ -97,11 +94,11 @@ selectedValue.value ='Yes';
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(32),
                   color:
-                  Colors.white, // Set the background color of the container
+                      Colors.white, // Set the background color of the container
                   boxShadow: [
                     BoxShadow(
                       color:
-                      Colors.grey.withOpacity(0.2), // Color of the shadow
+                          Colors.grey.withOpacity(0.2), // Color of the shadow
                       spreadRadius: 5, // Spread radius
                       blurRadius: 7, // Blur radius
                       offset: Offset(0, 2), // Offset of the shadow
@@ -110,34 +107,29 @@ selectedValue.value ='Yes';
                 ),
                 height: Get.height * 0.06,
                 width: Get.width,
-                child: 
-                    Row(
-                        children: [
-                          Radio(
-                            activeColor: AppColorsConstants
-                                .AppMainColor, // Use your custom color here
-                            value: "No",
-                            groupValue: selectedValue.value,
-                            onChanged: (value) {
-                              selectedValue.value ='No';
-
-                            },
-                          ),
-                          Text(
-                            "No",
-                            style: TextStyle(
-                              color:selectedValue.value == 'No'
-                                  ? AppColorsConstants
-                                  .AppMainColor // Use your custom color here
-                                  : Colors.black, // Use your custom color here
-                              fontSize: 12,
-                            ),
-                          ),
-                        ],
+                child: Row(
+                  children: [
+                    Radio(
+                      activeColor: AppColorsConstants
+                          .AppMainColor, // Use your custom color here
+                      value: "No",
+                      groupValue: selectedValue.value,
+                      onChanged: (value) {
+                        selectedValue.value = 'No';
+                      },
+                    ),
+                    Text(
+                      "No",
+                      style: TextStyle(
+                        color: selectedValue.value == 'No'
+                            ? AppColorsConstants
+                                .AppMainColor // Use your custom color here
+                            : Colors.black, // Use your custom color here
+                        fontSize: 12,
                       ),
-                   
-                  
-                
+                    ),
+                  ],
+                ),
               ),
               SizedBox(
                 height: Get.height * 0.06,
@@ -146,10 +138,12 @@ selectedValue.value ='Yes';
                 onpress: () {
                   ShowDialogue.showCustomDialog(context, title: "Separate Debt",
                       onpress: () {
-                        Get.toNamed(RoutesName.PayingScreen);
-                      },
+                    Get.toNamed(RoutesName.PayingScreen);
+                  },
                       content:
-                      "Would you like to list any debt that only one person is responsible for?");
+                      tyedQuestionsController
+                          .tyedQuestionsRxModel.value!.separateDebt
+                          .toString() ?? "Would you like to list any debt that only one person is responsible for?");
                 },
                 text: "Next",
                 height: Get.height * 0.05,

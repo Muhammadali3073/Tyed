@@ -1,4 +1,6 @@
-class SignUpModel {
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+class UserModel {
   String? userFirstName;
   String? userLastName;
   String? userEmail;
@@ -8,9 +10,9 @@ class SignUpModel {
   String? userPassword;
   String? userId;
   String? profileImage;
-  DateTime? timeStamp;
+  Timestamp? timeStamp;
 
-  SignUpModel(
+  UserModel(
       {this.userFirstName,
       this.userLastName,
       this.userEmail,
@@ -22,7 +24,7 @@ class SignUpModel {
       this.userId,
       this.profileImage});
 
-  SignUpModel.fromJson(Map<String, Object?> json)
+  UserModel.fromJson(Map<String, Object?> json)
       : this(
           userFirstName: json['firstName'] as String,
           userLastName: json['lastName'] as String,
@@ -33,7 +35,7 @@ class SignUpModel {
           userPassword: json['password'] as String,
           userId: json['userId'] as String,
           profileImage: json['profileImage'] as String,
-          timeStamp: json['timeStamp'] as DateTime,
+          timeStamp: json['timeStamp'] as Timestamp,
         );
 
   Map<String, Object?> toJson() {
@@ -50,4 +52,5 @@ class SignUpModel {
       'userId': userId
     };
   }
+
 }

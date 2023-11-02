@@ -7,8 +7,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../Constant/Constants/routes/routesName.dart';
 import '../../validations/validations.dart';
+import '../EditProfileScreenController/EditProfileScreenController.dart';
+import '../GetUserDataController/GetUserDataController.dart';
 
 class SignInController extends GetxController {
+  GetUserDataController getUserDataController =
+      Get.put(GetUserDataController(), tag: 'getUserDataController');
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   var isShowPassword = true.obs;
@@ -31,6 +35,7 @@ class SignInController extends GetxController {
 
         if (user.toString().isNotEmpty) {
           await prefs.setBool('isLogin', true);
+          getUserDataController.getUserData(userId: user.uid);
 
           Get.offAllNamed(RoutesName.CustomBottomNavigationBar);
           isSignInLoading.value = false;

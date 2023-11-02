@@ -6,6 +6,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:tyedapp/Constant/Constants/colors/Constants.dart';
 import 'package:tyedapp/viewModel/EditProfileScreenController/EditProfileScreenController.dart';
+import 'package:tyedapp/viewModel/GetUserDataController/GetUserDataController.dart';
 import '../../Widgets/CustomButton.dart';
 import '../../Widgets/CustomTextField1.dart';
 
@@ -18,10 +19,24 @@ class EditProfile extends StatefulWidget {
 
 class _EditProfileState extends State<EditProfile> {
   EditProfileController editProfileController =
-      Get.put(EditProfileController(), tag: 'editProfileController');
+      Get.find(tag: 'editProfileController');
+  GetUserDataController getUserDataController =
+      Get.find(tag: 'getUserDataController');
 
   @override
   Widget build(BuildContext context) {
+    editProfileController.firstNameController.text = getUserDataController
+        .getUserDataRxModel.value!.userFirstName
+        .toString();
+    editProfileController.lastNameController.text =
+        getUserDataController.getUserDataRxModel.value!.userLastName.toString();
+    editProfileController.emailController.text =
+        getUserDataController.getUserDataRxModel.value!.userEmail.toString();
+    editProfileController.addressController.text =
+        getUserDataController.getUserDataRxModel.value!.userAddress.toString();
+    editProfileController.dateController.text =
+        getUserDataController.getUserDataRxModel.value!.userDOB.toString();
+
     return Obx(
       () => Scaffold(
         body: SingleChildScrollView(
@@ -37,7 +52,7 @@ class _EditProfileState extends State<EditProfile> {
                           color: AppColorsConstants.AppMainColor,
                           borderRadius: BorderRadius.only(
                               bottomLeft: Radius.circular(20),
-                              bottomRight: Radius.circular(20))),
+                              )),
                       height: Get.height * 0.15,
                     ),
                     Center(
@@ -49,27 +64,44 @@ class _EditProfileState extends State<EditProfile> {
                                 width: Get.width * 0.20,
                                 decoration: BoxDecoration(
                                   image: DecorationImage(
-                                    fit: BoxFit.scaleDown,
-                                      image: FileImage(
-                                          File(
+                                      fit: BoxFit.scaleDown,
+                                      image: FileImage(File(
                                           editProfileController
                                               .selectedImage.value!.path))),
                                   color: Colors.white,
                                   shape: BoxShape.circle,
                                 ),
                               )
-                            : Container(
-                                height: Get.height * 0.20,
-                                width: Get.width * 0.20,
-                                decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                      image: AssetImage(
-                                    "assets/profileimagefinal.jpg",
-                                  )),
-                                  color: Colors.white,
-                                  shape: BoxShape.circle,
-                                ),
-                              ),
+                            : getUserDataController.getUserDataRxModel.value!
+                                    .profileImage!.isNotEmpty
+                                ? Container(
+                                    height: Get.height * 0.20,
+                                    width: Get.width * 0.20,
+                                    decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                          fit: BoxFit.scaleDown,
+                                          image: NetworkImage(
+                                              getUserDataController
+                                                  .getUserDataRxModel
+                                                  .value!
+                                                  .profileImage
+                                                  .toString())),
+                                      color: Colors.grey.withOpacity(0.5),
+                                      shape: BoxShape.circle,
+                                    ),
+                                  )
+                                : Container(
+                                    height: Get.height * 0.20,
+                                    width: Get.width * 0.20,
+                                    decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                          image: AssetImage(
+                                        "assets/profileimagefinal.jpg",
+                                      )),
+                                      color: Colors.white,
+                                      shape: BoxShape.circle,
+                                    ),
+                                  ),
                       ),
                     ),
                     Positioned(
@@ -90,8 +122,8 @@ class _EditProfileState extends State<EditProfile> {
                         onPressed: () {
                           Get.back();
                         },
-                        icon:  Icon(Icons.arrow_back_ios_new,
-                            size: 20,color: Colors.white), // Fixed icon size
+                        icon: Icon(Icons.arrow_back_ios_new,
+                            size: 20, color: Colors.white), // Fixed icon size
                       ),
                     ),
                   ],
@@ -159,13 +191,33 @@ class _EditProfileState extends State<EditProfile> {
                       SizedBox(
                         height: Get.height * 0.1,
                       ),
-                      CustomElevatedButton(
-                        onpress: () {},
-                        text: "Save",
-                        height: Get.height * 0.05,
-                        width: Get.width * 0.42,
-                        colors: AppColorsConstants.AppMainColor,
-                      ),
+                      editProfileController.isUpdateProfileLoading.value
+                          ? SizedBox(
+                              height: 30,
+                              width: 30,
+                              child: CircularProgressIndicator(
+                                  color: AppColorsConstants.AppMainColor),
+                            )
+                          : CustomElevatedButton(
+                              onpress: () {
+                                editProfileController.updateProfileHandler(
+                                  userFirstName: editProfileController
+                                      .firstNameController.text,
+                                  userLastName: editProfileController
+                                      .lastNameController.text,
+                                  userEmail: editProfileController
+                                      .emailController.text,
+                                  userAddress: editProfileController
+                                      .addressController.text,
+                                  userDOB:
+                                      editProfileController.dateController.text,
+                                );
+                              },
+                              text: "Save",
+                              height: Get.height * 0.05,
+                              width: Get.width * 0.42,
+                              colors: AppColorsConstants.AppMainColor,
+                            ),
                     ],
                   ),
                 ),
