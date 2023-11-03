@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:tyedapp/Constant/Constants/colors/Constants.dart';
 import 'package:tyedapp/Constant/Constants/founts/Constants.dart';
 import 'package:tyedapp/Constant/Constants/routes/routesName.dart';
+import 'package:tyedapp/models/tyed_answers_model.dart';
 
 import '../../Widgets/CustomAppBar.dart';
 import '../../Widgets/CustomButton.dart';
@@ -19,6 +20,7 @@ class PaySpousal extends StatefulWidget {
 }
 
 class _PaySpousalState extends State<PaySpousal> {
+  TyedAnswersModel tyedAnswersModel = TyedAnswersModel();
   TyedQuestionsController tyedQuestionsController =
       Get.find(tag: 'tyedQuestionsController');
   RxString selectedValue = "Yes, specify".obs;
@@ -260,6 +262,9 @@ class _PaySpousalState extends State<PaySpousal> {
                     alignment: Alignment.bottomCenter,
                     child: CustomElevatedButton(
                         onpress: () {
+                          tyedAnswersModel.tyedEndsAnswer = selectedValue.value;
+                          tyedAnswersModel.spousalSupportAnswer = supportDetailController.text;
+                          tyedAnswersModel.spousalSupportEndsAnswer = selectedValue1.value;
                           Get.toNamed(RoutesName.InheritScreen);
                         },
                         text: "Next",

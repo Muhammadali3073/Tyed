@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tyedapp/viewModel/EditProfileScreenController/EditProfileScreenController.dart';
 import 'package:tyedapp/viewModel/GetUserDataController/GetUserDataController.dart';
@@ -64,12 +65,16 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-      debugShowCheckedModeBanner: false,
-      initialRoute: widget.isLogin
-          ? RoutesName.CustomBottomNavigationBar
-          : RoutesName.OnboardScreen,
-      getPages: AppRoutes.routes,
+    return ResponsiveSizer(
+      builder: (context, orientation, screenType) {
+        return GetMaterialApp(
+          debugShowCheckedModeBanner: false,
+          initialRoute: widget.isLogin
+              ? RoutesName.CustomBottomNavigationBar
+              : RoutesName.OnboardScreen,
+          getPages: AppRoutes.routes,
+        );
+      },
     );
   }
 }

@@ -82,39 +82,8 @@ class _ShareDocumentsScreenState extends State<ShareDocumentsScreen> {
                               width: Get.width * 0.45,
                               contact: contact[index],
                               title: title[index],
-                              iconsdata: Expanded(
-                                child: Align(
-                                    alignment: Alignment.topRight,
-                                    child: InkWell(
-                                      onTap: () {},
-                                      child: Container(
-                                        height: 15,
-                                        width: 15,
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(100),
-                                          boxShadow: [
-                                            BoxShadow(
-                                              offset: const Offset(0, 3),
-                                              spreadRadius: 2,
-                                              blurRadius: 2,
-                                              color:
-                                                  Colors.grey.withOpacity(0.2),
-                                            )
-                                          ],
-                                          color: Colors.white,
-                                        ),
-                                        child: Center(
-                                          child: Text(
-                                            "x",
-                                            style: TextStyle(
-                                                fontSize: 10,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                        ),
-                                      ),
-                                    )),
-                              ));
+                             isRemove: true,
+                              );
                         },
                       ),
                       SizedBox(
@@ -300,7 +269,6 @@ class _ShareDocumentsScreenState extends State<ShareDocumentsScreen> {
                                             padding: const EdgeInsets.only(
                                                 bottom: 8),
                                             child: ContactRow(isSelected: false,
-                                              height: Get.height * 0.05,
                                               radius: 15,
                                               style:
                                                   const TextStyle(fontSize: 9),

@@ -8,6 +8,7 @@ import 'package:tyedapp/Constant/Constants/routes/routesName.dart';
 
 import '../../Widgets/CustomAppBar.dart';
 import '../../Widgets/CustomButton.dart';
+import '../../models/tyed_answers_model.dart';
 import '../../viewModel/TyedQuestionsController/TyedQuestionsController.dart';
 
 class YesNoScreen5 extends StatefulWidget {
@@ -18,6 +19,8 @@ class YesNoScreen5 extends StatefulWidget {
 }
 
 class _YesNoScreenState extends State<YesNoScreen5> {
+  TyedAnswersModel tyedAnswersModel = TyedAnswersModel();
+
   TyedQuestionsController tyedQuestionsController =
       Get.find(tag: 'tyedQuestionsController');
   RxString selectedValue = "Yes".obs;
@@ -141,6 +144,7 @@ class _YesNoScreenState extends State<YesNoScreen5> {
                 ),
                 CustomElevatedButton(
                   onpress: () {
+                    tyedAnswersModel.liveTogetherAnswer = selectedValue.value;
                     Get.toNamed(RoutesName.PaySpousal);
                   },
                   text: "Next",

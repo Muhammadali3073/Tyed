@@ -236,7 +236,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 signupController.lastNameController.text,
                             userFirstName:
                                 signupController.firstNameController.text,
-                            timeStamp: DateTime.now(),
                           );
                         },
                       ),

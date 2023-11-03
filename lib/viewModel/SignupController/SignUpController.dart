@@ -35,15 +35,15 @@ class SignupController extends GetxController {
       );
 
   // Sign Up Method
-  signUpHandler(
-      {userFirstName,
-      userLastName,
-      userEmail,
-      userAddress,
-      userPhoneNumber,
-      userDOB,
-      userPassword,
-      timeStamp}) async {
+  signUpHandler({
+    userFirstName,
+    userLastName,
+    userEmail,
+    userAddress,
+    userPhoneNumber,
+    userDOB,
+    userPassword,
+  }) async {
     if (firstNameController.text.isNotEmpty &&
         lastNameController.text.isNotEmpty &&
         emailController.text.isNotEmpty &&
@@ -55,11 +55,17 @@ class SignupController extends GetxController {
       try {
         isSignUpLoading.value = true;
 
+        // Timestamp
+        DateTime currentPhoneDate = DateTime.now();
+        Timestamp myTimeStamp = Timestamp.fromDate(currentPhoneDate);
+
+        // Create User With Email And Password
         final userCredential = await auth.createUserWithEmailAndPassword(
             email: userEmail, password: userPassword);
-
+        // Get User from userCredential
         final User user = userCredential.user!;
 
+        // Add User and Check User not Empty
         if (user.toString().isNotEmpty) {
           addUser(user.uid,
               profileImage: '',
@@ -70,7 +76,7 @@ class SignupController extends GetxController {
               userPhoneNumber: userPhoneNumber,
               userDOB: userDOB,
               userPassword: userPassword,
-              timeStamp: timeStamp);
+              timeStamp: myTimeStamp.toDate().toString());
         }
       } on FirebaseAuthException catch (e) {
         Get.snackbar(

@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 class UserModel {
   String? userFirstName;
@@ -10,7 +9,7 @@ class UserModel {
   String? userPassword;
   String? userId;
   String? profileImage;
-  Timestamp? timeStamp;
+  String? timeStamp;
 
   UserModel(
       {this.userFirstName,
@@ -35,7 +34,7 @@ class UserModel {
           userPassword: json['password'] as String,
           userId: json['userId'] as String,
           profileImage: json['profileImage'] as String,
-          timeStamp: json['timeStamp'] as Timestamp,
+          timeStamp: json['timeStamp'] as String,
         );
 
   Map<String, Object?> toJson() {

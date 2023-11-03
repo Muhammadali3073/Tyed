@@ -8,7 +8,6 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:tyedapp/viewModel/GetUserDataController/GetUserDataController.dart';
-import '../../models/sign_up_model.dart';
 
 class EditProfileController extends GetxController {
   GetUserDataController getUserDataController =
@@ -27,14 +26,6 @@ class EditProfileController extends GetxController {
   final FirebaseAuth auth = FirebaseAuth.instance;
   final FirebaseStorage storage = FirebaseStorage.instance;
   String? profileImageUrl;
-
-  // Update Fire-store date to Model
-  final userData = FirebaseFirestore.instance
-      .collection('users')
-      .withConverter<UserModel>(
-        fromFirestore: (snapshot, _) => UserModel.fromJson(snapshot.data()!),
-        toFirestore: (users, _) => users.toJson(),
-      );
 
   // Update Profile Handler
   updateProfileHandler({
@@ -86,7 +77,11 @@ class EditProfileController extends GetxController {
       'dOB': userDOB,
     };
 
-    return await userData.doc(auth.currentUser!.uid).update(dataToUpdate).then(
+    return await FirebaseFirestore.instance
+        .collection('users')
+        .doc(auth.currentUser!.uid)
+        .update(dataToUpdate)
+        .then(
       (value) {
         getUserDataController.getUserData();
         Get.snackbar('Success', 'User Update Successfully.');
@@ -112,7 +107,8 @@ class EditProfileController extends GetxController {
       final storage = FirebaseStorage.instance;
 
       final fileName = '${auth.currentUser!.uid}_image.jpg';
-      final Reference storageRef = storage.ref().child('profile_images_folder/$fileName');
+      final Reference storageRef =
+          storage.ref().child('profile_images_folder/$fileName');
       await storageRef.putFile(image);
 
       // Get the download URL for the uploaded image

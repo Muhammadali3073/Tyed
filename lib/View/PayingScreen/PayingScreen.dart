@@ -12,6 +12,7 @@ import '../../Widgets/CustomButton.dart';
 import '../../Widgets/Dialoge.dart';
 import '../../Widgets/RectangularButton.dart';
 import '../../Widgets/RoundedButton2.dart';
+import '../../models/tyed_answers_model.dart';
 import '../../viewModel/TyedQuestionsController/TyedQuestionsController.dart';
 
 class PayingScreen extends StatefulWidget {
@@ -22,6 +23,7 @@ class PayingScreen extends StatefulWidget {
 }
 
 class _PersonDetailsState extends State<PayingScreen> {
+  TyedAnswersModel tyedAnswersModel = TyedAnswersModel();
   TyedQuestionsController tyedQuestionsController =
       Get.find(tag: 'tyedQuestionsController');
   List images = [
@@ -38,6 +40,7 @@ class _PersonDetailsState extends State<PayingScreen> {
   ];
   RxInt selectedIndex = 0.obs;
   TextEditingController detailPaymentController = TextEditingController();
+
 
   @override
   Widget build(BuildContext context) {
@@ -94,9 +97,9 @@ class _PersonDetailsState extends State<PayingScreen> {
                               children: [
                                 Text(
                                   tyedQuestionsController.tyedQuestionsRxModel
-                                          .value!.assetsBelongOnlyYou
+                                          .value!.belongAssets
                                           .toString() ??
-                                      "What assets belong only to you?",
+                                      "Separate Debt",
                                   style: AppTextConstant.SimpleStyle,
                                 ),
                                 Image.asset("assets/group3.png")
@@ -246,6 +249,7 @@ class _PersonDetailsState extends State<PayingScreen> {
                       alignment: Alignment.bottomCenter,
                       child: CustomElevatedButton(
                         onpress: () {
+                          tyedAnswersModel.responsibleForPayingAnswer = detailPaymentController.text;
                           Get.toNamed(RoutesName.YesNoScreen2);
                         },
                         text: "Next",

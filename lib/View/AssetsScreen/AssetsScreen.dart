@@ -14,6 +14,7 @@ import '../../Widgets/CustomButton.dart';
 import '../../Widgets/RectangularButton.dart';
 
 import '../../Widgets/RoundedButton2.dart';
+import '../../models/tyed_answers_model.dart';
 import '../../viewModel/TyedQuestionsController/TyedQuestionsController.dart';
 
 class AssetsScreen extends StatefulWidget {
@@ -24,6 +25,8 @@ class AssetsScreen extends StatefulWidget {
 }
 
 class _AssetsScreenState extends State<AssetsScreen> {
+  TyedAnswersModel tyedAnswersModel = TyedAnswersModel();
+
   TyedQuestionsController tyedQuestionsController =
       Get.find(tag: 'tyedQuestionsController');
   List images = ["assets/house.svg", "assets/car.svg", "assets/money.svg"];
@@ -230,6 +233,7 @@ class _AssetsScreenState extends State<AssetsScreen> {
                       alignment: Alignment.bottomCenter,
                       child: CustomElevatedButton(
                         onpress: () {
+                          tyedAnswersModel.assetsBelongOnlyYouAnswer = detailRSController.text;
                           Get.toNamed(RoutesName.YesNoScreen);
                         },
                         text: "Next",

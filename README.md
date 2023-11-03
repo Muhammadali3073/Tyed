@@ -17,3 +17,7 @@ ios       1:323043528214:ios:e6047ce9c0463203642f37
 macos     1:323043528214:ios:8783ac96f595a770642f37
 
 
+Enable Swift on the iOS project, in ios/Podfile:
+
+target 'Runner' do
+use_frameworks!    # <-- Add this line

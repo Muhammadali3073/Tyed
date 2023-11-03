@@ -10,6 +10,7 @@ import 'package:tyedapp/Constant/Constants/routes/routesName.dart';
 import '../../Widgets/CustomAppBar.dart';
 import '../../Widgets/CustomButton.dart';
 import '../../Widgets/Dialoge.dart';
+import '../../models/tyed_answers_model.dart';
 import '../../viewModel/TyedQuestionsController/TyedQuestionsController.dart';
 
 class YesNoScreen extends StatefulWidget {
@@ -23,6 +24,8 @@ class _YesNoScreenState extends State<YesNoScreen> {
   TyedQuestionsController tyedQuestionsController =
       Get.find(tag: 'tyedQuestionsController');
   RxString selectedValue = "Yes".obs;
+
+  TyedAnswersModel tyedAnswersModel = TyedAnswersModel();
 
   @override
   Widget build(BuildContext context) {
@@ -137,7 +140,8 @@ class _YesNoScreenState extends State<YesNoScreen> {
               CustomElevatedButton(
                 onpress: () {
                   ShowDialogue.showCustomDialog(context, title: "Separate Debt",
-                      onpress: () {
+                      onPress: () {
+                    tyedAnswersModel.coOwnAssetsAnswer = selectedValue.value;
                     Get.toNamed(RoutesName.PayingScreen);
                   },
                       content:

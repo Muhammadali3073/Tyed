@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:tyedapp/Constant/Constants/colors/Constants.dart';
 import 'package:tyedapp/Constant/Constants/founts/Constants.dart';
 import 'package:tyedapp/Constant/Constants/routes/routesName.dart';
+import 'package:tyedapp/models/tyed_answers_model.dart';
 import 'package:tyedapp/viewModel/TyedQuestionsController/TyedQuestionsController.dart';
 
 import '../../Widgets/CustomAppBar.dart';
@@ -25,6 +26,7 @@ class _PersonDetailsState extends State<PersonDetails> {
       Get.find(tag: 'tyedQuestionsController');
   PersonDetailController personDetailController =
       Get.put(PersonDetailController(), tag: 'personDetailController');
+  TyedAnswersModel tyedAnswersModel = TyedAnswersModel();
 
   @override
   Widget build(BuildContext context) {
@@ -104,7 +106,17 @@ class _PersonDetailsState extends State<PersonDetails> {
                       child: CustomElevatedButton(
                           onpress: () {
                             ShowDialogue.showCustomDialog(context,
-                                title: "Separate Assets", onpress: () {
+                                title: "Separate Assets", onPress: () {
+                              tyedAnswersModel.personNameAnswer =
+                                  personDetailController
+                                      .personNameController.text;
+                              tyedAnswersModel.spouseNameAnswer =
+                                  personDetailController
+                                      .spouseNameController.text;
+                              tyedAnswersModel.yourAddressAnswer =
+                                  personDetailController.addressController.text;
+                              tyedAnswersModel.tyedDateAnswer =
+                                  personDetailController.dateController.text;
                               Get.toNamed(RoutesName.AssetsScreen);
                             },
                                 content: tyedQuestionsController

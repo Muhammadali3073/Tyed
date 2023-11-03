@@ -6,9 +6,9 @@ import 'package:tyedapp/models/sign_up_model.dart';
 
 class GetUserDataController extends GetxController {
   final FirebaseAuth auth = FirebaseAuth.instance;
-  var getUserDataLoading = false.obs;
+  var isGetUserDataLoading = false.obs;
   UserModel? userModel;
-   Rxn<UserModel> getUserDataRxModel = Rxn<UserModel>();
+  Rxn<UserModel> getUserDataRxModel = Rxn<UserModel>();
 
 
   final userData = FirebaseFirestore.instance
@@ -19,13 +19,16 @@ class GetUserDataController extends GetxController {
   );
 
   getUserData({userId}) async {
-    getUserDataLoading.value = true;
+    isGetUserDataLoading.value = true;
+
     userModel = (await userData
         .doc(userId ?? auth.currentUser!.uid)
         .get()
         .then((snapshot) => snapshot.data()));
+
     getUserDataRxModel.value = userModel!;
-    getUserDataLoading.value = false;
+
+    isGetUserDataLoading.value = false;
     log(getUserDataRxModel.value!.userEmail.toString());
   }
 

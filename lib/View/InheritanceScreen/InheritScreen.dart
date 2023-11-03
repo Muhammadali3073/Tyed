@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:tyedapp/Constant/Constants/colors/Constants.dart';
 import 'package:tyedapp/Constant/Constants/founts/Constants.dart';
 import 'package:tyedapp/Constant/Constants/routes/routesName.dart';
+import 'package:tyedapp/models/tyed_answers_model.dart';
 
 import '../../Widgets/AssetListviewBuilder.dart';
 import '../../Widgets/CustomAppBar.dart';
@@ -21,6 +22,8 @@ class InheritScreen extends StatefulWidget {
 }
 
 class _InheritScreenState extends State<InheritScreen> {
+  TyedAnswersModel tyedAnswersModel = TyedAnswersModel();
+
   TyedQuestionsController tyedQuestionsController =
       Get.find(tag: 'tyedQuestionsController');
   List images = [
@@ -29,7 +32,7 @@ class _InheritScreenState extends State<InheritScreen> {
     "assets/spouse.svg",
   ];
   List title = [
-    "Only what's specified in the Last Will\n of the deceased spouse",
+    "Only what's specified in the Last Will\nof the deceased spouse",
     "A portion of the estate as determined\nby local law",
     "What's in the Last Will and additional\nitems"
   ];
@@ -222,6 +225,8 @@ class _InheritScreenState extends State<InheritScreen> {
                       alignment: Alignment.bottomCenter,
                       child: CustomElevatedButton(
                         onpress: () {
+                          tyedAnswersModel.youPassedAnswer =
+                              additionalInheritanceController.text;
                           Get.toNamed(RoutesName.AgreementScreen);
                         },
                         text: "Next",

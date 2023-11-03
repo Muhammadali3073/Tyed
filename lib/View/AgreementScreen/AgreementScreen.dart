@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:tyedapp/Constant/Constants/colors/Constants.dart';
 import 'package:tyedapp/Constant/Constants/founts/Constants.dart';
 import 'package:tyedapp/Constant/Constants/routes/routesName.dart';
+import 'package:tyedapp/models/tyed_answers_model.dart';
 
 import '../../Widgets/CustomAppBar.dart';
 import '../../Widgets/CustomButton.dart';
@@ -21,6 +22,7 @@ class AgreementScreen extends StatefulWidget {
 }
 
 class _YesNoScreenState extends State<AgreementScreen> {
+  TyedAnswersModel tyedAnswersModel = TyedAnswersModel();
   TyedQuestionsController tyedQuestionsController =
       Get.find(tag: 'tyedQuestionsController');
   TextEditingController detailController = TextEditingController();
@@ -199,6 +201,8 @@ class _YesNoScreenState extends State<AgreementScreen> {
                     alignment: Alignment.bottomCenter,
                     child: CustomElevatedButton(
                         onpress: () {
+                          tyedAnswersModel.anythingElseIncludeAnswer =
+                              detailController.text;
                           Get.toNamed(RoutesName.PaymentMethod,
                               arguments: 'Tyed');
                         },

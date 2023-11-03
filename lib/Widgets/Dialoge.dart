@@ -13,7 +13,7 @@ class ShowDialogue {
   final index = 1.obs;
 
   static showCustomDialog(BuildContext context,
-      {String? title, String? content, VoidCallback? onpress}) {
+      {String? title, String? content, VoidCallback? onPress}) {
     showDialog(
       context: context,
       builder: (context) {
@@ -49,7 +49,7 @@ class ShowDialogue {
                   height: 10,
                 ),
                 ElevatedButton(
-                  onPressed: onpress,
+                  onPressed: onPress,
                   style: ElevatedButton.styleFrom(
                       minimumSize: const Size(130, 35),
                       shape: RoundedRectangleBorder(
