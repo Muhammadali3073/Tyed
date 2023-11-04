@@ -11,13 +11,14 @@ import '../../Widgets/CustomAppbar2.dart';
 
 class FamilyDocumentsFolder extends StatelessWidget {
   const FamilyDocumentsFolder({super.key});
-
+  backToBottomNavBar(){
+    Get.offAllNamed(RoutesName.CustomBottomNavigationBar);
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
           toolbarHeight: Get.height * 0.12,
-
           elevation: 0,
           backgroundColor: Colors.transparent,
           flexibleSpace: CustomAppBar2(

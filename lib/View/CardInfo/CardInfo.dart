@@ -192,8 +192,11 @@ class PaymentMethodProcess extends StatelessWidget {
                     Center(
                       child: CustomElevatedButton(
                         onpress: () {
-                          Get.toNamed(RoutesName.YourPasscode,
-                              arguments: Get.arguments);
+                          Get.arguments == 'Tyed'
+                              ? Get.toNamed(RoutesName.DownloadScreen)
+                              : Get.toNamed(RoutesName.YourPasscode);
+                          // Get.toNamed(RoutesName.YourPasscode,
+                          //     arguments: Get.arguments);
                         },
                         text: "Pay Now",
                         height: Get.height * 0.05,

@@ -49,7 +49,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
                       isSelectedDebitCard!.value=true;
                       isSelectedCreditCard!.value=false;
                     },
-                    color: isSelectedDebitCard == true
+                    color: isSelectedDebitCard!.value == true
                         ? AppColorsConstants.AppMainColor
                         : Colors.white,
                     text: 'By Credit Card',
@@ -61,7 +61,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
                       isSelectedDebitCard!.value=false;
                       isSelectedCreditCard!.value=true;
                     },
-                    color: isSelectedCreditCard == true
+                    color: isSelectedCreditCard!.value == true
                         ? AppColorsConstants.AppMainColor
                         : Colors.white,
                     text: 'By Debit Card',

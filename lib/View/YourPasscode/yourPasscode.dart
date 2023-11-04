@@ -16,6 +16,7 @@ class YourPasscode extends StatefulWidget {
 
 class _YourPasscodeState extends State<YourPasscode> {
   String YourPassCode = '3x3w3zy3';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -113,8 +114,10 @@ class _YourPasscodeState extends State<YourPasscode> {
               ),
               CustomElevatedButton(
                 onpress: () {
-                  Get.arguments == 'Tyed'?
-                  Get.toNamed(RoutesName.DownloadScreen) : Get.toNamed(RoutesName.FamilyDocumentsFolder);
+                  // Get.arguments == 'Tyed'?
+                  // Get.toNamed(RoutesName.DownloadScreen) :
+                  // Get.toNamed(RoutesName.FamilyDocumentsFolder);
+                  Get.offAllNamed(RoutesName.CustomBottomNavigationBar);
                 },
                 text: "Done",
                 height: Get.height * 0.05,
@@ -131,11 +134,13 @@ class _YourPasscodeState extends State<YourPasscode> {
 
 class DrawDottedHorizontalLine extends CustomPainter {
   final Paint _paint;
+
   DrawDottedHorizontalLine() : _paint = Paint() {
     _paint.color = Color.fromRGBO(204, 204, 204, 1); //dots color
     _paint.strokeWidth = 2; //dots thickness
     _paint.strokeCap = StrokeCap.square; //dots corner edges
   }
+
   @override
   void paint(Canvas canvas, Size size) {
     for (double i = -300; i < 300; i = i + 15) {
@@ -151,5 +156,3 @@ class DrawDottedHorizontalLine extends CustomPainter {
     return false;
   }
 }
-
-
