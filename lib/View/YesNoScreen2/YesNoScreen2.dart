@@ -19,7 +19,6 @@ class YesNoScreen2 extends StatefulWidget {
 }
 
 class _YesNoScreenState extends State<YesNoScreen2> {
-  TyedAnswersModel tyedAnswersModel = TyedAnswersModel();
   TyedQuestionsController tyedQuestionsController =
       Get.find(tag: 'tyedQuestionsController');
   RxString selectedValue = "Yes".obs;
@@ -143,8 +142,6 @@ class _YesNoScreenState extends State<YesNoScreen2> {
                 ),
                 CustomElevatedButton(
                   onpress: () {
-                    tyedAnswersModel.jointCreditCardAnswer =
-                        selectedValue.value;
                     Get.toNamed(RoutesName.YesNoScreen3);
                   },
                   text: "Next",

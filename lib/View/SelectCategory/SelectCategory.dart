@@ -14,6 +14,10 @@ class SelectCategory extends StatelessWidget {
     "Bank Statement",
     "Tax Reports",
     "Bills",
+    "Retirement Plans",
+    "Personal",
+    "Business",
+    "Passwords",
     "Others",
   ].obs;
 
@@ -53,20 +57,18 @@ class SelectCategory extends StatelessWidget {
                         ],
                       ),
                       child: Obx(() => Row(
-                        children: [
-                          Radio(
-                            activeColor: AppColorsConstants.AppMainColor,
-                            value: options[index],
-                            groupValue: selectedRadio.value,
-                            onChanged: (value) {
-
-                              selectedRadio.value = value!;
-                            },
-                          ),
-
-                          Text(options[index]),
-                        ],
-                      )),
+                            children: [
+                              Radio(
+                                activeColor: AppColorsConstants.AppMainColor,
+                                value: options[index],
+                                groupValue: selectedRadio.value,
+                                onChanged: (value) {
+                                  selectedRadio.value = value!;
+                                },
+                              ),
+                              Text(options[index]),
+                            ],
+                          )),
                     ),
                   );
                 },
@@ -78,15 +80,14 @@ class SelectCategory extends StatelessWidget {
           ),
           CustomElevatedButton(
             onpress: () {
-              Get.toNamed(RoutesName.Insurancepdfdocimages,arguments: selectedRadio.value);
-
+              Get.toNamed(RoutesName.Insurancepdfdocimages,
+                  arguments: selectedRadio.value);
             },
             text: "Next",
             height: Get.height * 0.05,
             width: Get.width * 0.4,
             colors: AppColorsConstants.AppMainColor,
           ),
-
         ],
       ),
     );

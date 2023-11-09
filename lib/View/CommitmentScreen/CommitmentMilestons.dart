@@ -55,7 +55,7 @@ class _CommitmentMilestoneState extends State<CommitmentMilestone> {
                 height: Get.height * 0.01,
               ),
               Text(
-                "you'r on the verge of crafting a tyed agreement."
+                "you're on the verge of crafting a tyed agreement."
                 "\nHere's a glimpse of the process ahead:",
                 style: AppTextConstant.SimpleStyle,
                 textAlign: TextAlign.center,

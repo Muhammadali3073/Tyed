@@ -20,7 +20,6 @@ class PaySpousal extends StatefulWidget {
 }
 
 class _PaySpousalState extends State<PaySpousal> {
-  TyedAnswersModel tyedAnswersModel = TyedAnswersModel();
   TyedQuestionsController tyedQuestionsController =
       Get.find(tag: 'tyedQuestionsController');
   RxString selectedValue = "Yes, specify".obs;
@@ -153,7 +152,8 @@ class _PaySpousalState extends State<PaySpousal> {
                   CustomContainer(
                     child: TextFormField(
                       controller: supportDetailController,
-                      decoration: InputDecoration(border: InputBorder.none),
+                      decoration: InputDecoration(border: InputBorder.none,contentPadding: EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 5),),
                       maxLines: 4,
                     ),
                   ),
@@ -262,9 +262,6 @@ class _PaySpousalState extends State<PaySpousal> {
                     alignment: Alignment.bottomCenter,
                     child: CustomElevatedButton(
                         onpress: () {
-                          tyedAnswersModel.tyedEndsAnswer = selectedValue.value;
-                          tyedAnswersModel.spousalSupportAnswer = supportDetailController.text;
-                          tyedAnswersModel.spousalSupportEndsAnswer = selectedValue1.value;
                           Get.toNamed(RoutesName.InheritScreen);
                         },
                         text: "Next",

@@ -36,9 +36,10 @@ import '../../../View/YesNoScreen3/YesNoScreen3.dart';
 import '../../../View/YesNoScreen4/YesNoScreen4.dart';
 import '../../../View/YesNoScreen5/YesNoScreen5.dart';
 import '../../../View/YesNoScreens/YesNo1.dart';
+import '../../../View/YourAndSpouseSign/YourAndSpouseSign.dart';
 import '../../../Widgets/BottomNavBar.dart';
 import 'routesName.dart';
-var arguments;
+dynamic arguments;
 class AppRoutes {
   static final List<GetPage> routes = [
     GetPage(
@@ -60,7 +61,7 @@ class AppRoutes {
         page: () => CommitmentMilestone()),
     GetPage(name: RoutesName.PersonDetails, page: () => PersonDetails()),
     GetPage(name: RoutesName.DocumentsFolder, page: () => DocumentsFolder()),
-    GetPage(name: RoutesName.AssetsScreen, page: () => AssetsScreen()),
+    GetPage(name: RoutesName.AssetsScreen, page: () => AssetsScreen(),arguments: arguments),
     GetPage(name: RoutesName.YesNoScreen, page: () => YesNoScreen()),
     GetPage(name: RoutesName.PayingScreen, page: () => PayingScreen()),
     GetPage(name: RoutesName.YesNoScreen2, page: () => YesNoScreen2()),
@@ -100,6 +101,7 @@ class AppRoutes {
         name: RoutesName.YourTiedAgreement, page: () => YourTiedAgreement()),
     GetPage(name: RoutesName.ProfileScreen, page: () => EditProfile()),
     GetPage(name: RoutesName.EditProfile, page: () => ProfileScreen()),
+    GetPage(name: RoutesName.YourAndSpouseSign, page: () => YourAndSpouseSign()),
     GetPage(
         name: RoutesName.PrivacyPolicyScreen,
         page: () => PrivacyPolicyScreen()),

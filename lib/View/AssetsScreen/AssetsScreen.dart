@@ -1,6 +1,6 @@
 // ignore_for_file: must_be_immutable, invalid_use_of_protected_member
+import 'dart:developer';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -10,22 +10,17 @@ import 'package:tyedapp/Constant/Constants/routes/routesName.dart';
 
 import '../../Widgets/CustomAppBar.dart';
 import '../../Widgets/CustomButton.dart';
-
-import '../../Widgets/RectangularButton.dart';
-
 import '../../Widgets/RoundedButton2.dart';
-import '../../models/tyed_answers_model.dart';
 import '../../viewModel/TyedQuestionsController/TyedQuestionsController.dart';
 
 class AssetsScreen extends StatefulWidget {
-  const AssetsScreen({Key? key}) : super(key: key);
+   const AssetsScreen({Key? key}) : super(key: key);
 
   @override
   State<AssetsScreen> createState() => _AssetsScreenState();
 }
 
 class _AssetsScreenState extends State<AssetsScreen> {
-  TyedAnswersModel tyedAnswersModel = TyedAnswersModel();
 
   TyedQuestionsController tyedQuestionsController =
       Get.find(tag: 'tyedQuestionsController');
@@ -33,83 +28,124 @@ class _AssetsScreenState extends State<AssetsScreen> {
 
   List title = ["Real Estate", "Vehicle", "Financial (investment, etc.)"];
 
-  TextEditingController detailRSController = TextEditingController();
+  RxInt currentIndex = 1.obs;
+  List listOfAssets = [1].obs;
 
-  RxInt selectedIndex = 0.obs;
+  TextEditingController detailRSController0 = TextEditingController();
+  TextEditingController detailRSController1 = TextEditingController();
+  TextEditingController detailRSController2 = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+
     return Obx(
       () => Scaffold(
           appBar: CustomAppBar(
             svgImagePath: 'assets/30%.svg',
           ),
-          body: Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: Get.width * 0.025,
-            ),
-            child: SingleChildScrollView(
-              child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      decoration: BoxDecoration(
-                        color: Colors
-                            .white, // Set the background color of the container
+          body: SingleChildScrollView(
+            child:
+                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              ListView.builder(
+                itemCount: listOfAssets.length,
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+                itemBuilder: (context, outerIndex) {
+                  RxInt selectedIndex = 0.obs;
+                  return Column(
+                    children: [
+                      outerIndex != 0
+                          ? Divider(
+                              color: Colors.grey,
+                              height: 5,
+                              thickness: 1,
+                              indent: Get.height * 0.01,
+                              endIndent: Get.height * 0.01,
+                            )
+                          : Container(),
+                      Container(
+                        margin: EdgeInsets.symmetric(
+                          horizontal: Get.width * 0.025,
+                          vertical: Get.height * 0.01,
+                        ),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          // Set the background color of the container
 
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey
-                                .withOpacity(0.2), // Color of the shadow
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.2),
+                              // Color of the shadow
 
-                            spreadRadius: 5, // Spread radius
+                              spreadRadius: 5,
+                              // Spread radius
 
-                            blurRadius: 7, // Blur radius
+                              blurRadius: 7,
+                              // Blur radius
 
-                            offset: const Offset(0, 2), // Offset of the shadow
-                          ),
-                        ],
-                      ),
-                      child: Padding(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: Get.width * 0.03),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  tyedQuestionsController.tyedQuestionsRxModel
-                                          .value!.assetsBelongOnlyYou
-                                          .toString() ??
-                                      "What assets belong only to you?",
-                                  style: AppTextConstant.SimpleStyle,
-                                ),
-                                Image.asset("assets/group3.png")
-                              ],
+                              offset:
+                                  const Offset(0, 2), // Offset of the shadow
                             ),
-                            SizedBox(
-                              child: ListView.builder(
-                                padding: EdgeInsets.zero,
-                                physics: NeverScrollableScrollPhysics(),
-                                shrinkWrap: true,
-                                itemCount: images.length,
-                                itemBuilder: (context, index) {
-                                  return Padding(
-                                    padding: EdgeInsets.symmetric(vertical: 4),
-                                    child: GestureDetector(
-                                      onTap: () {
-                                        selectedIndex.value = index;
-                                      },
-                                      child: Obx(() => Container(
+                          ],
+                        ),
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: Get.width * 0.03),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsets.symmetric(
+                                        vertical: outerIndex == 0
+                                            ? Get.height * 0.012
+                                            : 0),
+                                    child: Text(
+                                      tyedQuestionsController
+                                              .tyedQuestionsRxModel
+                                              .value!
+                                              .assetsBelongOnlyYou
+                                              .toString() ??
+                                          "What assets belong only to you?",
+                                      style: AppTextConstant.SimpleStyle,
+                                    ),
+                                  ),
+                                  outerIndex == 0
+                                      ? Container()
+                                      : InkWell(
+                                          onTap: () {
+                                            listOfAssets.removeAt(outerIndex);
+                                          },
+                                          child:
+                                              Image.asset("assets/group3.png"))
+                                ],
+                              ),
+                              SizedBox(
+                                child: ListView.builder(
+                                  padding: EdgeInsets.zero,
+                                  physics: NeverScrollableScrollPhysics(),
+                                  shrinkWrap: true,
+                                  itemCount: images.length,
+                                  itemBuilder: (context, innerIndex) {
+                                    return Padding(
+                                      padding:
+                                          EdgeInsets.symmetric(vertical: 4),
+                                      child: GestureDetector(
+                                        onTap: () {
+                                          selectedIndex.value = innerIndex;
+                                        },
+                                        child: Obx(
+                                          () => Container(
                                             width: Get.width,
                                             height: Get.height * 0.065,
                                             decoration: BoxDecoration(
                                               border: Border.all(
                                                   color: selectedIndex.value ==
-                                                          index
+                                                          innerIndex
                                                       ? AppColorsConstants
                                                           .AppMainColor
                                                       : Colors.white),
@@ -151,7 +187,8 @@ class _AssetsScreenState extends State<AssetsScreen> {
                                                             scaleY: 1.2,
                                                             child: SvgPicture
                                                                 .asset(
-                                                              images[index],
+                                                              images[
+                                                                  innerIndex],
                                                             )),
                                                         Padding(
                                                           padding:
@@ -159,7 +196,7 @@ class _AssetsScreenState extends State<AssetsScreen> {
                                                                   .only(
                                                                   left: 20),
                                                           child: Text(
-                                                            title[index],
+                                                            title[innerIndex],
                                                             style:
                                                                 AppTextConstant
                                                                     .SimpleStyle,
@@ -169,81 +206,100 @@ class _AssetsScreenState extends State<AssetsScreen> {
                                                 ),
                                               ],
                                             ),
-                                          )),
-                                    ),
-                                  );
-                                },
+                                          ),
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                ),
                               ),
-                            ),
-                            SizedBox(
-                              height: Get.height * 0.014,
-                            ),
-                            Obx(
-                              () => Text(
-                                "What are the details of this ${title[selectedIndex.value]}?",
+                              SizedBox(
+                                height: Get.height * 0.014,
+                              ),
+                              Text(
+                                "What are the details?",
                                 style: AppTextConstant.SimpleStyle,
                               ),
-                            ),
-                            SizedBox(
-                              height: Get.height * 0.008,
-                            ),
-                            Container(
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                // Set the background color of the container
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.grey.withOpacity(
-                                        0.2), // Color of the shadow
-                                    spreadRadius: 5, // Spread radius
-                                    blurRadius: 7, // Blur radius
-                                    offset:
-                                        Offset(0, 2), // Offset of the shadow
-                                  ),
-                                ],
+                              SizedBox(
+                                height: Get.height * 0.008,
                               ),
-                              child: TextFormField(
-                                controller: detailRSController,
-                                keyboardType: TextInputType.text,
-                                decoration: InputDecoration(
-                                    contentPadding: EdgeInsets.symmetric(
-                                        horizontal: 5, vertical: 5),
-                                    border: InputBorder.none),
-                                maxLines: 5,
+                              Container(
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  // Set the background color of the container
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey.withOpacity(0.2),
+                                      // Color of the shadow
+                                      spreadRadius: 5,
+                                      // Spread radius
+                                      blurRadius: 7,
+                                      // Blur radius
+                                      offset:
+                                          Offset(0, 2), // Offset of the shadow
+                                    ),
+                                  ],
+                                ),
+                                child: TextFormField(
+                                  controller: outerIndex == 0
+                                      ? detailRSController0
+                                      : outerIndex == 1
+                                          ? detailRSController1
+                                          : detailRSController2,
+                                  keyboardType: TextInputType.text,
+                                  decoration: InputDecoration(
+                                      contentPadding: EdgeInsets.symmetric(
+                                          horizontal: 10, vertical: 5),
+                                      border: InputBorder.none),
+                                  maxLines: 5,
+                                ),
                               ),
-                            ),
-                            SizedBox(
-                              height: Get.height * 0.03,
-                            ),
-                          ],
+                              SizedBox(
+                                height: Get.height * 0.03,
+                              ),
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                    SizedBox(
-                      height: Get.height * 0.008,
-                    ),
-                    RoundedButton2(
-                      title: "Add another separate asset",
-                      onpress: () {},
-                    ),
-                    SizedBox(
-                      height: Get.height * 0.03,
-                    ),
-                    Align(
-                      alignment: Alignment.bottomCenter,
-                      child: CustomElevatedButton(
-                        onpress: () {
-                          tyedAnswersModel.assetsBelongOnlyYouAnswer = detailRSController.text;
-                          Get.toNamed(RoutesName.YesNoScreen);
-                        },
-                        text: "Next",
-                        height: Get.height * 0.05,
-                        width: Get.width * 0.4,
-                        colors: AppColorsConstants.AppMainColor,
-                      ),
-                    ),
-                  ]),
-            ),
+                    ],
+                  );
+                },
+              ),
+              SizedBox(
+                height: Get.height * 0.008,
+              ),
+              Padding(
+                padding: EdgeInsets.only(
+                  left: Get.width * 0.025,
+                ),
+                child: RoundedButton2(
+                  title: "Add another separate asset",
+                  onpress: () {
+                    if (listOfAssets.length < 3) {
+                      listOfAssets.add(currentIndex.value++);
+                    }
+                  },
+                ),
+              ),
+              SizedBox(
+                height: Get.height * 0.03,
+              ),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: CustomElevatedButton(
+                  onpress: () {
+                    Get.toNamed(RoutesName.YesNoScreen);
+                  },
+                  text: "Next",
+                  height: Get.height * 0.05,
+                  width: Get.width * 0.4,
+                  colors: AppColorsConstants.AppMainColor,
+                ),
+              ),
+              SizedBox(
+                height: Get.height * 0.03,
+              ),
+            ]),
           )),
     );
   }

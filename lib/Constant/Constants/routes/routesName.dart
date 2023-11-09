@@ -21,7 +21,7 @@ class RoutesName {
   static const String PaySpousal = '/PaySpousal';
   static const String InheritScreen = '/InheritScreen';
   static const String AgreementScreen = '/AgreementScreen';
-  // static const String YourAndSpouseSign = '/YourAndSpouseSign';
+  static const String YourAndSpouseSign = '/YourAndSpouseSign';
   // static const String CheckOutScreen = '/CheckOutScreen';
   static const String PaymentMethod = '/PaymentMethod';
   static const String PaymentMethodProcess = '/PaymentMethodProcess';

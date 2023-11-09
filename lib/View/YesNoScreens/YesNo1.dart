@@ -25,7 +25,6 @@ class _YesNoScreenState extends State<YesNoScreen> {
       Get.find(tag: 'tyedQuestionsController');
   RxString selectedValue = "Yes".obs;
 
-  TyedAnswersModel tyedAnswersModel = TyedAnswersModel();
 
   @override
   Widget build(BuildContext context) {
@@ -141,7 +140,7 @@ class _YesNoScreenState extends State<YesNoScreen> {
                 onpress: () {
                   ShowDialogue.showCustomDialog(context, title: "Separate Debt",
                       onPress: () {
-                    tyedAnswersModel.coOwnAssetsAnswer = selectedValue.value;
+                    Get.back();
                     Get.toNamed(RoutesName.PayingScreen);
                   },
                       content:

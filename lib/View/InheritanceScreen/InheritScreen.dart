@@ -22,7 +22,6 @@ class InheritScreen extends StatefulWidget {
 }
 
 class _InheritScreenState extends State<InheritScreen> {
-  TyedAnswersModel tyedAnswersModel = TyedAnswersModel();
 
   TyedQuestionsController tyedQuestionsController =
       Get.find(tag: 'tyedQuestionsController');
@@ -215,7 +214,7 @@ class _InheritScreenState extends State<InheritScreen> {
                       height: Get.height * 0.008,
                     ),
                     RoundedButton2(
-                      title: "Add another separate asset",
+                      title: "Add another inheritance right",
                       onpress: () {},
                     ),
                     SizedBox(
@@ -225,8 +224,6 @@ class _InheritScreenState extends State<InheritScreen> {
                       alignment: Alignment.bottomCenter,
                       child: CustomElevatedButton(
                         onpress: () {
-                          tyedAnswersModel.youPassedAnswer =
-                              additionalInheritanceController.text;
                           Get.toNamed(RoutesName.AgreementScreen);
                         },
                         text: "Next",

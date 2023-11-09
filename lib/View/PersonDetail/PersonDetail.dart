@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 import 'package:tyedapp/Constant/Constants/colors/Constants.dart';
 import 'package:tyedapp/Constant/Constants/founts/Constants.dart';
 import 'package:tyedapp/Constant/Constants/routes/routesName.dart';
-import 'package:tyedapp/models/tyed_answers_model.dart';
 import 'package:tyedapp/viewModel/TyedQuestionsController/TyedQuestionsController.dart';
 
 import '../../Widgets/CustomAppBar.dart';
@@ -26,7 +25,6 @@ class _PersonDetailsState extends State<PersonDetails> {
       Get.find(tag: 'tyedQuestionsController');
   PersonDetailController personDetailController =
       Get.put(PersonDetailController(), tag: 'personDetailController');
-  TyedAnswersModel tyedAnswersModel = TyedAnswersModel();
 
   @override
   Widget build(BuildContext context) {
@@ -65,13 +63,13 @@ class _PersonDetailsState extends State<PersonDetails> {
                       tyedQuestionsController
                               .tyedQuestionsRxModel.value!.spouseName
                               .toString() ??
-                          "What is your Spouse full name?",
+                          "What is your Spouse's full name?",
                       style: AppTextConstant.SimpleStyle,
                     ),
                     CustomTextField(
                         controller: personDetailController.spouseNameController,
                         keyboardType: TextInputType.name,
-                        hintText: "Spouse Name"),
+                        hintText: "Spouse's Name"),
                     Text(
                       tyedQuestionsController
                               .tyedQuestionsRxModel.value!.personAddress
@@ -107,16 +105,22 @@ class _PersonDetailsState extends State<PersonDetails> {
                           onpress: () {
                             ShowDialogue.showCustomDialog(context,
                                 title: "Separate Assets", onPress: () {
-                              tyedAnswersModel.personNameAnswer =
+                              tyedQuestionsController
+                                      .tyedAnswersModel.personNameAnswer =
                                   personDetailController
                                       .personNameController.text;
-                              tyedAnswersModel.spouseNameAnswer =
+                              tyedQuestionsController
+                                      .tyedAnswersModel.spouseNameAnswer =
                                   personDetailController
                                       .spouseNameController.text;
-                              tyedAnswersModel.yourAddressAnswer =
+                              tyedQuestionsController
+                                      .tyedAnswersModel.yourAddressAnswer =
                                   personDetailController.addressController.text;
-                              tyedAnswersModel.tyedDateAnswer =
+                              tyedQuestionsController
+                                      .tyedAnswersModel.tyedDateAnswer =
                                   personDetailController.dateController.text;
+
+                              Get.back();
                               Get.toNamed(RoutesName.AssetsScreen);
                             },
                                 content: tyedQuestionsController

@@ -3,9 +3,13 @@ import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 
+import '../../models/tyed_answers_model.dart';
 import '../../models/tyed_questions_model.dart';
 
 class TyedQuestionsController extends GetxController {
+  // Model for question & answer
+  TyedAnswersModel tyedAnswersModel = TyedAnswersModel();
+
   var getTyedQuestionsLoading = false.obs;
   TyedQuestionsModel? tyedQuestionsModel;
   final tyedQuestionsRxModel = Rxn<TyedQuestionsModel>();
@@ -27,4 +31,8 @@ class TyedQuestionsController extends GetxController {
     tyedQuestionsRxModel.value = tyedQuestionsModel!;
     getTyedQuestionsLoading.value = false;
   }
+
+
+
+
 }

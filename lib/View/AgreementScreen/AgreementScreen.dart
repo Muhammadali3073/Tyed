@@ -22,7 +22,6 @@ class AgreementScreen extends StatefulWidget {
 }
 
 class _YesNoScreenState extends State<AgreementScreen> {
-  TyedAnswersModel tyedAnswersModel = TyedAnswersModel();
   TyedQuestionsController tyedQuestionsController =
       Get.find(tag: 'tyedQuestionsController');
   TextEditingController detailController = TextEditingController();
@@ -33,7 +32,7 @@ class _YesNoScreenState extends State<AgreementScreen> {
     return Obx(
       () => Scaffold(
           appBar: const CustomAppBar(
-            svgImagePath: 'assets/100%.svg',
+            svgImagePath: 'assets/90%.svg',
           ),
           body: SingleChildScrollView(
             child: Container(
@@ -182,18 +181,18 @@ class _YesNoScreenState extends State<AgreementScreen> {
                       decoration: InputDecoration(
                           contentPadding: EdgeInsets.all(12),
                           hintText:
-                              "e.g. All shared living expenses will be paid from the joint bank account that both Parties deposit monthlyfunds into.",
+                              "E.g. All shared living expenses will be paid from the joint bank account that both Parties deposit monthly funds into.",
                           hintStyle: AppTextConstant.hintText,
                           border: InputBorder.none),
                       maxLines: 7,
                     ),
                   ),
-                  SizedBox(
-                    height: Get.height * 0.02,
-                  ),
-                  RoundedButon2(
-                    title: 'Add Another Clause',
-                  ),
+                  // SizedBox(
+                  //   height: Get.height * 0.02,
+                  // ),
+                  // RoundedButon2(
+                  //   title: 'Add Another Clause',
+                  // ),
                   SizedBox(
                     height: Get.height * 0.04,
                   ),
@@ -201,10 +200,7 @@ class _YesNoScreenState extends State<AgreementScreen> {
                     alignment: Alignment.bottomCenter,
                     child: CustomElevatedButton(
                         onpress: () {
-                          tyedAnswersModel.anythingElseIncludeAnswer =
-                              detailController.text;
-                          Get.toNamed(RoutesName.PaymentMethod,
-                              arguments: 'Tyed');
+                          Get.toNamed(RoutesName.YourAndSpouseSign);
                         },
                         text: "Next",
                         height: Get.height * 0.05,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import 'RoundedButton.dart';
 
@@ -39,7 +40,7 @@ class RoundedButton2 extends StatelessWidget {
 
         )
       ]),
-      width: 170,
+      width: Get.width*0.5,
       height: 32,
     );
   }

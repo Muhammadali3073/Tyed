@@ -7,7 +7,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../Constant/Constants/routes/routesName.dart';
 import '../../validations/validations.dart';
-import '../EditProfileScreenController/EditProfileScreenController.dart';
 import '../GetUserDataController/GetUserDataController.dart';
 
 class SignInController extends GetxController {

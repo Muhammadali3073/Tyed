@@ -9,7 +9,8 @@ class CustomTextField extends StatelessWidget {
   TextEditingController?controller;
   bool? readOnly;
   final Callback? onTap;
-  CustomTextField({super.key, this.hintText,this.keyboardType ,this.controller,this.readOnly,this.onTap});
+  final Function(String)? onChanged;
+  CustomTextField({super.key, this.hintText,this.keyboardType ,this.controller,this.readOnly,this.onTap,this.onChanged});
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +25,7 @@ class CustomTextField extends StatelessWidget {
             // Remove any shadow
           ),
           child: TextFormField(onTap:onTap ,
+            onChanged: onChanged,
             controller:controller ,
               keyboardType: keyboardType,
               readOnly:readOnly??false ,
