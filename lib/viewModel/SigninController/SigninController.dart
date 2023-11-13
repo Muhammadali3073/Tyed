@@ -2,9 +2,11 @@ import 'dart:developer';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../Constant/Constants/colors/Constants.dart';
 import '../../Constant/Constants/routes/routesName.dart';
 import '../../validations/validations.dart';
 import '../GetUserDataController/GetUserDataController.dart';
@@ -43,11 +45,15 @@ class SignInController extends GetxController {
         }
       } on FirebaseAuthException catch (e) {
         Get.snackbar(
-            'Error', Validations.handleFirebaseAuthError(e.toString()));
+            'Error', Validations.handleFirebaseAuthError(e.toString()),colorText: Colors.white,
+            backgroundColor: AppColorsConstants
+                .AppMainColor.withOpacity(0.5));
         isSignInLoading.value = false;
       }
     } else {
-      Get.snackbar('Required', 'All fields are Required');
+      Get.snackbar('Required', 'All fields are Required',colorText: Colors.white,
+          backgroundColor: AppColorsConstants
+              .AppMainColor.withOpacity(0.5));
     }
   }
 
@@ -59,13 +65,17 @@ class SignInController extends GetxController {
         (value) async {
           await prefs.remove('isLogin');
           Get.offAllNamed(RoutesName.SignIn);
-          Get.snackbar('Success', 'Signout Successfully.');
+          Get.snackbar('Success', 'Signout Successfully.',colorText: Colors.white,
+              backgroundColor: AppColorsConstants
+                  .AppMainColor.withOpacity(0.5));
           log('Signout Successfully.');
           isSignOutLoading.value = false;
         },
       );
     } catch (e) {
-      Get.snackbar('Error', Validations.handleFirebaseAuthError(e.toString()));
+      Get.snackbar('Error', Validations.handleFirebaseAuthError(e.toString()),colorText: Colors.white,
+          backgroundColor: AppColorsConstants
+              .AppMainColor.withOpacity(0.5));
       log(e.toString());
       isSignOutLoading.value = false;
     }

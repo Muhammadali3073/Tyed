@@ -9,6 +9,8 @@ import 'package:tyedapp/Constant/Constants/routes/routesName.dart';
 import '../../Widgets/MainScreenWidget.dart';
 import '../../viewModel/EditProfileScreenController/EditProfileScreenController.dart';
 import '../../viewModel/GetUserDataController/GetUserDataController.dart';
+import '../../viewModel/PDFStoreInFirebaseController/pdfController.dart';
+import '../PdfViewer/text_to_pdf.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -20,6 +22,8 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   GetUserDataController getUserDataController =
       Get.find(tag: 'getUserDataController');
+
+  PDFController pdfController = Get.put(PDFController(), tag: 'pdfController');
 
   getUserDataMethod() {
     if (getUserDataController.getUserDataRxModel.value == null) {
@@ -62,7 +66,13 @@ class _MainScreenState extends State<MainScreen> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          SvgPicture.asset('assets/profile.svg'),
+                          InkWell(
+                              onTap: () async{
+                                pdfController
+                                    .uploadTyedAgreementsToFirebaseStorage(
+                                        pdfs: await makePdf());
+                              },
+                              child: SvgPicture.asset('assets/profile.svg')),
                           SizedBox(
                             width: Get.width * 0.02,
                           ),
@@ -83,37 +93,38 @@ class _MainScreenState extends State<MainScreen> {
                           ),
                           Expanded(
                             child: Align(
-                                alignment: Alignment.topRight,
-                                child: getUserDataController.getUserDataRxModel
-                                        .value!.profileImage!.isNotEmpty
-                                    ? Container(
-                                        height: Get.height * 0.13,
-                                        width: Get.width * 0.13,
-                                        decoration: BoxDecoration(
-                                          image: DecorationImage(
-                                              fit: BoxFit.scaleDown,
-                                              image: NetworkImage(
-                                                  getUserDataController
-                                                      .getUserDataRxModel
-                                                      .value!
-                                                      .profileImage
-                                                      .toString())),
-                                          color: Colors.grey.withOpacity(0.5),
-                                          shape: BoxShape.circle,
-                                        ),
-                                      )
-                                    : Container(
-                                        height: Get.height * 0.13,
-                                        width: Get.width * 0.13,
-                                        decoration: BoxDecoration(
-                                          image: DecorationImage(
-                                              image: AssetImage(
-                                            'assets /user photo.png',
-                                          )),
-                                          color: Colors.white,
-                                          shape: BoxShape.circle,
-                                        ),
-                                      )),
+                              alignment: Alignment.topRight,
+                              child: getUserDataController.getUserDataRxModel
+                                      .value!.profileImage!.isNotEmpty
+                                  ? Container(
+                                      height: Get.height * 0.13,
+                                      width: Get.width * 0.13,
+                                      decoration: BoxDecoration(
+                                        image: DecorationImage(
+                                            fit: BoxFit.scaleDown,
+                                            image: NetworkImage(
+                                                getUserDataController
+                                                    .getUserDataRxModel
+                                                    .value!
+                                                    .profileImage
+                                                    .toString())),
+                                        color: Colors.grey.withOpacity(0.5),
+                                        shape: BoxShape.circle,
+                                      ),
+                                    )
+                                  : Container(
+                                      height: Get.height * 0.13,
+                                      width: Get.width * 0.13,
+                                      decoration: BoxDecoration(
+                                        image: DecorationImage(
+                                            image: AssetImage(
+                                          "assets/profileimagefinal.jpg",
+                                        )),
+                                        color: Colors.white,
+                                        shape: BoxShape.circle,
+                                      ),
+                                    ),
+                            ),
                           ),
                         ],
                       ),

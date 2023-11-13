@@ -103,32 +103,46 @@ class _PersonDetailsState extends State<PersonDetails> {
                       alignment: Alignment.bottomCenter,
                       child: CustomElevatedButton(
                           onpress: () {
-                            ShowDialogue.showCustomDialog(context,
-                                title: "Separate Assets", onPress: () {
-                              tyedQuestionsController
-                                      .tyedAnswersModel.personNameAnswer =
-                                  personDetailController
-                                      .personNameController.text;
-                              tyedQuestionsController
-                                      .tyedAnswersModel.spouseNameAnswer =
-                                  personDetailController
-                                      .spouseNameController.text;
-                              tyedQuestionsController
-                                      .tyedAnswersModel.yourAddressAnswer =
-                                  personDetailController.addressController.text;
-                              tyedQuestionsController
-                                      .tyedAnswersModel.tyedDateAnswer =
-                                  personDetailController.dateController.text;
-
-                              Get.back();
-                              Get.toNamed(RoutesName.AssetsScreen);
-                            },
-                                content: tyedQuestionsController
-                                        .tyedQuestionsRxModel
-                                        .value!
-                                        .separateAssets
-                                        .toString() ??
-                                    "Would you like to list any assets that will remain separate after tyed commitment?");
+                            if (personDetailController.personNameController.text.isNotEmpty &&
+                                personDetailController
+                                    .spouseNameController.text.isNotEmpty &&
+                                personDetailController
+                                    .addressController.text.isNotEmpty &&
+                                personDetailController
+                                    .dateController.text.isNotEmpty) {
+                              ShowDialogue.showCustomDialog(context,
+                                  title: "Separate Assets", onPress: () {
+                                tyedQuestionsController
+                                        .tyedAnswersModel.personNameAnswer =
+                                    personDetailController
+                                        .personNameController.text;
+                                tyedQuestionsController
+                                        .tyedAnswersModel.spouseNameAnswer =
+                                    personDetailController
+                                        .spouseNameController.text;
+                                tyedQuestionsController
+                                        .tyedAnswersModel.yourAddressAnswer =
+                                    personDetailController
+                                        .addressController.text;
+                                tyedQuestionsController
+                                        .tyedAnswersModel.tyedDateAnswer =
+                                    personDetailController.dateController.text;
+                                Get.back();
+                                Get.toNamed(RoutesName.AssetsScreen);
+                              },
+                                  content: tyedQuestionsController
+                                          .tyedQuestionsRxModel
+                                          .value!
+                                          .separateAssets
+                                          .toString() ??
+                                      "Would you like to list any assets that will remain separate after tyed commitment?");
+                            } else {
+                              Get.snackbar(
+                                  'Required', 'All fields are Required',
+                                  colorText: Colors.white,
+                                  backgroundColor: AppColorsConstants
+                                      .AppMainColor.withOpacity(0.5));
+                            }
                           },
                           text: "Next",
                           height: Get.height * 0.05,

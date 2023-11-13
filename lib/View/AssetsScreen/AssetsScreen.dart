@@ -14,14 +14,13 @@ import '../../Widgets/RoundedButton2.dart';
 import '../../viewModel/TyedQuestionsController/TyedQuestionsController.dart';
 
 class AssetsScreen extends StatefulWidget {
-   const AssetsScreen({Key? key}) : super(key: key);
+  const AssetsScreen({Key? key}) : super(key: key);
 
   @override
   State<AssetsScreen> createState() => _AssetsScreenState();
 }
 
 class _AssetsScreenState extends State<AssetsScreen> {
-
   TyedQuestionsController tyedQuestionsController =
       Get.find(tag: 'tyedQuestionsController');
   List images = ["assets/house.svg", "assets/car.svg", "assets/money.svg"];
@@ -37,7 +36,6 @@ class _AssetsScreenState extends State<AssetsScreen> {
 
   @override
   Widget build(BuildContext context) {
-
     return Obx(
       () => Scaffold(
           appBar: CustomAppBar(
@@ -288,7 +286,19 @@ class _AssetsScreenState extends State<AssetsScreen> {
                 alignment: Alignment.bottomCenter,
                 child: CustomElevatedButton(
                   onpress: () {
-                    Get.toNamed(RoutesName.YesNoScreen);
+                    if (detailRSController0.text.isNotEmpty ||
+                        detailRSController1.text.isNotEmpty ||
+                        detailRSController2.text.isNotEmpty) {
+                      tyedQuestionsController
+                              .tyedAnswersModel.assetsBelongOnlyYouAnswer =
+                          '${detailRSController0.text}${'\n${detailRSController1.text}'}${'\n${detailRSController2.text}'}';
+                      Get.toNamed(RoutesName.YesNoScreen);
+                    } else {
+                      Get.snackbar('Required', 'All fields are Required',
+                          colorText: Colors.white,
+                          backgroundColor:
+                              AppColorsConstants.AppMainColor.withOpacity(0.5));
+                    }
                   },
                   text: "Next",
                   height: Get.height * 0.05,

@@ -143,6 +143,8 @@ class _YesNoScreenState extends State<YesNoScreen5> {
                 ),
                 CustomElevatedButton(
                   onpress: () {
+                    tyedQuestionsController.tyedAnswersModel.liveTogetherAnswer = selectedValue.value;
+
                     Get.toNamed(RoutesName.PaySpousal);
                   },
                   text: "Next",

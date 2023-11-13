@@ -23,13 +23,13 @@ class _YourAndSpouseSignState extends State<YourAndSpouseSign> {
   TyedQuestionsController tyedQuestionsController =
       Get.find(tag: 'tyedQuestionsController');
   final yourSignatureController = SignatureController(
-    penStrokeWidth: 1,
+    penStrokeWidth: 1.5,
     penColor: Colors.black,
     exportBackgroundColor: Colors.transparent,
   );
 
   final spouseSignatureController = SignatureController(
-    penStrokeWidth: 1,
+    penStrokeWidth: 1.5,
     penColor: Colors.black,
     exportBackgroundColor: Colors.transparent,
   );
@@ -42,12 +42,22 @@ class _YourAndSpouseSignState extends State<YourAndSpouseSign> {
     spouseSignatureController.clear();
   }
 
-  saveSignature() async {
+  spouseSignatureImage() async {
     if (spouseSignatureController.isNotEmpty) {
-      tyedQuestionsController.tyedAnswersModel.signatureImage =
+      tyedQuestionsController.tyedAnswersModel.spouseSignatureImage =
           await spouseSignatureController.toPngBytes();
     }
-    log(tyedQuestionsController.tyedAnswersModel.signatureImage.toString());
+    log(tyedQuestionsController.tyedAnswersModel.spouseSignatureImage
+        .toString());
+  }
+
+  personSignatureImage() async {
+    if (yourSignatureController.isNotEmpty) {
+      tyedQuestionsController.tyedAnswersModel.personSignatureImage =
+          await yourSignatureController.toPngBytes();
+    }
+    log(tyedQuestionsController.tyedAnswersModel.personSignatureImage
+        .toString());
   }
 
   @override
@@ -143,8 +153,17 @@ class _YourAndSpouseSignState extends State<YourAndSpouseSign> {
                 ),
                 CustomElevatedButton(
                   onpress: () {
-                    saveSignature();
-                    Get.toNamed(RoutesName.PaymentMethod, arguments: 'Tyed');
+                    if (spouseSignatureController.isNotEmpty &&
+                        yourSignatureController.isNotEmpty) {
+                      spouseSignatureImage();
+                      personSignatureImage();
+                      Get.toNamed(RoutesName.PaymentMethod, arguments: 'Tyed');
+                    } else {
+                      Get.snackbar('Required', 'Signature Required',
+                          colorText: Colors.white,
+                          backgroundColor:
+                              AppColorsConstants.AppMainColor.withOpacity(0.5));
+                    }
                   },
                   text: "Done",
                   height: Get.height * 0.05,

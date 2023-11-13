@@ -4,7 +4,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:printing/printing.dart';
-import '../../viewModel/TextToPDFController/text-to_pdf_controller.dart';
+import 'text_to_pdf.dart';
 
 class PdfViewer extends StatefulWidget {
   const PdfViewer({Key? key}) : super(key: key);

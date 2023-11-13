@@ -22,7 +22,6 @@ class InheritScreen extends StatefulWidget {
 }
 
 class _InheritScreenState extends State<InheritScreen> {
-
   TyedQuestionsController tyedQuestionsController =
       Get.find(tag: 'tyedQuestionsController');
   List images = [
@@ -224,7 +223,18 @@ class _InheritScreenState extends State<InheritScreen> {
                       alignment: Alignment.bottomCenter,
                       child: CustomElevatedButton(
                         onpress: () {
-                          Get.toNamed(RoutesName.AgreementScreen);
+                          if (additionalInheritanceController.text.isNotEmpty) {
+                            tyedQuestionsController
+                                    .tyedAnswersModel.youPassedAnswer =
+                                additionalInheritanceController.text;
+                            Get.toNamed(RoutesName.AgreementScreen);
+                          } else {
+                            Get.snackbar('Required', 'All fields are Required',
+                                colorText: Colors.white,
+                                backgroundColor:
+                                    AppColorsConstants.AppMainColor.withOpacity(
+                                        0.5));
+                          }
                         },
                         text: "Next",
                         height: Get.height * 0.05,

@@ -9,6 +9,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:tyedapp/models/sign_up_model.dart';
 
+import '../../Constant/Constants/colors/Constants.dart';
 import '../../Constant/Constants/routes/routesName.dart';
 import '../../validations/validations.dart';
 
@@ -76,15 +77,19 @@ class SignupController extends GetxController {
               userPhoneNumber: userPhoneNumber,
               userDOB: userDOB,
               userPassword: userPassword,
+              tyedAgreementsList: [],
               timeStamp: myTimeStamp.toDate().toString());
         }
       } on FirebaseAuthException catch (e) {
-        Get.snackbar(
-            'Error', Validations.handleFirebaseAuthError(e.toString()));
+        Get.snackbar('Error', Validations.handleFirebaseAuthError(e.toString()),
+            colorText: Colors.white,
+            backgroundColor: AppColorsConstants.AppMainColor.withOpacity(0.5));
         isSignUpLoading.value = false;
       }
     } else {
-      Get.snackbar('Required', 'All fields are Required');
+      Get.snackbar('Required', 'All fields are Required',
+          colorText: Colors.white,
+          backgroundColor: AppColorsConstants.AppMainColor.withOpacity(0.5));
     }
   }
 
@@ -98,23 +103,28 @@ class SignupController extends GetxController {
       userAddress,
       userDOB,
       userPassword,
+      tyedAgreementsList,
       timeStamp}) async {
     return await userData
         .doc(userID)
         .set(UserModel(
-            userId: userID,
-            profileImage: profileImage,
-            userFirstName: userFirstName,
-            userLastName: userLastName,
-            userEmail: userEmail,
-            userPhoneNumber: userPhoneNumber,
-            userAddress: userAddress,
-            userDOB: userDOB,
-            userPassword: userPassword,
-            timeStamp: timeStamp))
+          userId: userID,
+          profileImage: profileImage,
+          userFirstName: userFirstName,
+          userLastName: userLastName,
+          userEmail: userEmail,
+          userPhoneNumber: userPhoneNumber,
+          userAddress: userAddress,
+          userDOB: userDOB,
+          userPassword: userPassword,
+          tyedAgreementsList: tyedAgreementsList,
+          timeStamp: timeStamp,
+        ))
         .then(
       (value) {
-        Get.snackbar('Success', 'User Registered Successfully.');
+        Get.snackbar('Success', 'User Registered Successfully.',
+            colorText: Colors.white,
+            backgroundColor: AppColorsConstants.AppMainColor.withOpacity(0.5));
         Get.offAllNamed(RoutesName.SignIn);
         isSignUpLoading.value = false;
         log("User Added");

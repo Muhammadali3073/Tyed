@@ -262,7 +262,17 @@ class _PaySpousalState extends State<PaySpousal> {
                     alignment: Alignment.bottomCenter,
                     child: CustomElevatedButton(
                         onpress: () {
-                          Get.toNamed(RoutesName.InheritScreen);
+                          if(supportDetailController.text.isNotEmpty){
+                            tyedQuestionsController.tyedAnswersModel.tyedEndsAnswer = selectedValue.value;
+                            tyedQuestionsController.tyedAnswersModel.spousalSupportAnswer = supportDetailController.text;
+                            tyedQuestionsController.tyedAnswersModel.spousalSupportEndsAnswer = selectedValue1.value;
+                            Get.toNamed(RoutesName.InheritScreen);
+                          }else {
+                            Get.snackbar('Required', 'All fields are Required',
+                                colorText: Colors.white,
+                                backgroundColor:
+                                AppColorsConstants.AppMainColor.withOpacity(0.5));
+                          }
                         },
                         text: "Next",
                         height: Get.height * 0.05,

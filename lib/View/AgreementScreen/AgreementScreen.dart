@@ -200,7 +200,21 @@ class _YesNoScreenState extends State<AgreementScreen> {
                     alignment: Alignment.bottomCenter,
                     child: CustomElevatedButton(
                         onpress: () {
-                          Get.toNamed(RoutesName.YourAndSpouseSign);
+                          if (detailController.text.isNotEmpty) {
+                            tyedQuestionsController.tyedAnswersModel
+                                    .anythingElseIncludeAnswer =
+                                selectedValue.value;
+                            tyedQuestionsController.tyedAnswersModel
+                                .likeToAddAnswer = detailController.text;
+
+                            Get.toNamed(RoutesName.YourAndSpouseSign);
+                          } else {
+                            Get.snackbar('Required', 'All fields are Required',
+                                colorText: Colors.white,
+                                backgroundColor:
+                                    AppColorsConstants.AppMainColor.withOpacity(
+                                        0.5));
+                          }
                         },
                         text: "Next",
                         height: Get.height * 0.05,

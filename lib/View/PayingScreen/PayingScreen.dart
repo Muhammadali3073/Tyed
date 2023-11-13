@@ -156,16 +156,18 @@ class _PersonDetailsState extends State<PayingScreen> {
                                           onTap: () {
                                             selectedIndex.value = index;
                                           },
-                                          child: Obx(()=> Container(
+                                          child: Obx(
+                                            () => Container(
                                               width: Get.width,
                                               height: Get.height * 0.065,
                                               decoration: BoxDecoration(
                                                 border: Border.all(
-                                                    color: selectedIndex.value ==
-                                                            index
-                                                        ? AppColorsConstants
-                                                            .AppMainColor
-                                                        : Colors.white),
+                                                    color:
+                                                        selectedIndex.value ==
+                                                                index
+                                                            ? AppColorsConstants
+                                                                .AppMainColor
+                                                            : Colors.white),
                                                 color: Colors.white,
                                                 // Set the background color of the container
 
@@ -189,11 +191,14 @@ class _PersonDetailsState extends State<PayingScreen> {
                                               child: Row(
                                                 children: [
                                                   Padding(
-                                                    padding: EdgeInsets.symmetric(
-                                                        horizontal:
-                                                            Get.width * 0.02,
-                                                        vertical:
-                                                            Get.height * 0.01),
+                                                    padding:
+                                                        EdgeInsets.symmetric(
+                                                            horizontal:
+                                                                Get.width *
+                                                                    0.02,
+                                                            vertical:
+                                                                Get.height *
+                                                                    0.01),
                                                     child: Row(
                                                         mainAxisAlignment:
                                                             MainAxisAlignment
@@ -213,9 +218,8 @@ class _PersonDetailsState extends State<PayingScreen> {
                                                                     left: 20),
                                                             child: Text(
                                                               title[index],
-                                                              style:
-                                                                  AppTextConstant
-                                                                      .SimpleStyle,
+                                                              style: AppTextConstant
+                                                                  .SimpleStyle,
                                                             ),
                                                           ),
                                                         ]),
@@ -305,8 +309,20 @@ class _PersonDetailsState extends State<PayingScreen> {
                 alignment: Alignment.bottomCenter,
                 child: CustomElevatedButton(
                   onpress: () {
-
-                    Get.toNamed(RoutesName.YesNoScreen2);
+                    if (detailRSController0.text.isNotEmpty ||
+                        detailRSController1.text.isNotEmpty ||
+                        detailRSController2.text.isNotEmpty ||
+                        detailRSController3.text.isNotEmpty) {
+                      tyedQuestionsController
+                              .tyedAnswersModel.responsibleForPayingAnswer =
+                          '${detailRSController0.text}${'\n${detailRSController1.text}'}${'\n${detailRSController2.text}'}${'\n${detailRSController3.text}'}';
+                      Get.toNamed(RoutesName.YesNoScreen2);
+                    } else {
+                      Get.snackbar('Required', 'All fields are Required',
+                          colorText: Colors.white,
+                          backgroundColor:
+                              AppColorsConstants.AppMainColor.withOpacity(0.5));
+                    }
                   },
                   text: "Next",
                   height: Get.height * 0.05,

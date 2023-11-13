@@ -140,6 +140,9 @@ class _YesNoScreenState extends State<YesNoScreen> {
                 onpress: () {
                   ShowDialogue.showCustomDialog(context, title: "Separate Debt",
                       onPress: () {
+
+                    tyedQuestionsController.tyedAnswersModel.coOwnAssetsAnswer = selectedValue.value;
+
                     Get.back();
                     Get.toNamed(RoutesName.PayingScreen);
                   },

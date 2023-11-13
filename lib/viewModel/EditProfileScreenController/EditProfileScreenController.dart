@@ -9,6 +9,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:tyedapp/viewModel/GetUserDataController/GetUserDataController.dart';
 
+import '../../Constant/Constants/colors/Constants.dart';
+
 class EditProfileController extends GetxController {
   GetUserDataController getUserDataController =
       Get.put(GetUserDataController(), tag: 'getUserDataController');
@@ -42,20 +44,34 @@ class EditProfileController extends GetxController {
         dateController.text.isNotEmpty) {
       try {
         isUpdateProfileLoading.value = true;
-        uploadProfileImageToFirebaseStorage(
-          selectedImage.value,
-          userFirstName: userFirstName,
-          userLastName: userLastName,
-          userEmail: userEmail,
-          userAddress: userAddress,
-          userDOB: userDOB,
-        );
+        selectedImage.value == null
+            ? await updateUserData(
+                profileImage: getUserDataController
+                    .getUserDataRxModel.value!.profileImage,
+                userFirstName: userFirstName,
+                userLastName: userLastName,
+                userEmail: userEmail,
+                userAddress: userAddress,
+                userDOB: userDOB,
+              )
+            : await uploadProfileImageToFirebaseStorage(
+                selectedImage.value,
+                userFirstName: userFirstName,
+                userLastName: userLastName,
+                userEmail: userEmail,
+                userAddress: userAddress,
+                userDOB: userDOB,
+              );
       } on FirebaseAuthException catch (e) {
-        Get.snackbar('Error', e.toString());
+        Get.snackbar('Error', e.toString(),colorText: Colors.white,
+            backgroundColor: AppColorsConstants
+                .AppMainColor.withOpacity(0.5));
         isUpdateProfileLoading.value = false;
       }
     } else {
-      Get.snackbar('Required', 'All fields are Required');
+      Get.snackbar('Required', 'All fields are Required',colorText: Colors.white,
+          backgroundColor: AppColorsConstants
+              .AppMainColor.withOpacity(0.5));
     }
   }
 
@@ -84,7 +100,9 @@ class EditProfileController extends GetxController {
         .then(
       (value) {
         getUserDataController.getUserData();
-        Get.snackbar('Success', 'User Update Successfully.');
+        Get.snackbar('Success', 'User Update Successfully.',colorText: Colors.white,
+            backgroundColor: AppColorsConstants
+                .AppMainColor.withOpacity(0.5));
         isUpdateProfileLoading.value = false;
         log("User Updated");
       },
@@ -154,10 +172,14 @@ class EditProfileController extends GetxController {
         selectedImage.value = File(pickedFile.path);
         log(selectedImage.value.toString());
       } else {
-        Get.snackbar("No Image", "Please Select Image");
+        Get.snackbar("No Image", "Please Select Image",colorText: Colors.white,
+            backgroundColor: AppColorsConstants
+                .AppMainColor.withOpacity(0.5));
       }
     } catch (e) {
-      Get.snackbar("An Error", " ${e.toString()}");
+      Get.snackbar("An Error", " ${e.toString()}",colorText: Colors.white,
+          backgroundColor: AppColorsConstants
+              .AppMainColor.withOpacity(0.5));
     }
   }
 }
