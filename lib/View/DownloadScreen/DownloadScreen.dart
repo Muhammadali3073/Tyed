@@ -61,6 +61,7 @@ class DownloadScreen extends StatelessWidget {
               Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 10),
                   child: CustomPdfRow(
+                    onTap: () => Get.toNamed(RoutesName.PdfViewer),
                     column1: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       crossAxisAlignment: CrossAxisAlignment.start,

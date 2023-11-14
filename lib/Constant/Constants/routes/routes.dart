@@ -30,6 +30,7 @@ import '../../../View/DocumentsFolder/DocumentsFolder.dart';
 import '../../../View/InsurancePdfdocImages/InsurancePdfdocImages.dart';
 import '../../../View/MainScreen/MainScreen.dart';
 import '../../../View/Onboardscreen/OnboardScreen.dart';
+import '../../../View/PdfViewer/NetworkPDFViewer.dart';
 import '../../../View/Signin/SignInScreen.dart';
 import '../../../View/YesNoScreen2/YesNoScreen2.dart';
 import '../../../View/YesNoScreen3/YesNoScreen3.dart';
@@ -39,7 +40,9 @@ import '../../../View/YesNoScreens/YesNo1.dart';
 import '../../../View/YourAndSpouseSign/YourAndSpouseSign.dart';
 import '../../../Widgets/BottomNavBar.dart';
 import 'routesName.dart';
+
 dynamic arguments;
+
 class AppRoutes {
   static final List<GetPage> routes = [
     GetPage(
@@ -61,7 +64,10 @@ class AppRoutes {
         page: () => CommitmentMilestone()),
     GetPage(name: RoutesName.PersonDetails, page: () => PersonDetails()),
     GetPage(name: RoutesName.DocumentsFolder, page: () => DocumentsFolder()),
-    GetPage(name: RoutesName.AssetsScreen, page: () => AssetsScreen(),arguments: arguments),
+    GetPage(
+        name: RoutesName.AssetsScreen,
+        page: () => AssetsScreen(),
+        arguments: arguments),
     GetPage(name: RoutesName.YesNoScreen, page: () => YesNoScreen()),
     GetPage(name: RoutesName.PayingScreen, page: () => PayingScreen()),
     GetPage(name: RoutesName.YesNoScreen2, page: () => YesNoScreen2()),
@@ -69,23 +75,33 @@ class AppRoutes {
     GetPage(name: RoutesName.YesNoScreen4, page: () => YesNoScreen4()),
     GetPage(name: RoutesName.YesNoScreen5, page: () => YesNoScreen5()),
     GetPage(name: RoutesName.PaySpousal, page: () => PaySpousal()),
-    GetPage(name: RoutesName.Insurancepdfdocimages, page: () => Insurancepdfdocimages(),arguments: arguments ),
+    GetPage(
+        name: RoutesName.Insurancepdfdocimages,
+        page: () => Insurancepdfdocimages(),
+        arguments: arguments),
     GetPage(name: RoutesName.InheritScreen, page: () => InheritScreen()),
     GetPage(name: RoutesName.AgreementScreen, page: () => AgreementScreen()),
     GetPage(
         name: RoutesName.FamilyDocumentsFolder,
-        page: () => FamilyDocumentsFolder()),
+        page: () => FamilyDocumentsFolder(),arguments: arguments),
 
-    GetPage(name: RoutesName.PaymentMethod, page: () => PaymentMethod(),arguments: arguments),
+    GetPage(
+        name: RoutesName.PaymentMethod,
+        page: () => PaymentMethod(),
+        arguments: arguments),
     GetPage(
         name: RoutesName.PaymentMethodProcess,
-        page: () => PaymentMethodProcess(),arguments: arguments),
+        page: () => PaymentMethodProcess(),
+        arguments: arguments),
     GetPage(name: RoutesName.DownloadScreen, page: () => DownloadScreen()),
     // GetPage(name: RoutesName.BrowseFiles, page: () => BrowseFiles()),
     GetPage(
         name: RoutesName.FamilyDocCheckout, page: () => FamilyDocCheckout()),
     GetPage(name: RoutesName.SelectCategory, page: () => SelectCategory()),
-    GetPage(name: RoutesName.AddPeopleScreen, page: () => AddPeopleScreen(),arguments: arguments),
+    GetPage(
+        name: RoutesName.AddPeopleScreen,
+        page: () => AddPeopleScreen(),
+        arguments: arguments),
     GetPage(
         name: RoutesName.ContactListScreen, page: () => ContactListScreen()),
     GetPage(
@@ -96,12 +112,17 @@ class AppRoutes {
         name: RoutesName.SavedDocumentsScreen,
         page: () => SavedDocumentsScreen()),
     GetPage(name: RoutesName.PdfViewer, page: () => PdfViewer()),
+    GetPage(
+        name: RoutesName.NetworkPdfViewer,
+        page: () => NetworkPdfViewer(),
+        arguments: arguments),
     GetPage(name: RoutesName.ChangePasscode, page: () => ChangePasscode()),
     GetPage(
         name: RoutesName.YourTiedAgreement, page: () => YourTiedAgreement()),
     GetPage(name: RoutesName.ProfileScreen, page: () => EditProfile()),
     GetPage(name: RoutesName.EditProfile, page: () => ProfileScreen()),
-    GetPage(name: RoutesName.YourAndSpouseSign, page: () => YourAndSpouseSign()),
+    GetPage(
+        name: RoutesName.YourAndSpouseSign, page: () => YourAndSpouseSign()),
     GetPage(
         name: RoutesName.PrivacyPolicyScreen,
         page: () => PrivacyPolicyScreen()),

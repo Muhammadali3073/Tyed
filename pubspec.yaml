@@ -42,7 +42,10 @@ dependencies:
   signature: ^5.4.0
   shared_preferences: ^2.2.2
   responsive_sizer: ^3.2.0
-
+  share_plus: ^7.2.1
+  path: ^1.8.3
+  path_provider: ^2.1.1
+  http: ^1.1.0
 
 # Picker
   pdf: ^3.10.4

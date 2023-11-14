@@ -51,7 +51,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 width: Get.width * 0.20,
                                 decoration: BoxDecoration(
                                   image: DecorationImage(
-                                      fit: BoxFit.scaleDown,
+                                      fit: BoxFit.cover,
                                       image: NetworkImage(getUserDataController
                                           .getUserDataRxModel
                                           .value!

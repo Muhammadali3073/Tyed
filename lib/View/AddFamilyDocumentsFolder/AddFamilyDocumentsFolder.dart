@@ -21,8 +21,9 @@ class FamilyDocumentsFolder extends StatelessWidget {
           toolbarHeight: Get.height * 0.12,
           elevation: 0,
           backgroundColor: Colors.transparent,
+          leading: Container(),
           flexibleSpace: CustomAppBar2(
-            isBack: false,
+            isArgument: Get.arguments??false,
             titleText: "Add Family Document",
             height: Get.height * 0.11,
           ),

@@ -35,6 +35,7 @@ class RoutesName {
   static const String YourPasscode = '/YourPasscode';
   static const String SavedDocumentsScreen = '/SavedDocumentsScreen';
   static const String PdfViewer = '/PdfViewer';
+  static const String NetworkPdfViewer = '/NetworkPdfViewer';
   static const String ChangePasscode = '/ChangePasscode';
   static const String YourTiedAgreement = '/YourTiedAgreement';
   static const String ProfileScreen = '/ProfileScreen';

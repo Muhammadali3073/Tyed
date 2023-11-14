@@ -1,7 +1,6 @@
 // ignore_for_file: must_be_immutable
 import 'dart:developer';
 
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -9,6 +8,7 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tyedapp/viewModel/EditProfileScreenController/EditProfileScreenController.dart';
 import 'package:tyedapp/viewModel/GetUserDataController/GetUserDataController.dart';
+import 'package:tyedapp/viewModel/PDFStoreInFirebaseController/pdfController.dart';
 import 'package:tyedapp/viewModel/TyedQuestionsController/TyedQuestionsController.dart';
 import 'Constant/Constants/routes/routes.dart';
 import 'Constant/Constants/routes/routesName.dart';
@@ -55,6 +55,8 @@ class _MyAppState extends State<MyApp> {
       Get.put(EditProfileController(), tag: 'editProfileController');
   GetUserDataController getUserDataController =
       Get.put(GetUserDataController(), tag: 'getUserDataController');
+  PDFController pdfController = Get.put(PDFController(), tag: 'pdfController');
+
 
   @override
   void initState() {

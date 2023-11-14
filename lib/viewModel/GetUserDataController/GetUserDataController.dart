@@ -26,7 +26,7 @@ class GetUserDataController extends GetxController {
         .get()
         .then((snapshot) => snapshot.data()));
 
-    getUserDataRxModel.value = userModel!;
+    getUserDataRxModel.value = userModel;
 
     isGetUserDataLoading.value = false;
     log(getUserDataRxModel.value!.userEmail.toString());

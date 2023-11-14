@@ -64,7 +64,7 @@ class _EditProfileState extends State<EditProfile> {
                                 width: Get.width * 0.20,
                                 decoration: BoxDecoration(
                                   image: DecorationImage(
-                                      fit: BoxFit.scaleDown,
+                                      fit: BoxFit.cover,
                                       image: FileImage(File(
                                           editProfileController
                                               .selectedImage.value!.path))),
@@ -79,7 +79,7 @@ class _EditProfileState extends State<EditProfile> {
                                     width: Get.width * 0.20,
                                     decoration: BoxDecoration(
                                       image: DecorationImage(
-                                          fit: BoxFit.scaleDown,
+                                          fit: BoxFit.cover,
                                           image: NetworkImage(
                                               getUserDataController
                                                   .getUserDataRxModel

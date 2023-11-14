@@ -3,10 +3,9 @@ import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../Constant/Constants/colors/Constants.dart';
+import '../../Constant/Constants/routes/routesName.dart';
 import '../GetUserDataController/GetUserDataController.dart';
 
 class PDFController extends GetxController {
@@ -20,29 +19,28 @@ class PDFController extends GetxController {
 
   Future<void> uploadTyedAgreementsToFirebaseStorage({pdfs}) async {
     try {
-      List<String> tyedAgreementsListUrl = [];
-      for (int i = getUserDataController
-              .getUserDataRxModel.value!.tyedAgreementsList!.length;
-          i < getUserDataController
-              .getUserDataRxModel.value!.tyedAgreementsList!.length+1;
-          i++) {
-        final pdf = pdfs;
-        final fileName = '${auth.currentUser!.uid}_$i.pdf';
-        final Reference storageRef =
-            storage.ref().child('tyed_agreement_folder/$fileName');
-        await storageRef.putData(pdf);
+      isPDFControllerLoading.value = true;
+      String tyedAgreementsListUrl;
+      final pdf = pdfs;
+      final fileName =
+          '${auth.currentUser!.uid}_${getUserDataController.getUserDataRxModel.value!.tyedAgreementsList!.length + 1}.pdf';
+      final Reference storageRef =
+          storage.ref().child('tyed_agreement_folder/$fileName');
+      UploadTask uploadTask = storageRef.putData(pdf);
 
-        // Get the download URL for the uploaded image
-        String imageUrl = await storageRef.getDownloadURL();
-        tyedAgreementsListUrl.add(imageUrl);
-        // Now you can use 'imageUrl' for further processing, like storing it in Firestore.
+      // Get the download URL for the uploaded image
+      TaskSnapshot snap = await uploadTask;
+      String downloadUrl = await snap.ref.getDownloadURL();
+      tyedAgreementsListUrl = downloadUrl;
 
-        log('Download URL for $fileName: $tyedAgreementsListUrl');
-      }
+      // Now you can use 'imageUrl' for further processing, like storing it in Firestore
+      log('Download URL for $fileName: $tyedAgreementsListUrl');
 
       // Add user data in fire-store
       final dataToUpdate = {
-        'tyedAgreementsList': tyedAgreementsListUrl,
+        "tyedAgreementsList": FieldValue.arrayUnion([
+          tyedAgreementsListUrl,
+        ])
       };
 
       return await FirebaseFirestore.instance
@@ -51,11 +49,17 @@ class PDFController extends GetxController {
           .update(dataToUpdate)
           .then(
         (value) {
+          // Call Update User data
           getUserDataController.getUserData();
-          Get.snackbar('Success', 'User Update Successfully.',
-              colorText: Colors.white,
-              backgroundColor:
-                  AppColorsConstants.AppMainColor.withOpacity(0.5));
+
+          // Route of Download Screen
+          Get.toNamed(RoutesName.DownloadScreen);
+
+          // Get.snackbar('Success', 'User Update Successfully.',
+          //     colorText: Colors.white,
+          //     backgroundColor:
+          //         AppColorsConstants.AppMainColor.withOpacity(0.5));
+
           isPDFControllerLoading.value = false;
           log("User Updated");
         },
