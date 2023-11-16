@@ -28,8 +28,11 @@ import 'package:tyedapp/View/YourPasscode/yourPasscode.dart';
 import '../../../View/AddFamilyDocumentsFolder/AddFamilyDocumentsFolder.dart';
 import '../../../View/DocumentsFolder/DocumentsFolder.dart';
 import '../../../View/InsurancePdfdocImages/InsurancePdfdocImages.dart';
+import '../../../View/IntroScreen/IntroScreen.dart';
 import '../../../View/MainScreen/MainScreen.dart';
 import '../../../View/Onboardscreen/OnboardScreen.dart';
+import '../../../View/PaymentPlanDocument/PaymentPlanDocument.dart';
+import '../../../View/PaymentPlanTyedAgreement/paymentPlanTyedAdgreement.dart';
 import '../../../View/PdfViewer/NetworkPDFViewer.dart';
 import '../../../View/Signin/SignInScreen.dart';
 import '../../../View/YesNoScreen2/YesNoScreen2.dart';
@@ -48,10 +51,15 @@ class AppRoutes {
     GetPage(
       name: RoutesName.CustomBottomNavigationBar,
       page: () => CustomBottomNavigationBar(),
+      arguments: arguments,
     ),
     GetPage(
       name: RoutesName.OnboardScreen,
       page: () => OnboardScreen(),
+    ),
+    GetPage(
+      name: RoutesName.IntroScreen,
+      page: () => IntroScreen(),
     ),
     GetPage(
       name: RoutesName.SignIn,
@@ -83,7 +91,8 @@ class AppRoutes {
     GetPage(name: RoutesName.AgreementScreen, page: () => AgreementScreen()),
     GetPage(
         name: RoutesName.FamilyDocumentsFolder,
-        page: () => FamilyDocumentsFolder(),arguments: arguments),
+        page: () => FamilyDocumentsFolder(),
+        arguments: arguments),
 
     GetPage(
         name: RoutesName.PaymentMethod,
@@ -126,5 +135,11 @@ class AppRoutes {
     GetPage(
         name: RoutesName.PrivacyPolicyScreen,
         page: () => PrivacyPolicyScreen()),
+    GetPage(
+        name: RoutesName.PaymentPlanTyedAgreementScreen,
+        page: () => PaymentPlanTyedAgreementScreen()),
+    GetPage(
+        name: RoutesName.PaymentPlanDocumentScreen,
+        page: () => PaymentPlanDocumentScreen()),
   ];
 }

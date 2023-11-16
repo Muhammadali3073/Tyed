@@ -8,7 +8,7 @@ import 'package:tyedapp/Constant/Constants/routes/routesName.dart';
 
 import '../../Widgets/MainScreenWidget.dart';
 import '../../viewModel/GetUserDataController/GetUserDataController.dart';
-import '../PdfViewer/text_to_pdf.dart';
+import '../../viewModel/PDFStoreInFirebaseController/pdfController.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -18,6 +18,7 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
+  PDFController pdfController = Get.find(tag: 'pdfController');
 
 
   GetUserDataController getUserDataController =
@@ -121,9 +122,6 @@ class _MainScreenState extends State<MainScreen> {
                         ],
                       ),
                     ),
-                    // SizedBox(
-                    //   height: Get.height * 0.03,
-                    // ),
                     Expanded(
                       child: Container(
                         decoration: BoxDecoration(
@@ -146,7 +144,8 @@ class _MainScreenState extends State<MainScreen> {
                             ),
                             InkWell(
                               onTap: () {
-                                Get.toNamed(RoutesName.FamilyDocumentsFolder, arguments: true);
+                                Get.toNamed(RoutesName.IntroScreen);
+                                // Get.toNamed(RoutesName.FamilyDocumentsFolder, arguments: true);
                               },
                               child: CustomCard(
                                 text: 'Add Family\nDocuments',

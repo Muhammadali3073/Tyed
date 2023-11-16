@@ -22,7 +22,7 @@ class PaymentMethod extends StatefulWidget {
 }
 
 class _PaymentMethodState extends State<PaymentMethod> {
-  RxBool? isSelectedDebitCard = false.obs;
+  RxBool? isSelectedDebitCard = true.obs;
   RxBool? isSelectedCreditCard = false.obs;
   @override
   Widget build(BuildContext context) {
@@ -30,7 +30,8 @@ class _PaymentMethodState extends State<PaymentMethod> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            CustomAppBar2(
+            CustomAppBar2(isBack: false,
+                isArgument: true,
                 height: Get.height * 0.1,
                 titleText: 'Payment Method',
                 customWidth: 0.13),
@@ -44,7 +45,6 @@ class _PaymentMethodState extends State<PaymentMethod> {
                   Image.asset('assets/paymentmethodimage.png'),
                   SizedBox(height: Get.height * 0.04),
                   CustomOptionContainer(
-
                     onpress: () {
                       isSelectedDebitCard!.value=true;
                       isSelectedCreditCard!.value=false;
@@ -56,7 +56,6 @@ class _PaymentMethodState extends State<PaymentMethod> {
                   ),
                   SizedBox(height: Get.height * 0.02),
                   CustomOptionContainer(
-
                     onpress: () {
                       isSelectedDebitCard!.value=false;
                       isSelectedCreditCard!.value=true;

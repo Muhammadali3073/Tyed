@@ -15,7 +15,8 @@ class SavedDocumentsScreen extends StatelessWidget {
         backgroundColor: Colors.grey[50],
         body: Column(
           children: [
-             CustomAppBar2(
+             CustomAppBar2(isBack: false,
+               isArgument: true,
               titleText: "Saved Documents",
               style: TextStyle(fontSize: 14),
               customWidth: 0.15,

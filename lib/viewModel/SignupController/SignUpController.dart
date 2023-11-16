@@ -77,7 +77,6 @@ class SignupController extends GetxController {
               userPhoneNumber: userPhoneNumber,
               userDOB: userDOB,
               userPassword: userPassword,
-              tyedAgreementsList: [],
               timeStamp: myTimeStamp.toDate().toString());
         }
       } on FirebaseAuthException catch (e) {
@@ -103,7 +102,7 @@ class SignupController extends GetxController {
       userAddress,
       userDOB,
       userPassword,
-      tyedAgreementsList,
+      tyedAgreements,
       timeStamp}) async {
     return await userData
         .doc(userID)
@@ -117,7 +116,10 @@ class SignupController extends GetxController {
           userAddress: userAddress,
           userDOB: userDOB,
           userPassword: userPassword,
-          tyedAgreementsList: tyedAgreementsList,
+          tyedAgreementsList: TyedAgreements(
+            tyedAgreementPayment: [],
+            tyedAgreements: [],
+          ),
           timeStamp: timeStamp,
         ))
         .then(

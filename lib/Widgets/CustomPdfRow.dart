@@ -12,12 +12,7 @@ class CustomPdfRow extends StatelessWidget {
   Widget? column2;
   Function() onTap;
 
-  CustomPdfRow(
-      {Key? key,
-      this.column1,
-      this.column2,
-        required this.onTap
-      });
+  CustomPdfRow({Key? key, this.column1, this.column2, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -33,30 +28,39 @@ class CustomPdfRow extends StatelessWidget {
             color: Colors.grey.shade100,
           ),
         ]),
-        child: Row(
-          children: [
-            Align(
-              alignment: Alignment.topLeft,
-              child: Container(
-                decoration: BoxDecoration(
-                  color: AppColorsConstants.AppMainColor,
-                  borderRadius: BorderRadius.only(
-                    bottomRight: Radius.circular(27),
+        child: SizedBox(
+          width: double.infinity,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                children: [
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: AppColorsConstants.AppMainColor,
+                        borderRadius: BorderRadius.only(
+                          bottomRight: Radius.circular(27),
+                        ),
+                      ),
+                      height: Get.height * 0.075,
+                      width: Get.width * 0.18,
+                      child: Center(
+                        child: SvgPicture.asset("assets/pdficon.svg"),
+                      ),
+                    ),
                   ),
-                ),
-                height: Get.height * 0.075,
-                width: Get.width * 0.18,
-                child: Center(
-                  child: SvgPicture.asset("assets/pdficon.svg"),
-                ),
+                  SizedBox(width: Get.width * 0.03),
+                  column1 ?? Container(),
+                ],
               ),
-            ),
-            SizedBox(width: Get.width * 0.03),
-            column1 ?? Container(),
-            // Use column1 widget if provided, else use an empty Container
-            column2 ?? Container(),
-            // Use column2 widget if provided, else use an empty Container
-          ],
+
+              // Use column1 widget if provided, else use an empty Container
+              column2 ?? Container(),
+              // Use column2 widget if provided, else use an empty Container
+            ],
+          ),
         ),
       ),
     );

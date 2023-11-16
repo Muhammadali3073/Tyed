@@ -41,4 +41,7 @@ class RoutesName {
   static const String ProfileScreen = '/ProfileScreen';
   static const String EditProfile = '/EditProfile';
   static const String PrivacyPolicyScreen = '/PrivacyPolicyScreen';
+  static const String PaymentPlanTyedAgreementScreen = '/PaymentPlanTyedAgreementScreen';
+  static const String IntroScreen = '/IntroScreen';
+  static const String PaymentPlanDocumentScreen = '/PaymentPlanDocumentScreen';
 }

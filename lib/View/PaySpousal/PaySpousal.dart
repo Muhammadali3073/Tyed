@@ -152,9 +152,14 @@ class _PaySpousalState extends State<PaySpousal> {
                   CustomContainer(
                     child: TextFormField(
                       controller: supportDetailController,
-                      decoration: InputDecoration(border: InputBorder.none,contentPadding: EdgeInsets.symmetric(
-                          horizontal: 10, vertical: 5),),
-                      maxLines: 4,
+                      keyboardType: TextInputType.text,
+                      decoration: InputDecoration(
+                          border: InputBorder.none,
+                          contentPadding: EdgeInsets.symmetric(
+                            horizontal: Get.height * 0.010,
+                            vertical: Get.height * 0.010,
+                          )),
+                      maxLines: 5,
                     ),
                   ),
                   SizedBox(
@@ -262,16 +267,22 @@ class _PaySpousalState extends State<PaySpousal> {
                     alignment: Alignment.bottomCenter,
                     child: CustomElevatedButton(
                         onpress: () {
-                          if(supportDetailController.text.isNotEmpty){
-                            tyedQuestionsController.tyedAnswersModel.tyedEndsAnswer = selectedValue.value;
-                            tyedQuestionsController.tyedAnswersModel.spousalSupportAnswer = supportDetailController.text;
-                            tyedQuestionsController.tyedAnswersModel.spousalSupportEndsAnswer = selectedValue1.value;
+                          if (supportDetailController.text.isNotEmpty) {
+                            tyedQuestionsController.tyedAnswersModel
+                                .tyedEndsAnswer = selectedValue.value;
+                            tyedQuestionsController
+                                    .tyedAnswersModel.spousalSupportAnswer =
+                                supportDetailController.text;
+                            tyedQuestionsController
+                                    .tyedAnswersModel.spousalSupportEndsAnswer =
+                                selectedValue1.value;
                             Get.toNamed(RoutesName.InheritScreen);
-                          }else {
+                          } else {
                             Get.snackbar('Required', 'All fields are Required',
                                 colorText: Colors.white,
                                 backgroundColor:
-                                AppColorsConstants.AppMainColor.withOpacity(0.5));
+                                    AppColorsConstants.AppMainColor.withOpacity(
+                                        0.5));
                           }
                         },
                         text: "Next",

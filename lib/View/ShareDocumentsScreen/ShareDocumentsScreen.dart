@@ -42,7 +42,8 @@ class _ShareDocumentsScreenState extends State<ShareDocumentsScreen> {
           width: double.infinity,
           child: Column(
             children: [
-              CustomAppBar2(
+              CustomAppBar2(isBack: false,
+                isArgument: true,
                 height: Get.height * 0.1,
                 titleText: "Share",
                 style: const TextStyle(fontSize: 14),
@@ -298,7 +299,8 @@ class _ShareDocumentsScreenState extends State<ShareDocumentsScreen> {
               ),
               CustomElevatedButton(
                 onpress: () {
-                  Get.toNamed(RoutesName.PaymentMethod,arguments: 'Family');
+                  Get.toNamed(RoutesName.YourPasscode);
+                  // Get.toNamed(RoutesName.PaymentMethod,arguments: 'Family');
                 },
                 text: "Share",
                 height: Get.height * 0.04,

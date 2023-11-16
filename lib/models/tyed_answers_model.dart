@@ -55,6 +55,9 @@ class TyedAnswersModel {
   Uint8List? personSignatureImage;
   Uint8List? spouseSignatureImage;
 
+  String dateSignatureQuestion;
+  String dateSignatureAnswer;
+
   TyedAnswersModel({
     this.personNameQuestion = 'What is your full name?',
     this.personNameAnswer = '',
@@ -98,5 +101,7 @@ class TyedAnswersModel {
     this.likeToAddAnswer = '',
     this.personSignatureImage,
     this.spouseSignatureImage,
+    this.dateSignatureQuestion = 'Date when get Signatures',
+    this.dateSignatureAnswer = '',
   });
 }

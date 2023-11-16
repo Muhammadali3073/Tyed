@@ -1,23 +1,24 @@
 // ignore_for_file: file_names
 
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:tyedapp/Constant/Constants/colors/Constants.dart';
 
-import '../../Constant/Constants/founts/Constants.dart';
 import '../../Constant/Constants/routes/routesName.dart';
 import '../../Widgets/OnboardButton.dart';
 
-class OnboardScreen extends StatefulWidget {
-  const OnboardScreen({super.key});
+class IntroScreen extends StatefulWidget {
+  const IntroScreen({super.key});
 
   @override
-  State<OnboardScreen> createState() => _OnboardScreenState();
+  State<IntroScreen> createState() => _IntroScreenState();
 }
 
-class _OnboardScreenState extends State<OnboardScreen> {
+class _IntroScreenState extends State<IntroScreen> {
   int currentIndex = 0;
 
   @override
@@ -62,27 +63,17 @@ class _OnboardScreenState extends State<OnboardScreen> {
                             height: Get.height * 0.25,
                           ),
                           SvgPicture.asset(
-                            "assets/firstonboard.svg",
+                            "assets/intro1.svg",
                             height: Get.height * 0.3,
                           ),
                           SizedBox(
                             height: Get.height * 0.04,
                           ),
                           Text(
-                            "Safeguard Your Family's\nDocuments with tyed",
-                            style: AppTextConstant.onBoardText.copyWith(
-                              fontSize: 18,
-                              fontWeight: FontWeight.w500,
-                            ),
-                            textAlign: TextAlign.center,
-                          ),
-                          SizedBox(
-                            height: Get.height * 0.012,
-                          ),
-                          Text(
-                            "Our app employs top-notch encryption and \nadvanced security measures to keep your data safe \nfrom prying eyes",
+                            "Welcome to tyed your trusted companion for\nsafeguarding and sharing vital family\ndocuments. Effortlessly share wills, essential\npapers, and more with close family and friends.",
                             style: TextStyle(
-                                fontWeight: FontWeight.w300, fontSize: 14),
+                              fontWeight: FontWeight.w300,
+                                fontSize: 14),
                             textAlign: TextAlign.center,
                           ),
                         ],
@@ -93,29 +84,43 @@ class _OnboardScreenState extends State<OnboardScreen> {
                             height: Get.height * 0.25,
                           ),
                           SvgPicture.asset(
-                            "assets/secondonboard.svg",
+                            "assets/intro2.svg",
                             height: Get.height * 0.3,
                           ),
-                          SizedBox(height: Get.height * 0.04),
-                          Text(
-                            " Create Your Custom tyed\nAgreement",
-                            style: AppTextConstant.onBoardText.copyWith(
-                                fontSize: 18, fontWeight: FontWeight.w500),
-                            textAlign: TextAlign.center,
-                          ),
                           SizedBox(
-                            height: Get.height * 0.012,
+                            height: Get.height * 0.04,
                           ),
                           Text(
-                            "Tyed Marriage Agreement, offering a legal alternative for\nmeaningful connections. Explore hassle-free prenuptial\nagreements, easily created and signed on-screen,\nensuring your love story is uniquely yours.",
-                            style: AppTextConstant.SimpleStyle.copyWith(
-                              fontSize: 14,
+                            "Designate administrators and securely store\neverything in your private wallet, protected by a\npassword that can only be changed through\nunanimous agreement",
+                            style: TextStyle(
                               fontWeight: FontWeight.w300,
-                            ),
+                                fontSize: 14),
                             textAlign: TextAlign.center,
                           ),
                         ],
                       ),
+                      Column(
+                        children: [
+                          SizedBox(
+                            height: Get.height * 0.25,
+                          ),
+                          SvgPicture.asset(
+                            "assets/intro3.svg",
+                            height: Get.height * 0.3,
+                          ),
+                          SizedBox(
+                            height: Get.height * 0.04,
+                          ),
+                          Text(
+                            "Embrace peace of mind with tyed  – where\nsharing memories and securing\nlegacies is simplified.",
+                            style: TextStyle(
+                              fontWeight: FontWeight.w300,
+                                fontSize: 14),
+                            textAlign: TextAlign.center,
+                          ),
+                        ],
+                      ),
+
                     ],
                   ),
                   Positioned(
@@ -131,7 +136,7 @@ class _OnboardScreenState extends State<OnboardScreen> {
                             dotWidth: 10,
                           ),
                           controller: pageController.value,
-                          count: 2,
+                          count: 3,
                         ),
                       ),
                     ),
@@ -153,7 +158,12 @@ class _OnboardScreenState extends State<OnboardScreen> {
                           ? pageController.value.nextPage(
                               duration: Duration(milliseconds: 400),
                               curve: Curves.linear)
-                          : Get.offAllNamed(RoutesName.SignIn);
+                          : currentIndex == 1
+                              ? pageController.value.nextPage(
+                                  duration: Duration(milliseconds: 400),
+                                  curve: Curves.linear)
+                              : Get.toNamed(RoutesName.PaymentPlanDocumentScreen);
+                      log(currentIndex.toString());
                     }),
               ),
             ),
@@ -163,7 +173,7 @@ class _OnboardScreenState extends State<OnboardScreen> {
             top: Get.height * 0.05,
             child: InkWell(
                 onTap: () {
-                  Get.offAllNamed(RoutesName.SignIn);
+                  Get.toNamed(RoutesName.PaymentPlanDocumentScreen);
                 },
                 child: Text('Skip')),
           ),

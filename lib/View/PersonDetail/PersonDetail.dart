@@ -130,6 +130,10 @@ class _PersonDetailsState extends State<PersonDetails> {
                                 Get.back();
                                 Get.toNamed(RoutesName.AssetsScreen);
                               },
+                                  onPressForNo: () {
+                                    Get.back();
+                                    Get.toNamed(RoutesName.YesNoScreen);
+                                  },
                                   content: tyedQuestionsController
                                           .tyedQuestionsRxModel
                                           .value!

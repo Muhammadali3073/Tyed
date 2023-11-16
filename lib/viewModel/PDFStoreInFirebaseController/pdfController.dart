@@ -3,8 +3,10 @@ import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../Constant/Constants/colors/Constants.dart';
 import '../../Constant/Constants/routes/routesName.dart';
 import '../GetUserDataController/GetUserDataController.dart';
 
@@ -19,11 +21,10 @@ class PDFController extends GetxController {
 
   Future<void> uploadTyedAgreementsToFirebaseStorage({pdfs}) async {
     try {
-      isPDFControllerLoading.value = true;
       String tyedAgreementsListUrl;
       final pdf = pdfs;
       final fileName =
-          '${auth.currentUser!.uid}_${getUserDataController.getUserDataRxModel.value!.tyedAgreementsList!.length + 1}.pdf';
+          '${auth.currentUser!.uid}_${getUserDataController.getUserDataRxModel.value!.tyedAgreementsList!.tyedAgreements!.length + 1}.pdf';
       final Reference storageRef =
           storage.ref().child('tyed_agreement_folder/$fileName');
       UploadTask uploadTask = storageRef.putData(pdf);
@@ -36,18 +37,16 @@ class PDFController extends GetxController {
       // Now you can use 'imageUrl' for further processing, like storing it in Firestore
       log('Download URL for $fileName: $tyedAgreementsListUrl');
 
-      // Add user data in fire-store
-      final dataToUpdate = {
-        "tyedAgreementsList": FieldValue.arrayUnion([
-          tyedAgreementsListUrl,
-        ])
-      };
-
       return await FirebaseFirestore.instance
           .collection('users')
           .doc(auth.currentUser!.uid)
-          .update(dataToUpdate)
-          .then(
+          .update({
+        'tyedAgreementsList.tyedAgreementPayment': FieldValue.arrayUnion([
+          '$tyedAgreementsListUrl,false'
+        ]),
+        'tyedAgreementsList.tyedAgreements':
+            FieldValue.arrayUnion([tyedAgreementsListUrl]),
+      }).then(
         (value) {
           // Call Update User data
           getUserDataController.getUserData();
@@ -55,10 +54,10 @@ class PDFController extends GetxController {
           // Route of Download Screen
           Get.toNamed(RoutesName.DownloadScreen);
 
-          // Get.snackbar('Success', 'User Update Successfully.',
-          //     colorText: Colors.white,
-          //     backgroundColor:
-          //         AppColorsConstants.AppMainColor.withOpacity(0.5));
+          Get.snackbar('Saved', 'Tyed Agreement saved Successfully.',
+              colorText: Colors.white,
+              backgroundColor:
+                  AppColorsConstants.AppMainColor.withOpacity(0.5));
 
           isPDFControllerLoading.value = false;
           log("User Updated");

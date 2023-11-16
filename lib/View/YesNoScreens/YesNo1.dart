@@ -146,6 +146,10 @@ class _YesNoScreenState extends State<YesNoScreen> {
                     Get.back();
                     Get.toNamed(RoutesName.PayingScreen);
                   },
+                      onPressForNo: () {
+                        Get.back();
+                        Get.toNamed(RoutesName.YesNoScreen2);
+                      },
                       content:
                       tyedQuestionsController
                           .tyedQuestionsRxModel.value!.separateDebt

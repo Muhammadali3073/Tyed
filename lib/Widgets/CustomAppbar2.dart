@@ -11,16 +11,17 @@ class CustomAppBar2 extends StatelessWidget {
   final TextStyle? style;
   bool? isBack;
   bool? isArgument;
+  Function()? onPressed;
 
-  CustomAppBar2({
-    this.titleText,
-    this.icon,
-    this.style,
-    this.customWidth,
-    this.height,
-    this.isBack,
-    this.isArgument,
-  }); // Default to 12% of the screen width
+  CustomAppBar2(
+      {this.isBack,
+      this.titleText,
+      this.icon,
+      this.style,
+      this.customWidth,
+      this.height,
+      this.isArgument,
+      this.onPressed}); // Default to 12% of the screen width
 
   @override
   Widget build(BuildContext context) {
@@ -50,9 +51,10 @@ class CustomAppBar2 extends StatelessWidget {
             isBack != true
                 ? isArgument == true
                     ? IconButton(
-                        onPressed: () {
-                          Get.back();
-                        },
+                        onPressed: onPressed ??
+                            () {
+                              Get.back();
+                            },
                         icon: const Icon(
                           Icons.arrow_back_ios_new,
                           size: 14,

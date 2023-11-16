@@ -20,6 +20,8 @@ class AddPeopleScreen extends StatelessWidget {
       body: Column(
         children: [
           CustomAppBar2(
+            isBack: false,
+            isArgument: true,
             height: Get.height * 0.1,
             titleText: "Share",
             style: TextStyle(fontSize: 14),

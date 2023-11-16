@@ -43,7 +43,8 @@ class _InsurancepdfdocimagesState extends State<Insurancepdfdocimages> {
         child: Column(
           children: [
             CustomAppBar2(
-              height: Get.height * 0.1,
+              isBack: false,
+              isArgument: true,              height: Get.height * 0.1,
               titleText: '${Get.arguments}',
 
             ),

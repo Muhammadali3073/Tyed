@@ -13,19 +13,22 @@ class ShowDialogue {
   final index = 1.obs;
 
   static showCustomDialog(BuildContext context,
-      {String? title, String? content, VoidCallback? onPress}) {
+      {String? title,
+      String? content,
+      VoidCallback? onPress,
+      VoidCallback? onPressForNo}) {
     showDialog(
       context: context,
       builder: (context) {
         return AlertDialog(
           title: title != null
               ? Center(
-            child: Text(
-              title,
-              style: const TextStyle(
-                  fontSize: 14, color: Color.fromRGBO(19, 20, 21, 1)),
-            ),
-          )
+                  child: Text(
+                    title,
+                    style: const TextStyle(
+                        fontSize: 14, color: Color.fromRGBO(19, 20, 21, 1)),
+                  ),
+                )
               : null, // Check if title is provided, otherwise null
           contentPadding: EdgeInsets.all(8), // Adjust padding as needed
           content: SizedBox(
@@ -56,7 +59,7 @@ class ShowDialogue {
                         borderRadius: BorderRadius.circular(20),
                       ),
                       backgroundColor: AppColorsConstants.AppMainColor),
-                  child: const Text("Yes, list on next page"),
+                  child: const Text("Yes, list on next page",style: TextStyle(color: Colors.white)),
                 ),
                 SizedBox(
                   height: Get.height * 0.013,
@@ -65,9 +68,10 @@ class ShowDialogue {
                   width: Get.height * 0.21,
                   widget: const Center(child: Text("No")),
                   height: 35,
-                  onpress: () {
-                    Get.back();
-                  },
+                  onpress: onPressForNo ??
+                      () {
+                        Get.back();
+                      },
                 ),
               ],
             ),
@@ -77,6 +81,3 @@ class ShowDialogue {
     );
   }
 }
-
-
-

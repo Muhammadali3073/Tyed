@@ -20,7 +20,6 @@ class GetUserDataController extends GetxController {
 
   getUserData({userId}) async {
     isGetUserDataLoading.value = true;
-
     userModel = (await userData
         .doc(userId ?? auth.currentUser!.uid)
         .get()
@@ -29,7 +28,7 @@ class GetUserDataController extends GetxController {
     getUserDataRxModel.value = userModel;
 
     isGetUserDataLoading.value = false;
-    log(getUserDataRxModel.value!.userEmail.toString());
+    log(getUserDataRxModel.value!.tyedAgreementsList!.tyedAgreementPayment.toString());
   }
 
 

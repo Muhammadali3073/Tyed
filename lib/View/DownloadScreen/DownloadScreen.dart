@@ -1,5 +1,7 @@
 // ignore_for_file: file_names
 
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -11,25 +13,35 @@ import 'package:tyedapp/Constant/Constants/founts/Constants.dart';
 import '../../Constant/Constants/routes/routesName.dart';
 import '../../Widgets/CustomButton.dart';
 import '../../Widgets/CustomPdfRow.dart';
+import '../../viewModel/GetUserDataController/GetUserDataController.dart';
 
-class DownloadScreen extends StatelessWidget {
+class DownloadScreen extends StatefulWidget {
   const DownloadScreen({super.key});
 
-  backToBottomNavBar(){
+  @override
+  State<DownloadScreen> createState() => _DownloadScreenState();
+}
+
+class _DownloadScreenState extends State<DownloadScreen> {
+  GetUserDataController getUserDataController =
+      Get.find(tag: 'getUserDataController');
+
+  back() {
     Get.offAllNamed(RoutesName.CustomBottomNavigationBar);
   }
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: WillPopScope(
-        onWillPop: () {
-          return backToBottomNavBar();
-        },
+    return Obx(
+      () => WillPopScope(
+        onWillPop: () => back(),
         child: Scaffold(
           body: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10),
             child: Column(children: [
+              SizedBox(
+                height: Get.height * 0.03,
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
@@ -61,49 +73,46 @@ class DownloadScreen extends StatelessWidget {
               Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 10),
                   child: CustomPdfRow(
-                    onTap: () => Get.toNamed(RoutesName.PdfViewer),
+                    onTap: () {
+                      List<String> isPaymentCheck = getUserDataController
+                          .getUserDataRxModel
+                          .value!
+                          .tyedAgreementsList!
+                          .tyedAgreementPayment![getUserDataController
+                                  .getUserDataRxModel
+                                  .value!
+                                  .tyedAgreementsList!
+                                  .tyedAgreements!
+                                  .length -
+                              1]
+                          .toString()
+                          .split(',')
+                          .toList();
+                      log(isPaymentCheck[1].toString());
+
+                      isPaymentCheck[1] == 'false'
+                          ? Get.toNamed(
+                              RoutesName.PaymentPlanTyedAgreementScreen)
+                          : Get.toNamed(RoutesName.PdfViewer,
+                              arguments: getUserDataController
+                                  .getUserDataRxModel
+                                  .value!
+                                  .tyedAgreementsList!
+                                  .tyedAgreements![getUserDataController
+                                      .getUserDataRxModel
+                                      .value!
+                                      .tyedAgreementsList!
+                                      .tyedAgreements!
+                                      .length -
+                                  1]);
+                    },
                     column1: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Row(
-                          children: [
-                            Text(
-                              "tyed agreement",
-                              style: TextStyle(fontSize: 12),
-                            ),
-                            InkWell(
-                              onTap: () {},
-                              child: Padding(
-                                padding: EdgeInsets.only(left: Get.width * 0.03),
-                                child: Container(
-                                  height: 15,
-                                  width: 15,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(100),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        offset: const Offset(0, 3),
-                                        spreadRadius: 2,
-                                        blurRadius: 2,
-                                        color: Colors.grey.withOpacity(0.2),
-                                      )
-                                    ],
-                                    color: Colors.white,
-                                  ),
-                                  child: Center(
-                                    child: Transform.scale(
-                                      scale: 1.8,
-                                      child: SvgPicture.asset(
-                                        "assets/pencilicon.svg",
-                                        height: Get.height * 0.05,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
+                        Text(
+                          "Tyed Agreement ${getUserDataController.getUserDataRxModel.value!.tyedAgreementsList!.tyedAgreements!.length}",
+                          style: TextStyle(fontSize: 12),
                         ),
                         Row(
                           children: [
@@ -113,7 +122,39 @@ class DownloadScreen extends StatelessWidget {
                               height: 17,
                               colors: AppColorsConstants.AppMainColor,
                               onpress: () {
-                                // Add your onPressed logic here
+                                List<String> isPaymentCheck =
+                                    getUserDataController
+                                        .getUserDataRxModel
+                                        .value!
+                                        .tyedAgreementsList!
+                                        .tyedAgreementPayment![
+                                            getUserDataController
+                                                    .getUserDataRxModel
+                                                    .value!
+                                                    .tyedAgreementsList!
+                                                    .tyedAgreements!
+                                                    .length -
+                                                1]
+                                        .toString()
+                                        .split(',')
+                                        .toList();
+                                log(isPaymentCheck[1].toString());
+                                isPaymentCheck[1] == 'false'
+                                    ? Get.toNamed(RoutesName
+                                        .PaymentPlanTyedAgreementScreen)
+                                    : Get.toNamed(RoutesName.PdfViewer,
+                                        arguments: getUserDataController
+                                                .getUserDataRxModel
+                                                .value!
+                                                .tyedAgreementsList!
+                                                .tyedAgreements![
+                                            getUserDataController
+                                                    .getUserDataRxModel
+                                                    .value!
+                                                    .tyedAgreementsList!
+                                                    .tyedAgreements!
+                                                    .length -
+                                                1]);
                               },
                             ),
                             Padding(
@@ -126,13 +167,56 @@ class DownloadScreen extends StatelessWidget {
                                 height: 17,
                                 colors: AppColorsConstants.AppMainColor,
                                 onpress: () {
-                                  // Add your onPressed logic here
+                                  List<String> isPaymentCheck =
+                                      getUserDataController
+                                          .getUserDataRxModel
+                                          .value!
+                                          .tyedAgreementsList!
+                                          .tyedAgreementPayment![
+                                              getUserDataController
+                                                      .getUserDataRxModel
+                                                      .value!
+                                                      .tyedAgreementsList!
+                                                      .tyedAgreements!
+                                                      .length -
+                                                  1]
+                                          .toString()
+                                          .split(',')
+                                          .toList();
+                                  log(isPaymentCheck[1].toString());
+                                  isPaymentCheck[1] == 'false'
+                                      ? Get.toNamed(RoutesName
+                                          .PaymentPlanTyedAgreementScreen)
+                                      : Get.toNamed(RoutesName.PdfViewer,
+                                          arguments: getUserDataController
+                                                  .getUserDataRxModel
+                                                  .value!
+                                                  .tyedAgreementsList!
+                                                  .tyedAgreements![
+                                              getUserDataController
+                                                      .getUserDataRxModel
+                                                      .value!
+                                                      .tyedAgreementsList!
+                                                      .tyedAgreements!
+                                                      .length -
+                                                  1]);
                                 },
                               ),
                             ),
                           ],
                         )
                       ],
+                    ),
+                    column2: Container(
+                      margin: EdgeInsets.only(right: 10),
+                      child: Text(
+                        "Unpaid",
+                        style: TextStyle(
+                          fontSize: 10,
+                          fontWeight: FontWeight.bold,
+                          color: AppColorsConstants.AppMainColor,
+                        ),
+                      ),
                     ),
                   ))
             ]),

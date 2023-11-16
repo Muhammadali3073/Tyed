@@ -92,86 +92,86 @@ class _InheritScreenState extends State<InheritScreen> {
                                     style: AppTextConstant.SimpleStyle,
                                   ),
                                 ),
-                                Image.asset("assets/group3.png")
+                                // Image.asset("assets/group3.png")
                               ],
                             ),
-                            SizedBox(
-                              height: Get.height * 0.015,
-                            ),
-                            SizedBox(
-                              child: ListView.builder(
-                                padding: EdgeInsets.zero,
-                                physics: NeverScrollableScrollPhysics(),
-                                shrinkWrap: true,
-                                itemCount: images.length,
-                                itemBuilder: (context, index) {
-                                  return Padding(
-                                    padding: EdgeInsets.symmetric(vertical: 4),
-                                    child: Container(
-                                      width: Get.width,
-                                      height: Get.height * 0.065,
-                                      decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        // Set the background color of the container
-
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: Colors.grey.withOpacity(0.2),
-                                            // Color of the shadow
-
-                                            spreadRadius: 5,
-                                            // Spread radius
-
-                                            blurRadius: 7,
-                                            // Blur radius
-
-                                            offset: Offset(
-                                                0, 2), // Offset of the shadow
-                                          ),
-                                        ],
-                                      ),
-                                      child: Row(
-                                        children: [
-                                          Padding(
-                                            padding: EdgeInsets.symmetric(
-                                                horizontal: Get.width * 0.02,
-                                                vertical: Get.height * 0.01),
-                                            child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.start,
-                                                children: [
-                                                  Transform.scale(
-                                                      scaleX: 1.2,
-                                                      scaleY: 1.2,
-                                                      child: SvgPicture.asset(
-                                                        images[index],
-                                                      )),
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            left: 20),
-                                                    child: Text(
-                                                      title[index],
-                                                      style: AppTextConstant
-                                                          .SimpleStyle,
-                                                    ),
-                                                  ),
-                                                ]),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  );
-                                },
-                              ),
-                            ),
-                            SizedBox(
-                              height: Get.height * 0.014,
-                            ),
-                            Text(
-                              "What additional inheritance rights would you like to include?",
-                              style: AppTextConstant.SimpleStyle,
-                            ),
+                            // SizedBox(
+                            //   height: Get.height * 0.015,
+                            // ),
+                            // SizedBox(
+                            //   child: ListView.builder(
+                            //     padding: EdgeInsets.zero,
+                            //     physics: NeverScrollableScrollPhysics(),
+                            //     shrinkWrap: true,
+                            //     itemCount: images.length,
+                            //     itemBuilder: (context, index) {
+                            //       return Padding(
+                            //         padding: EdgeInsets.symmetric(vertical: 4),
+                            //         child: Container(
+                            //           width: Get.width,
+                            //           height: Get.height * 0.065,
+                            //           decoration: BoxDecoration(
+                            //             color: Colors.white,
+                            //             // Set the background color of the container
+                            //
+                            //             boxShadow: [
+                            //               BoxShadow(
+                            //                 color: Colors.grey.withOpacity(0.2),
+                            //                 // Color of the shadow
+                            //
+                            //                 spreadRadius: 5,
+                            //                 // Spread radius
+                            //
+                            //                 blurRadius: 7,
+                            //                 // Blur radius
+                            //
+                            //                 offset: Offset(
+                            //                     0, 2), // Offset of the shadow
+                            //               ),
+                            //             ],
+                            //           ),
+                            //           child: Row(
+                            //             children: [
+                            //               Padding(
+                            //                 padding: EdgeInsets.symmetric(
+                            //                     horizontal: Get.width * 0.02,
+                            //                     vertical: Get.height * 0.01),
+                            //                 child: Row(
+                            //                     mainAxisAlignment:
+                            //                         MainAxisAlignment.start,
+                            //                     children: [
+                            //                       Transform.scale(
+                            //                           scaleX: 1.2,
+                            //                           scaleY: 1.2,
+                            //                           child: SvgPicture.asset(
+                            //                             images[index],
+                            //                           )),
+                            //                       Padding(
+                            //                         padding:
+                            //                             const EdgeInsets.only(
+                            //                                 left: 20),
+                            //                         child: Text(
+                            //                           title[index],
+                            //                           style: AppTextConstant
+                            //                               .SimpleStyle,
+                            //                         ),
+                            //                       ),
+                            //                     ]),
+                            //               ),
+                            //             ],
+                            //           ),
+                            //         ),
+                            //       );
+                            //     },
+                            //   ),
+                            // ),
+                            // SizedBox(
+                            //   height: Get.height * 0.014,
+                            // ),
+                            // Text(
+                            //   "What additional inheritance rights would you like to include?",
+                            //   style: AppTextConstant.SimpleStyle,
+                            // ),
                             SizedBox(
                               height: Get.height * 0.010,
                             ),
@@ -210,15 +210,15 @@ class _InheritScreenState extends State<InheritScreen> {
                       ),
                     ),
                     SizedBox(
-                      height: Get.height * 0.008,
+                      height: Get.height * 0.1,
                     ),
-                    RoundedButton2(
-                      title: "Add another inheritance right",
-                      onpress: () {},
-                    ),
-                    SizedBox(
-                      height: Get.height * 0.03,
-                    ),
+                    // RoundedButton2(
+                    //   title: "Add another inheritance right",
+                    //   onpress: () {},
+                    // ),
+                    // SizedBox(
+                    //   height: Get.height * 0.03,
+                    // ),
                     Align(
                       alignment: Alignment.bottomCenter,
                       child: CustomElevatedButton(

@@ -21,6 +21,8 @@ class DocumentsFolder extends StatelessWidget {
           elevation: 0,
           backgroundColor: Colors.transparent,
           flexibleSpace: CustomAppBar2(
+            isBack: false,
+            isArgument: true,
             titleText: "Document Folder 1",
             height: Get.height * 0.11,
             icon: PopupMenuButton(

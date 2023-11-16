@@ -22,7 +22,6 @@ class PaymentMethodProcess extends StatefulWidget {
 }
 
 class _PaymentMethodProcessState extends State<PaymentMethodProcess> {
-  PDFController pdfController = Get.find(tag: 'pdfController');
 
   TextEditingController nameController = TextEditingController();
 
@@ -34,14 +33,14 @@ class _PaymentMethodProcessState extends State<PaymentMethodProcess> {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(
-      () => Scaffold(
+    return  Scaffold(
         body: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 5),
             child: Column(
               children: [
-                CustomAppBar2(
+                CustomAppBar2(isBack: false,
+                  isArgument: true,
                   height: Get.height * 0.1,
                   titleText: 'Card Info',
                 ),
@@ -206,25 +205,15 @@ class _PaymentMethodProcessState extends State<PaymentMethodProcess> {
                         height: Get.height * 0.06,
                       ),
                       Center(
-                        child: pdfController.isPDFControllerLoading.value
-                            ? SizedBox(
-                                height: 30,
-                                width: 30,
-                                child: CircularProgressIndicator(
-                                    color: AppColorsConstants.AppMainColor),
-                              )
-                            : CustomElevatedButton(
+                        child:  CustomElevatedButton(
                                 onpress: () async {
                                   if (Get.arguments == 'Tyed') {
-                                    await pdfController
-                                        .uploadTyedAgreementsToFirebaseStorage(
-                                            pdfs: await makePdf());
+                                    Get.back();
+                                    Get.back();
+                                    Get.back();
                                   } else {
-                                    Get.toNamed(RoutesName.YourPasscode);
+                                    Get.toNamed(RoutesName.FamilyDocumentsFolder, arguments: true);
                                   }
-
-                                  // Get.toNamed(RoutesName.YourPasscode,
-                                  //     arguments: Get.arguments);
                                 },
                                 text: "Pay Now",
                                 height: Get.height * 0.05,
@@ -239,7 +228,7 @@ class _PaymentMethodProcessState extends State<PaymentMethodProcess> {
             ),
           ),
         ),
-      ),
-    );
+      )
+    ;
   }
 }

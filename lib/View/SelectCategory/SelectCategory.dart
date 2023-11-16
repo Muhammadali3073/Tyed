@@ -26,7 +26,8 @@ class SelectCategory extends StatelessWidget {
     return Scaffold(
       body: Column(
         children: [
-          CustomAppBar2(
+          CustomAppBar2(isBack: false,
+            isArgument: true,
             height: Get.height * 0.1,
             titleText: 'Select Category',
           ),
