@@ -205,7 +205,13 @@ class _YourAndSpouseSignState extends State<YourAndSpouseSign> {
                       child: TextFormField(
                           textAlign: TextAlign.center,
                           onTap: () {
+                            spouseSignatureImage();
+                            personSignatureImage();
                             selectDOB(context);
+                          },
+                          onChanged: (value) {
+                            tyedQuestionsController
+                                .tyedAnswersModel.dateSignatureAnswer = value;
                           },
                           controller: dateController,
                           keyboardType: TextInputType.datetime,
@@ -230,36 +236,28 @@ class _YourAndSpouseSignState extends State<YourAndSpouseSign> {
                           )
                         : CustomElevatedButton(
                             onpress: () async {
-                              Get.toNamed(RoutesName.DownloadScreen);
+                              // Get.toNamed(RoutesName.DownloadScreen);
 
-
-
-                              // if (spouseSignatureController.isNotEmpty &&
-                              //     yourSignatureController.isNotEmpty) {
-                              //   if (dateController.text.isNotEmpty) {
-                              //     pdfController.isPDFControllerLoading.value =
-                              //         true;
-                              //     spouseSignatureImage();
-                              //     personSignatureImage();
-                              //     tyedQuestionsController.tyedAnswersModel
-                              //             .dateSignatureAnswer =
-                              //         dateController.text;
-                              //
-                              //     await pdfController
-                              //         .uploadTyedAgreementsToFirebaseStorage(
-                              //             pdfs: await makePdf());
-                              //   } else {
-                              //     Get.snackbar('Required', 'Date is Required',
-                              //         colorText: Colors.white,
-                              //         backgroundColor: AppColorsConstants
-                              //             .AppMainColor.withOpacity(0.5));
-                              //   }
-                              // } else {
-                              //   Get.snackbar('Required', 'Signature Required',
-                              //       colorText: Colors.white,
-                              //       backgroundColor: AppColorsConstants
-                              //           .AppMainColor.withOpacity(0.5));
-                              // }
+                              if (spouseSignatureController.isNotEmpty &&
+                                  yourSignatureController.isNotEmpty) {
+                                if (dateController.text.isNotEmpty) {
+                                  pdfController.isPDFControllerLoading.value =
+                                      true;
+                                  await pdfController
+                                      .uploadTyedAgreementsToFirebaseStorage(
+                                          pdfs: await makePdf());
+                                } else {
+                                  Get.snackbar('Required', 'Date is Required',
+                                      colorText: Colors.white,
+                                      backgroundColor: AppColorsConstants
+                                          .AppMainColor.withOpacity(0.5));
+                                }
+                              } else {
+                                Get.snackbar('Required', 'Signature Required',
+                                    colorText: Colors.white,
+                                    backgroundColor: AppColorsConstants
+                                        .AppMainColor.withOpacity(0.5));
+                              }
                             },
                             text: "Done",
                             height: Get.height * 0.05,

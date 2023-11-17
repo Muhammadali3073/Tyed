@@ -9,7 +9,6 @@ class UserModel {
   String? userId;
   String? profileImage;
   String? timeStamp;
-  TyedAgreements? tyedAgreementsList;
 
   UserModel({
     this.userFirstName,
@@ -22,7 +21,6 @@ class UserModel {
     this.timeStamp,
     this.userId,
     this.profileImage,
-    this.tyedAgreementsList,
   });
 
   UserModel.fromJson(Map<String, Object?> json)
@@ -37,10 +35,6 @@ class UserModel {
           userId: json['userId'] as String?,
           profileImage: json['profileImage'] as String?,
           timeStamp: json['timeStamp'] as String?,
-          tyedAgreementsList: json['tyedAgreementsList'] != null
-              ? TyedAgreements.fromJson(
-              json['tyedAgreementsList'] as Map<String, Object?>)
-              : null,
         );
 
   Map<String, Object?> toJson() {
@@ -55,30 +49,7 @@ class UserModel {
       'timeStamp': timeStamp ?? '',
       'profileImage': profileImage ?? '',
       'userId': userId ?? '',
-      'tyedAgreementsList': tyedAgreementsList?.toJson(),
     };
   }
 }
 
-class TyedAgreements {
-  List<dynamic>? tyedAgreementPayment;
-  List<dynamic>? tyedAgreements;
-
-  TyedAgreements({
-    this.tyedAgreementPayment,
-    this.tyedAgreements,
-  });
-
-  TyedAgreements.fromJson(Map<String, Object?> json)
-      : this(
-          tyedAgreementPayment: json['tyedAgreementPayment'] as List<dynamic>?,
-          tyedAgreements: json['tyedAgreements'] as List<dynamic>?,
-        );
-
-  Map<String, Object?> toJson() {
-    return {
-      'tyedAgreementPayment': tyedAgreementPayment ?? [],
-      'tyedAgreements': tyedAgreements ?? [],
-    };
-  }
-}

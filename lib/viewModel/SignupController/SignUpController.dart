@@ -7,7 +7,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:tyedapp/models/sign_up_model.dart';
+import 'package:tyedapp/models/tyed_agreement_model.dart';
+import 'package:tyedapp/models/user_model.dart';
 
 import '../../Constant/Constants/colors/Constants.dart';
 import '../../Constant/Constants/routes/routesName.dart';
@@ -33,6 +34,13 @@ class SignupController extends GetxController {
       .withConverter<UserModel>(
         fromFirestore: (snapshot, _) => UserModel.fromJson(snapshot.data()!),
         toFirestore: (users, _) => users.toJson(),
+      );
+  final tyedAgreementData = FirebaseFirestore.instance
+      .collection('tyedAgreements')
+      .withConverter<TyedAgreementsModel>(
+        fromFirestore: (snapshot, _) =>
+            TyedAgreementsModel.fromJson(snapshot.data()!),
+        toFirestore: (tyedAgreement, _) => tyedAgreement.toJson(),
       );
 
   // Sign Up Method
@@ -77,6 +85,8 @@ class SignupController extends GetxController {
               userPhoneNumber: userPhoneNumber,
               userDOB: userDOB,
               userPassword: userPassword,
+              unpaidTyedAgreementsList: [],
+              paidTyedAgreementsList: [],
               timeStamp: myTimeStamp.toDate().toString());
         }
       } on FirebaseAuthException catch (e) {
@@ -102,7 +112,8 @@ class SignupController extends GetxController {
       userAddress,
       userDOB,
       userPassword,
-      tyedAgreements,
+      unpaidTyedAgreementsList,
+      paidTyedAgreementsList,
       timeStamp}) async {
     return await userData
         .doc(userID)
@@ -116,20 +127,30 @@ class SignupController extends GetxController {
           userAddress: userAddress,
           userDOB: userDOB,
           userPassword: userPassword,
-          tyedAgreementsList: TyedAgreements(
-            tyedAgreementPayment: [],
-            tyedAgreements: [],
-          ),
           timeStamp: timeStamp,
         ))
         .then(
-      (value) {
-        Get.snackbar('Success', 'User Registered Successfully.',
-            colorText: Colors.white,
-            backgroundColor: AppColorsConstants.AppMainColor.withOpacity(0.5));
-        Get.offAllNamed(RoutesName.SignIn);
-        isSignUpLoading.value = false;
-        log("User Added");
+      (value) async {
+        await tyedAgreementData
+            .doc(userID)
+            .set(TyedAgreementsModel(
+              unpaidTyedAgreementsList: unpaidTyedAgreementsList,
+              paidTyedAgreementsList: paidTyedAgreementsList,
+            ))
+            .then(
+          (value) async {
+            Get.snackbar('Success', 'User Registered Successfully.',
+                colorText: Colors.white,
+                backgroundColor:
+                    AppColorsConstants.AppMainColor.withOpacity(0.5));
+            Get.offAllNamed(RoutesName.SignIn);
+            isSignUpLoading.value = false;
+            log("User Added");
+          },
+        ).catchError((error) {
+          isSignUpLoading.value = false;
+          log("Failed to add user: $error");
+        });
       },
     ).catchError((error) {
       isSignUpLoading.value = false;

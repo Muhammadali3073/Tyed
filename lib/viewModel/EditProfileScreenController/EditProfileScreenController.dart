@@ -63,15 +63,15 @@ class EditProfileController extends GetxController {
                 userDOB: userDOB,
               );
       } on FirebaseAuthException catch (e) {
-        Get.snackbar('Error', e.toString(),colorText: Colors.white,
-            backgroundColor: AppColorsConstants
-                .AppMainColor.withOpacity(0.5));
+        Get.snackbar('Error', e.toString(),
+            colorText: Colors.white,
+            backgroundColor: AppColorsConstants.AppMainColor.withOpacity(0.5));
         isUpdateProfileLoading.value = false;
       }
     } else {
-      Get.snackbar('Required', 'All fields are Required',colorText: Colors.white,
-          backgroundColor: AppColorsConstants
-              .AppMainColor.withOpacity(0.5));
+      Get.snackbar('Required', 'All fields are Required',
+          colorText: Colors.white,
+          backgroundColor: AppColorsConstants.AppMainColor.withOpacity(0.5));
     }
   }
 
@@ -100,9 +100,9 @@ class EditProfileController extends GetxController {
         .then(
       (value) {
         getUserDataController.getUserData();
-        Get.snackbar('Success', 'User Update Successfully.',colorText: Colors.white,
-            backgroundColor: AppColorsConstants
-                .AppMainColor.withOpacity(0.5));
+        Get.snackbar('Success', 'User Update Successfully.',
+            colorText: Colors.white,
+            backgroundColor: AppColorsConstants.AppMainColor.withOpacity(0.5));
         isUpdateProfileLoading.value = false;
         log("User Updated");
       },
@@ -172,14 +172,14 @@ class EditProfileController extends GetxController {
         selectedImage.value = File(pickedFile.path);
         log(selectedImage.value.toString());
       } else {
-        Get.snackbar("No Image", "Please Select Image",colorText: Colors.white,
-            backgroundColor: AppColorsConstants
-                .AppMainColor.withOpacity(0.5));
+        Get.snackbar("No Image", "Please Select Image",
+            colorText: Colors.white,
+            backgroundColor: AppColorsConstants.AppMainColor.withOpacity(0.5));
       }
     } catch (e) {
-      Get.snackbar("An Error", " ${e.toString()}",colorText: Colors.white,
-          backgroundColor: AppColorsConstants
-              .AppMainColor.withOpacity(0.5));
+      Get.snackbar("An Error", " ${e.toString()}",
+          colorText: Colors.white,
+          backgroundColor: AppColorsConstants.AppMainColor.withOpacity(0.5));
     }
   }
 }

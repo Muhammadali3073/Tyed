@@ -25,7 +25,6 @@ class _YesNoScreenState extends State<YesNoScreen> {
       Get.find(tag: 'tyedQuestionsController');
   RxString selectedValue = "Yes".obs;
 
-
   @override
   Widget build(BuildContext context) {
     return Obx(() => Scaffold(
@@ -140,20 +139,21 @@ class _YesNoScreenState extends State<YesNoScreen> {
                 onpress: () {
                   ShowDialogue.showCustomDialog(context, title: "Separate Debt",
                       onPress: () {
-
-                    tyedQuestionsController.tyedAnswersModel.coOwnAssetsAnswer = selectedValue.value;
+                    tyedQuestionsController.tyedAnswersModel.coOwnAssetsAnswer =
+                        selectedValue.value;
 
                     Get.back();
                     Get.toNamed(RoutesName.PayingScreen);
+                  }, onPressForNo: () {
+                    tyedQuestionsController.tyedAnswersModel.coOwnAssetsAnswer =
+                        selectedValue.value;
+                    Get.back();
+                    Get.toNamed(RoutesName.YesNoScreen2);
                   },
-                      onPressForNo: () {
-                        Get.back();
-                        Get.toNamed(RoutesName.YesNoScreen2);
-                      },
-                      content:
-                      tyedQuestionsController
-                          .tyedQuestionsRxModel.value!.separateDebt
-                          .toString() ?? "Would you like to list any debt that only one person is responsible for?");
+                      content: tyedQuestionsController
+                              .tyedQuestionsRxModel.value!.separateDebt
+                              .toString() ??
+                          "Would you like to list any debt that only one person is responsible for?");
                 },
                 text: "Next",
                 height: Get.height * 0.05,

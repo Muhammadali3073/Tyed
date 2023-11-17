@@ -2,7 +2,7 @@ import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
-import 'package:tyedapp/models/sign_up_model.dart';
+import 'package:tyedapp/models/user_model.dart';
 
 class GetUserDataController extends GetxController {
   final FirebaseAuth auth = FirebaseAuth.instance;
@@ -28,7 +28,7 @@ class GetUserDataController extends GetxController {
     getUserDataRxModel.value = userModel;
 
     isGetUserDataLoading.value = false;
-    log(getUserDataRxModel.value!.tyedAgreementsList!.tyedAgreementPayment.toString());
+    log(getUserDataRxModel.value!.userFirstName!.toString());
   }
 
 

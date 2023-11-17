@@ -47,6 +47,7 @@ class CustomAppBar2 extends StatelessWidget {
         padding: EdgeInsets.only(top: Get.height * 0.05),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             isBack != true
                 ? isArgument == true

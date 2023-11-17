@@ -7,6 +7,7 @@ import 'package:tyedapp/Constant/Constants/colors/Constants.dart';
 import 'package:tyedapp/Constant/Constants/routes/routesName.dart';
 
 import '../../Widgets/MainScreenWidget.dart';
+import '../../viewModel/GetUserDataController/GetTyedAgreementsController.dart';
 import '../../viewModel/GetUserDataController/GetUserDataController.dart';
 import '../../viewModel/PDFStoreInFirebaseController/pdfController.dart';
 
@@ -18,11 +19,12 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  PDFController pdfController = Get.find(tag: 'pdfController');
-
+  // PDFController pdfController = Get.find(tag: 'pdfController');
 
   GetUserDataController getUserDataController =
       Get.find(tag: 'getUserDataController');
+  GetTyedAgreementDataController tyedAgreementDataController =
+      Get.find(tag: 'tyedAgreementDataController');
 
   getUserDataMethod() {
     if (getUserDataController.getUserDataRxModel.value == null) {
@@ -30,10 +32,17 @@ class _MainScreenState extends State<MainScreen> {
     }
   }
 
+  getTyedAgreementMethod() {
+    if (tyedAgreementDataController.getTyedAgreementsRxModel.value == null) {
+      tyedAgreementDataController.getTyedAgreementsData();
+    }
+  }
+
   @override
   void initState() {
     // TODO: implement initState
     getUserDataMethod();
+    getTyedAgreementMethod();
     super.initState();
   }
 
@@ -65,7 +74,7 @@ class _MainScreenState extends State<MainScreen> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                           SvgPicture.asset('assets/profile.svg'),
+                          SvgPicture.asset('assets/profile.svg'),
                           SizedBox(
                             width: Get.width * 0.02,
                           ),

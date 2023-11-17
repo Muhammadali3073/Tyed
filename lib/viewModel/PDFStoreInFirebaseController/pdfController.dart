@@ -8,11 +8,12 @@ import 'package:get/get.dart';
 
 import '../../Constant/Constants/colors/Constants.dart';
 import '../../Constant/Constants/routes/routesName.dart';
-import '../GetUserDataController/GetUserDataController.dart';
+import '../GetUserDataController/GetTyedAgreementsController.dart';
 
 class PDFController extends GetxController {
-  GetUserDataController getUserDataController =
-      Get.put(GetUserDataController(), tag: 'getUserDataController');
+  GetTyedAgreementDataController tyedAgreementDataController = Get.put(
+      GetTyedAgreementDataController(),
+      tag: 'tyedAgreementDataController');
 
   var isPDFControllerLoading = false.obs;
 
@@ -24,7 +25,7 @@ class PDFController extends GetxController {
       String tyedAgreementsListUrl;
       final pdf = pdfs;
       final fileName =
-          '${auth.currentUser!.uid}_${getUserDataController.getUserDataRxModel.value!.tyedAgreementsList!.tyedAgreements!.length + 1}.pdf';
+          '${auth.currentUser!.uid}_${tyedAgreementDataController.getTyedAgreementsRxModel.value!.unpaidTyedAgreementsList == null ? 1 : tyedAgreementDataController.getTyedAgreementsRxModel.value!.unpaidTyedAgreementsList!.length + 1}.pdf';
       final Reference storageRef =
           storage.ref().child('tyed_agreement_folder/$fileName');
       UploadTask uploadTask = storageRef.putData(pdf);
@@ -38,18 +39,15 @@ class PDFController extends GetxController {
       log('Download URL for $fileName: $tyedAgreementsListUrl');
 
       return await FirebaseFirestore.instance
-          .collection('users')
+          .collection('tyedAgreements')
           .doc(auth.currentUser!.uid)
           .update({
-        'tyedAgreementsList.tyedAgreementPayment': FieldValue.arrayUnion([
-          '$tyedAgreementsListUrl,false'
-        ]),
-        'tyedAgreementsList.tyedAgreements':
+        'unpaidTyedAgreementsList':
             FieldValue.arrayUnion([tyedAgreementsListUrl]),
       }).then(
         (value) {
-          // Call Update User data
-          getUserDataController.getUserData();
+          // Call Update tyedA greement data
+          tyedAgreementDataController.getTyedAgreementsData();
 
           // Route of Download Screen
           Get.toNamed(RoutesName.DownloadScreen);
@@ -64,11 +62,54 @@ class PDFController extends GetxController {
         },
       ).catchError((error) {
         isPDFControllerLoading.value = false;
-        log("Failed to add user: $error");
+        log("Failed: $error");
       });
     } catch (e) {
       isPDFControllerLoading.value = false;
       log('Error uploading images to Firebase Storage: $e');
     }
+  }
+
+  updateTyedAgreementsPayment() async {
+    await FirebaseFirestore.instance
+        .collection('tyedAgreements')
+        .doc(auth.currentUser!.uid)
+        .update({
+      'paidTyedAgreementsList': FieldValue.arrayUnion([
+        '${tyedAgreementDataController.getTyedAgreementsRxModel.value!.unpaidTyedAgreementsList![0]}'
+      ]),
+    }).then(
+      (value) async {
+        await FirebaseFirestore.instance
+            .collection('tyedAgreements')
+            .doc(auth.currentUser!.uid)
+            .update({
+          'unpaidTyedAgreementsList': FieldValue.arrayRemove([
+            '${tyedAgreementDataController.getTyedAgreementsRxModel.value!.unpaidTyedAgreementsList![0]}'
+          ]),
+        }).then(
+          (value) {
+            // Call Update tyedA greement data
+            tyedAgreementDataController.getTyedAgreementsData();
+
+            // Route of Back
+            Get.back();
+            Get.back();
+            Get.back();
+
+            Get.snackbar('Update', 'Payment done Successfully.',
+                colorText: Colors.white,
+                backgroundColor:
+                    AppColorsConstants.AppMainColor.withOpacity(0.5));
+
+            log("Payment Updated");
+          },
+        ).catchError((error) {
+          log("Failed: $error");
+        });
+      },
+    ).catchError((error) {
+      log("Failed: $error");
+    });
   }
 }

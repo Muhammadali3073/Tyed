@@ -9,11 +9,16 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../Constant/Constants/colors/Constants.dart';
 import '../../Constant/Constants/routes/routesName.dart';
 import '../../validations/validations.dart';
+import '../GetUserDataController/GetTyedAgreementsController.dart';
 import '../GetUserDataController/GetUserDataController.dart';
 
 class SignInController extends GetxController {
   GetUserDataController getUserDataController =
       Get.put(GetUserDataController(), tag: 'getUserDataController');
+  GetTyedAgreementDataController tyedAgreementDataController = Get.put(
+      GetTyedAgreementDataController(),
+      tag: 'tyedAgreementDataController');
+
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   var isShowPassword = true.obs;
@@ -37,6 +42,7 @@ class SignInController extends GetxController {
         if (user.toString().isNotEmpty) {
           await prefs.setBool('isLogin', true);
           getUserDataController.getUserData(userId: user.uid);
+          tyedAgreementDataController.getTyedAgreementsData(userId: user.uid);
 
           Get.offAllNamed(RoutesName.CustomBottomNavigationBar);
           isSignInLoading.value = false;
@@ -44,16 +50,15 @@ class SignInController extends GetxController {
           log('Login: ${prefs.getBool('isLogin')} ');
         }
       } on FirebaseAuthException catch (e) {
-        Get.snackbar(
-            'Error', Validations.handleFirebaseAuthError(e.toString()),colorText: Colors.white,
-            backgroundColor: AppColorsConstants
-                .AppMainColor.withOpacity(0.5));
+        Get.snackbar('Error', Validations.handleFirebaseAuthError(e.toString()),
+            colorText: Colors.white,
+            backgroundColor: AppColorsConstants.AppMainColor.withOpacity(0.5));
         isSignInLoading.value = false;
       }
     } else {
-      Get.snackbar('Required', 'All fields are Required',colorText: Colors.white,
-          backgroundColor: AppColorsConstants
-              .AppMainColor.withOpacity(0.5));
+      Get.snackbar('Required', 'All fields are Required',
+          colorText: Colors.white,
+          backgroundColor: AppColorsConstants.AppMainColor.withOpacity(0.5));
     }
   }
 
@@ -65,17 +70,18 @@ class SignInController extends GetxController {
         (value) async {
           await prefs.remove('isLogin');
           Get.offAllNamed(RoutesName.SignIn);
-          Get.snackbar('Success', 'Signout Successfully.',colorText: Colors.white,
-              backgroundColor: AppColorsConstants
-                  .AppMainColor.withOpacity(0.5));
+          Get.snackbar('Success', 'Signout Successfully.',
+              colorText: Colors.white,
+              backgroundColor:
+                  AppColorsConstants.AppMainColor.withOpacity(0.5));
           log('Signout Successfully.');
           isSignOutLoading.value = false;
         },
       );
     } catch (e) {
-      Get.snackbar('Error', Validations.handleFirebaseAuthError(e.toString()),colorText: Colors.white,
-          backgroundColor: AppColorsConstants
-              .AppMainColor.withOpacity(0.5));
+      Get.snackbar('Error', Validations.handleFirebaseAuthError(e.toString()),
+          colorText: Colors.white,
+          backgroundColor: AppColorsConstants.AppMainColor.withOpacity(0.5));
       log(e.toString());
       isSignOutLoading.value = false;
     }

@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tyedapp/viewModel/EditProfileScreenController/EditProfileScreenController.dart';
+import 'package:tyedapp/viewModel/GetUserDataController/GetTyedAgreementsController.dart';
 import 'package:tyedapp/viewModel/GetUserDataController/GetUserDataController.dart';
 import 'package:tyedapp/viewModel/PDFStoreInFirebaseController/pdfController.dart';
 import 'package:tyedapp/viewModel/TyedQuestionsController/TyedQuestionsController.dart';
@@ -56,7 +57,9 @@ class _MyAppState extends State<MyApp> {
   GetUserDataController getUserDataController =
       Get.put(GetUserDataController(), tag: 'getUserDataController');
   PDFController pdfController = Get.put(PDFController(), tag: 'pdfController');
-
+  GetTyedAgreementDataController tyedAgreementDataController = Get.put(
+      GetTyedAgreementDataController(),
+      tag: 'tyedAgreementDataController');
 
   @override
   void initState() {
