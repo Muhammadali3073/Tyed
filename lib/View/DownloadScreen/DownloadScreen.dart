@@ -14,6 +14,7 @@ import '../../Constant/Constants/routes/routesName.dart';
 import '../../Widgets/CustomButton.dart';
 import '../../Widgets/CustomPdfRow.dart';
 import '../../viewModel/GetUserDataController/GetTyedAgreementsController.dart';
+import '../../viewModel/PDFStoreInFirebaseController/pdfController.dart';
 
 class DownloadScreen extends StatefulWidget {
   const DownloadScreen({super.key});
@@ -32,11 +33,14 @@ class _DownloadScreenState extends State<DownloadScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var currentSelectUrl = tyedAgreementDataController.getTyedAgreementsRxModel
+        .value!.unpaidTyedAgreementsList![tyedAgreementDataController
+            .getTyedAgreementsRxModel.value!.unpaidTyedAgreementsList!.length -
+        1];
+    log(currentSelectUrl.toString());
+
     return Obx(
-      () => tyedAgreementDataController.isGetTyedAgreementDataLoading.value ||
-              tyedAgreementDataController
-                      .getTyedAgreementsRxModel.value!.unpaidTyedAgreementsList ==
-                  null
+      () => tyedAgreementDataController.isGetTyedAgreementDataLoading.value
           ? Scaffold(
               body: Center(
                 child: SizedBox(
@@ -89,42 +93,49 @@ class _DownloadScreenState extends State<DownloadScreen> {
                         padding: const EdgeInsets.symmetric(horizontal: 10),
                         child: CustomPdfRow(
                           onTap: () {
-                            List<String> tyedAgreements =
-                                tyedAgreementDataController
-                                    .getTyedAgreementsRxModel
-                                    .value!
-                                    .unpaidTyedAgreementsList![
-                                        tyedAgreementDataController
-                                                .getTyedAgreementsRxModel
-                                                .value!
-                                                .unpaidTyedAgreementsList!
-                                                .length -
-                                            1]
-                                    .toString()
-                                    .split(',')
-                                    .toList();
-                            log(tyedAgreements[1].toString());
-
-                            tyedAgreements[1] == 'false'
+                            tyedAgreementDataController.getTyedAgreementsRxModel
+                                    .value!.unpaidTyedAgreementsList!.isEmpty
                                 ? Get.toNamed(
-                                    RoutesName.PaymentPlanTyedAgreementScreen)
-                                : Get.toNamed(
                                     RoutesName.PdfViewer,
-                                    arguments: tyedAgreements[0][
-                                        tyedAgreementDataController
+                                    arguments: currentSelectUrl.toString()
+                                  )
+                                : tyedAgreementDataController
+                                        .getTyedAgreementsRxModel
+                                        .value!
+                                        .unpaidTyedAgreementsList!
+                                        .contains(currentSelectUrl)
+                                    ? Get.toNamed(
+                                        RoutesName
+                                            .PaymentPlanTyedAgreementScreen,
+                                        arguments: tyedAgreementDataController
                                                 .getTyedAgreementsRxModel
                                                 .value!
                                                 .unpaidTyedAgreementsList!
                                                 .length -
-                                            1],
-                                  );
+                                            1)
+                                    : Get.toNamed(
+                                        RoutesName.PdfViewer,
+                                        arguments: currentSelectUrl.toString(),
+                                      );
                           },
                           column1: Column(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                "Tyed Agreement ${tyedAgreementDataController.getTyedAgreementsRxModel.value!.unpaidTyedAgreementsList!.length}",
+                                tyedAgreementDataController
+                                        .getTyedAgreementsRxModel
+                                        .value!
+                                        .unpaidTyedAgreementsList!
+                                        .isEmpty
+                                    ? "Tyed Agreement ${tyedAgreementDataController.getTyedAgreementsRxModel.value!.paidTyedAgreementsList!.length}"
+                                    : tyedAgreementDataController
+                                            .getTyedAgreementsRxModel
+                                            .value!
+                                            .unpaidTyedAgreementsList!
+                                            .contains(currentSelectUrl)
+                                        ? "Tyed Agreement ${tyedAgreementDataController.getTyedAgreementsRxModel.value!.unpaidTyedAgreementsList!.length}"
+                                        : "Tyed Agreement ${tyedAgreementDataController.getTyedAgreementsRxModel.value!.paidTyedAgreementsList!.length}",
                                 style: TextStyle(fontSize: 12),
                               ),
                               Row(
@@ -135,34 +146,30 @@ class _DownloadScreenState extends State<DownloadScreen> {
                                     height: 17,
                                     colors: AppColorsConstants.AppMainColor,
                                     onpress: () {
-                                      List<String> tyedAgreements =
-                                          tyedAgreementDataController
+                                      tyedAgreementDataController.getTyedAgreementsRxModel
+                                          .value!.unpaidTyedAgreementsList!.isEmpty
+                                          ? Get.toNamed(
+                                          RoutesName.PdfViewer,
+                                          arguments: currentSelectUrl.toString()
+                                      )
+                                          : tyedAgreementDataController
+                                          .getTyedAgreementsRxModel
+                                          .value!
+                                          .unpaidTyedAgreementsList!
+                                          .contains(currentSelectUrl)
+                                          ? Get.toNamed(
+                                          RoutesName
+                                              .PaymentPlanTyedAgreementScreen,
+                                          arguments: tyedAgreementDataController
                                               .getTyedAgreementsRxModel
                                               .value!
-                                              .unpaidTyedAgreementsList![
-                                                  tyedAgreementDataController
-                                                          .getTyedAgreementsRxModel
-                                                          .value!
-                                                          .unpaidTyedAgreementsList!
-                                                          .length -
-                                                      1]
-                                              .toString()
-                                              .split(',')
-                                              .toList();
-                                      log(tyedAgreements[1].toString());
-                                      tyedAgreements[1] == 'false'
-                                          ? Get.toNamed(RoutesName
-                                              .PaymentPlanTyedAgreementScreen)
+                                              .unpaidTyedAgreementsList!
+                                              .length -
+                                              1)
                                           : Get.toNamed(
-                                              RoutesName.PdfViewer,
-                                              arguments: tyedAgreements[
-                                                  0][tyedAgreementDataController
-                                                      .getTyedAgreementsRxModel
-                                                      .value!
-                                                      .unpaidTyedAgreementsList!
-                                                      .length -
-                                                  1],
-                                            );
+                                        RoutesName.PdfViewer,
+                                        arguments: currentSelectUrl.toString(),
+                                      );
                                     },
                                   ),
                                   Padding(
@@ -176,34 +183,30 @@ class _DownloadScreenState extends State<DownloadScreen> {
                                       height: 17,
                                       colors: AppColorsConstants.AppMainColor,
                                       onpress: () {
-                                        List<String> tyedAgreements =
-                                            tyedAgreementDataController
+                                        tyedAgreementDataController.getTyedAgreementsRxModel
+                                            .value!.unpaidTyedAgreementsList!.isEmpty
+                                            ? Get.toNamed(
+                                            RoutesName.PdfViewer,
+                                            arguments: currentSelectUrl.toString()
+                                        )
+                                            : tyedAgreementDataController
+                                            .getTyedAgreementsRxModel
+                                            .value!
+                                            .unpaidTyedAgreementsList!
+                                            .contains(currentSelectUrl)
+                                            ? Get.toNamed(
+                                            RoutesName
+                                                .PaymentPlanTyedAgreementScreen,
+                                            arguments: tyedAgreementDataController
                                                 .getTyedAgreementsRxModel
                                                 .value!
-                                                .unpaidTyedAgreementsList![
-                                                    tyedAgreementDataController
-                                                            .getTyedAgreementsRxModel
-                                                            .value!
-                                                            .unpaidTyedAgreementsList!
-                                                            .length -
-                                                        1]
-                                                .toString()
-                                                .split(',')
-                                                .toList();
-                                        log(tyedAgreements[1].toString());
-                                        tyedAgreements[1] == 'false'
-                                            ? Get.toNamed(RoutesName
-                                                .PaymentPlanTyedAgreementScreen)
+                                                .unpaidTyedAgreementsList!
+                                                .length -
+                                                1)
                                             : Get.toNamed(
-                                                RoutesName.PdfViewer,
-                                                arguments: tyedAgreements[
-                                                    0][tyedAgreementDataController
-                                                        .getTyedAgreementsRxModel
-                                                        .value!
-                                                        .unpaidTyedAgreementsList!
-                                                        .length -
-                                                    1],
-                                              );
+                                          RoutesName.PdfViewer,
+                                          arguments: currentSelectUrl.toString(),
+                                        );
                                       },
                                     ),
                                   ),
@@ -214,11 +217,35 @@ class _DownloadScreenState extends State<DownloadScreen> {
                           column2: Container(
                             margin: EdgeInsets.only(right: 10),
                             child: Text(
-                              "Unpaid",
+                              tyedAgreementDataController
+                                      .getTyedAgreementsRxModel
+                                      .value!
+                                      .unpaidTyedAgreementsList!
+                                      .isEmpty
+                                  ? "View"
+                                  : tyedAgreementDataController
+                                          .getTyedAgreementsRxModel
+                                          .value!
+                                          .unpaidTyedAgreementsList!
+                                          .contains(currentSelectUrl)
+                                      ? "Pay"
+                                      : "View",
                               style: TextStyle(
                                 fontSize: 10,
                                 fontWeight: FontWeight.bold,
-                                color: AppColorsConstants.AppMainColor,
+                                color: tyedAgreementDataController
+                                        .getTyedAgreementsRxModel
+                                        .value!
+                                        .unpaidTyedAgreementsList!
+                                        .isEmpty
+                                    ? Colors.black
+                                    : tyedAgreementDataController
+                                            .getTyedAgreementsRxModel
+                                            .value!
+                                            .unpaidTyedAgreementsList!
+                                            .contains(currentSelectUrl)
+                                        ? AppColorsConstants.AppMainColor
+                                        : Colors.black,
                               ),
                             ),
                           ),

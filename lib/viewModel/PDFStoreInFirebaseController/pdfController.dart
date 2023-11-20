@@ -45,9 +45,9 @@ class PDFController extends GetxController {
         'unpaidTyedAgreementsList':
             FieldValue.arrayUnion([tyedAgreementsListUrl]),
       }).then(
-        (value) {
+        (value) async{
           // Call Update tyedA greement data
-          tyedAgreementDataController.getTyedAgreementsData();
+         await tyedAgreementDataController.getTyedAgreementsData();
 
           // Route of Download Screen
           Get.toNamed(RoutesName.DownloadScreen);
@@ -70,13 +70,13 @@ class PDFController extends GetxController {
     }
   }
 
-  updateTyedAgreementsPayment() async {
+  updateTyedAgreementsPayment(currentIndexOfPdf) async {
     await FirebaseFirestore.instance
         .collection('tyedAgreements')
         .doc(auth.currentUser!.uid)
         .update({
       'paidTyedAgreementsList': FieldValue.arrayUnion([
-        '${tyedAgreementDataController.getTyedAgreementsRxModel.value!.unpaidTyedAgreementsList![0]}'
+        '${tyedAgreementDataController.getTyedAgreementsRxModel.value!.unpaidTyedAgreementsList![currentIndexOfPdf]}'
       ]),
     }).then(
       (value) async {
@@ -85,12 +85,12 @@ class PDFController extends GetxController {
             .doc(auth.currentUser!.uid)
             .update({
           'unpaidTyedAgreementsList': FieldValue.arrayRemove([
-            '${tyedAgreementDataController.getTyedAgreementsRxModel.value!.unpaidTyedAgreementsList![0]}'
+            '${tyedAgreementDataController.getTyedAgreementsRxModel.value!.unpaidTyedAgreementsList![currentIndexOfPdf]}'
           ]),
         }).then(
-          (value) {
+          (value) async {
             // Call Update tyedA greement data
-            tyedAgreementDataController.getTyedAgreementsData();
+            await tyedAgreementDataController.getTyedAgreementsData();
 
             // Route of Back
             Get.back();
@@ -101,14 +101,16 @@ class PDFController extends GetxController {
                 colorText: Colors.white,
                 backgroundColor:
                     AppColorsConstants.AppMainColor.withOpacity(0.5));
-
+            isPDFControllerLoading.value = false;
             log("Payment Updated");
           },
         ).catchError((error) {
+          isPDFControllerLoading.value = false;
           log("Failed: $error");
         });
       },
     ).catchError((error) {
+      isPDFControllerLoading.value = false;
       log("Failed: $error");
     });
   }

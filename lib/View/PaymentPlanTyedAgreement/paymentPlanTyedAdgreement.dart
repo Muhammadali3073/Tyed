@@ -59,7 +59,11 @@ class PaymentPlanTyedAgreementScreen extends StatelessWidget {
                       height: Get.height * 0.05,
                     ),
                     CustomElevatedButtonOnboardScreen(
-                        label: 'Pay Now', onPressed: () {Get.toNamed(RoutesName.PaymentMethod,arguments: 'Tyed');}),
+                        label: 'Pay Now',
+                        onPressed: () {
+                          Get.toNamed(RoutesName.PaymentMethod,
+                              arguments: ['Tyed', Get.arguments]);
+                        }),
                   ],
                 ),
               ],

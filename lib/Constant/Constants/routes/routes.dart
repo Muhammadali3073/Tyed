@@ -102,7 +102,10 @@ class AppRoutes {
         name: RoutesName.PaymentMethodProcess,
         page: () => PaymentMethodProcess(),
         arguments: arguments),
-    GetPage(name: RoutesName.DownloadScreen, page: () => DownloadScreen()),
+    GetPage(
+        name: RoutesName.DownloadScreen,
+        page: () => DownloadScreen(),
+        arguments: arguments),
     // GetPage(name: RoutesName.BrowseFiles, page: () => BrowseFiles()),
     GetPage(
         name: RoutesName.FamilyDocCheckout, page: () => FamilyDocCheckout()),
@@ -137,7 +140,8 @@ class AppRoutes {
         page: () => PrivacyPolicyScreen()),
     GetPage(
         name: RoutesName.PaymentPlanTyedAgreementScreen,
-        page: () => PaymentPlanTyedAgreementScreen()),
+        page: () => PaymentPlanTyedAgreementScreen(),
+        arguments: arguments),
     GetPage(
         name: RoutesName.PaymentPlanDocumentScreen,
         page: () => PaymentPlanDocumentScreen()),

@@ -29,7 +29,5 @@ class GetTyedAgreementDataController extends GetxController {
     getTyedAgreementsRxModel.value = tyedAgreementsModel;
 
     isGetTyedAgreementDataLoading.value = false;
-    log(getTyedAgreementsRxModel.value!.unpaidTyedAgreementsList.toString());
-    log(getTyedAgreementsRxModel.value!.paidTyedAgreementsList.toString());
   }
 }

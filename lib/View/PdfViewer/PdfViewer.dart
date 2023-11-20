@@ -47,7 +47,6 @@ class _PdfVierState extends State<PdfViewer> {
 
   @override
   Widget build(BuildContext context) {
-    log(Get.arguments.toString());
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
