@@ -20,6 +20,15 @@ class DocumentsFolder extends StatelessWidget {
           toolbarHeight: Get.height * 0.1,
           elevation: 0,
           backgroundColor: Colors.transparent,
+          leading: IconButton(
+            onPressed: () {
+              Get.back();
+            },
+            icon: const Icon(
+              Icons.arrow_back_ios_new,
+              size: 14,
+            ),
+          ),
           flexibleSpace: CustomAppBar2(
             isBack: false,
             isArgument: true,
@@ -71,7 +80,6 @@ class DocumentsFolder extends StatelessWidget {
                               AppTextConstant.BoldStyle.copyWith(fontSize: 14))
                     ],
                   )),
-
                   PopupMenuItem(
                       onTap: () {
                         Get.toNamed(RoutesName.ChangePasscode);
@@ -145,18 +153,22 @@ class DocumentsFolder extends StatelessWidget {
                         itemBuilder: (context, index) => Padding(
                           padding: EdgeInsets.symmetric(
                               vertical: Get.height * 0.007),
-                          child: InkWell(onTap:(){   Get.toNamed(RoutesName.PdfViewer);},
+                          child: InkWell(
+                            onTap: () {
+                              Get.toNamed(RoutesName.PdfViewer);
+                            },
                             child: Container(
                               height: Get.height * 0.08,
                               width: Get.width,
-                              decoration:
-                                  BoxDecoration(color: Colors.white, boxShadow: [
-                                BoxShadow(
-                                  blurRadius: 3,
-                                  spreadRadius: 1,
-                                  color: Colors.grey.shade100,
-                                ),
-                              ]),
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  boxShadow: [
+                                    BoxShadow(
+                                      blurRadius: 3,
+                                      spreadRadius: 1,
+                                      color: Colors.grey.shade100,
+                                    ),
+                                  ]),
                               child: Row(
                                 children: [
                                   Align(
@@ -171,23 +183,24 @@ class DocumentsFolder extends StatelessWidget {
                                       height: Get.height * 0.075,
                                       width: Get.width * 0.2,
                                       child: Center(
-                                        child:
-                                            SvgPicture.asset("assets/folder.svg"),
+                                        child: SvgPicture.asset(
+                                            "assets/folder.svg"),
                                       ),
                                     ),
                                   ),
                                   Expanded(
                                     child: Padding(
-                                      padding:
-                                          EdgeInsets.only(left: Get.width * 0.05),
+                                      padding: EdgeInsets.only(
+                                          left: Get.width * 0.05),
                                       child: Text(
                                         "Pdf",
-                                        style: AppTextConstant.BoldStyle.copyWith(
-                                            fontSize: 14),
+                                        style:
+                                            AppTextConstant.BoldStyle.copyWith(
+                                                fontSize: 14),
                                       ),
                                     ),
                                   ),
-                          
+
                                   // Use column2 widget if provided, else use an empty Container
                                 ],
                               ),
@@ -233,20 +246,25 @@ class DocumentsFolder extends StatelessWidget {
                         itemBuilder: (context, index) => Padding(
                           padding: EdgeInsets.symmetric(
                               vertical: Get.height * 0.007),
-                          child: InkWell(onTap:(){   Get.toNamed(RoutesName.PdfViewer);},
+                          child: InkWell(
+                            onTap: () {
+                              Get.toNamed(RoutesName.PdfViewer);
+                            },
                             child: Container(
                               height: Get.height * 0.08,
                               width: Get.width,
-                              decoration:
-                                  BoxDecoration(color: Colors.white, boxShadow: [
-                                BoxShadow(
-                                  blurRadius: 3,
-                                  spreadRadius: 1,
-                                  color: Colors.grey.shade100,
-                                ),
-                              ]),
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  boxShadow: [
+                                    BoxShadow(
+                                      blurRadius: 3,
+                                      spreadRadius: 1,
+                                      color: Colors.grey.shade100,
+                                    ),
+                                  ]),
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Align(
                                     alignment: Alignment.topLeft,
@@ -260,23 +278,24 @@ class DocumentsFolder extends StatelessWidget {
                                       height: Get.height * 0.075,
                                       width: Get.width * 0.2,
                                       child: Center(
-                                        child:
-                                            SvgPicture.asset("assets/folder.svg"),
+                                        child: SvgPicture.asset(
+                                            "assets/folder.svg"),
                                       ),
                                     ),
                                   ),
                                   Expanded(
                                     child: Padding(
-                                      padding:
-                                          EdgeInsets.only(left: Get.width * 0.05),
+                                      padding: EdgeInsets.only(
+                                          left: Get.width * 0.05),
                                       child: Text(
                                         "Image",
-                                        style: AppTextConstant.BoldStyle.copyWith(
-                                            fontSize: 14),
+                                        style:
+                                            AppTextConstant.BoldStyle.copyWith(
+                                                fontSize: 14),
                                       ),
                                     ),
                                   ),
-                          
+
                                   // Use column2 widget if provided, else use an empty Container
                                 ],
                               ),
@@ -322,20 +341,25 @@ class DocumentsFolder extends StatelessWidget {
                         itemBuilder: (context, index) => Padding(
                           padding: EdgeInsets.symmetric(
                               vertical: Get.height * 0.007),
-                          child: InkWell(onTap:(){   Get.toNamed(RoutesName.PdfViewer);},
+                          child: InkWell(
+                            onTap: () {
+                              Get.toNamed(RoutesName.PdfViewer);
+                            },
                             child: Container(
                               height: Get.height * 0.08,
                               width: Get.width,
-                              decoration:
-                                  BoxDecoration(color: Colors.white, boxShadow: [
-                                BoxShadow(
-                                  blurRadius: 3,
-                                  spreadRadius: 1,
-                                  color: Colors.grey.shade100,
-                                ),
-                              ]),
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  boxShadow: [
+                                    BoxShadow(
+                                      blurRadius: 3,
+                                      spreadRadius: 1,
+                                      color: Colors.grey.shade100,
+                                    ),
+                                  ]),
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Align(
                                     alignment: Alignment.topLeft,
@@ -349,23 +373,24 @@ class DocumentsFolder extends StatelessWidget {
                                       height: Get.height * 0.075,
                                       width: Get.width * 0.2,
                                       child: Center(
-                                        child:
-                                            SvgPicture.asset("assets/folder.svg"),
+                                        child: SvgPicture.asset(
+                                            "assets/folder.svg"),
                                       ),
                                     ),
                                   ),
                                   Expanded(
                                     child: Padding(
-                                      padding:
-                                          EdgeInsets.only(left: Get.width * 0.05),
+                                      padding: EdgeInsets.only(
+                                          left: Get.width * 0.05),
                                       child: Text(
                                         "Document ",
-                                        style: AppTextConstant.BoldStyle.copyWith(
-                                            fontSize: 14),
+                                        style:
+                                            AppTextConstant.BoldStyle.copyWith(
+                                                fontSize: 14),
                                       ),
                                     ),
                                   ),
-                          
+
                                   // Use column2 widget if provided, else use an empty Container
                                 ],
                               ),

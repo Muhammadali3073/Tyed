@@ -17,25 +17,25 @@ class PaymentPlanDocumentScreen extends StatefulWidget {
 }
 
 class _PaymentPlanDocumentScreenState extends State<PaymentPlanDocumentScreen> {
-  List paymentPlans = [
-    '\$2.99 / 1 Document',
-    '\$5.99 / 6 Document ',
-    '\$9.99 / 12 Document '
-  ];
+  List paymentPlansPrice = ['2.99', '5.99', '9.99'];
+  List paymentPlansDocuments = ['1', '6', '12'];
 
   RxInt isSelectPlan = 0.obs;
+
   backToBottomNavBar() {
     Get.offAllNamed(RoutesName.CustomBottomNavigationBar);
   }
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-       onWillPop: () => backToBottomNavBar(),
+      onWillPop: () => backToBottomNavBar(),
       child: Scaffold(
         body: Column(
           children: [
             CustomAppBar2(
-              onPressed: () => Get.offAllNamed(RoutesName.CustomBottomNavigationBar),
+              onPressed: () =>
+                  Get.offAllNamed(RoutesName.CustomBottomNavigationBar),
               isBack: false,
               isArgument: true,
               height: Get.height * 0.10,
@@ -56,7 +56,7 @@ class _PaymentPlanDocumentScreenState extends State<PaymentPlanDocumentScreen> {
                   SizedBox(height: Get.height * 0.025),
                   ListView.builder(
                     padding: EdgeInsets.zero,
-                    itemCount: paymentPlans.length,
+                    itemCount: paymentPlansPrice.length,
                     shrinkWrap: true,
                     physics: NeverScrollableScrollPhysics(),
                     itemBuilder: (context, index) {
@@ -97,7 +97,8 @@ class _PaymentPlanDocumentScreenState extends State<PaymentPlanDocumentScreen> {
                                 SizedBox(
                                   width: Get.height * 0.008,
                                 ),
-                                Text(paymentPlans[index],
+                                Text(
+                                    '\$${paymentPlansPrice[index]} / ${paymentPlansDocuments[index]} Document',
                                     style: TextStyle(
                                         fontWeight: FontWeight.w600,
                                         color: isSelectPlan.value == index

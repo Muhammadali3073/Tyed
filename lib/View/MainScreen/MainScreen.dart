@@ -5,6 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:tyedapp/Constant/Constants/colors/Constants.dart';
 import 'package:tyedapp/Constant/Constants/routes/routesName.dart';
+import 'package:tyedapp/viewModel/GetUserDataController/GetFamilyDocumentsController.dart';
 
 import '../../Widgets/MainScreenWidget.dart';
 import '../../viewModel/GetUserDataController/GetTyedAgreementsController.dart';
@@ -25,6 +26,8 @@ class _MainScreenState extends State<MainScreen> {
       Get.find(tag: 'getUserDataController');
   GetTyedAgreementDataController tyedAgreementDataController =
       Get.find(tag: 'tyedAgreementDataController');
+  GetFamilyDocumentsDataController getFamilyDocumentsDataController =
+      Get.find(tag: 'getFamilyDocumentsDataController');
 
   getUserDataMethod() {
     if (getUserDataController.getUserDataRxModel.value == null) {
@@ -38,11 +41,19 @@ class _MainScreenState extends State<MainScreen> {
     }
   }
 
+  getFamilyDocumentsMethod() {
+    if (getFamilyDocumentsDataController.getFamilyDocumentsRxModel.value ==
+        null) {
+      getFamilyDocumentsDataController.getFamilyDocumentsData();
+    }
+  }
+
   @override
   void initState() {
     // TODO: implement initState
     getUserDataMethod();
     getTyedAgreementMethod();
+    getFamilyDocumentsMethod();
     super.initState();
   }
 

@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tyedapp/viewModel/EditProfileScreenController/EditProfileScreenController.dart';
+import 'package:tyedapp/viewModel/GetUserDataController/GetFamilyDocumentsController.dart';
 import 'package:tyedapp/viewModel/GetUserDataController/GetTyedAgreementsController.dart';
 import 'package:tyedapp/viewModel/GetUserDataController/GetUserDataController.dart';
 import 'package:tyedapp/viewModel/PDFStoreInFirebaseController/pdfController.dart';
@@ -47,19 +48,22 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   SignInController signInController =
-      Get.put(SignInController(), tag: 'signInController');
+  Get.put(SignInController(), tag: 'signInController');
   SignupController signupController =
-      Get.put(SignupController(), tag: 'signupController');
+  Get.put(SignupController(), tag: 'signupController');
   TyedQuestionsController tyedQuestionsController =
-      Get.put(TyedQuestionsController(), tag: 'tyedQuestionsController');
+  Get.put(TyedQuestionsController(), tag: 'tyedQuestionsController');
   EditProfileController editProfileController =
-      Get.put(EditProfileController(), tag: 'editProfileController');
+  Get.put(EditProfileController(), tag: 'editProfileController');
   GetUserDataController getUserDataController =
-      Get.put(GetUserDataController(), tag: 'getUserDataController');
+  Get.put(GetUserDataController(), tag: 'getUserDataController');
   PDFController pdfController = Get.put(PDFController(), tag: 'pdfController');
   GetTyedAgreementDataController tyedAgreementDataController = Get.put(
       GetTyedAgreementDataController(),
       tag: 'tyedAgreementDataController');
+  GetFamilyDocumentsDataController getFamilyDocumentsDataController = Get.put(
+      GetFamilyDocumentsDataController(),
+      tag: 'getFamilyDocumentsDataController');
 
   @override
   void initState() {

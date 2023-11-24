@@ -28,7 +28,7 @@ class GetUserDataController extends GetxController {
     getUserDataRxModel.value = userModel;
 
     isGetUserDataLoading.value = false;
-    log(getUserDataRxModel.value!.userFirstName!.toString());
+    log('getUserDataRxModel is Coming Fine. ${getUserDataRxModel.value!.userFirstName}');
   }
 
 

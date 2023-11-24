@@ -7,11 +7,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:tyedapp/models/tyed_agreement_model.dart';
-import 'package:tyedapp/models/user_model.dart';
+import 'package:tyedapp/models/family_document_model.dart';
 
 import '../../Constant/Constants/colors/Constants.dart';
 import '../../Constant/Constants/routes/routesName.dart';
+import '../../models/tyed_agreement_model.dart';
+import '../../models/user_model.dart';
 import '../../validations/validations.dart';
 
 class SignupController extends GetxController {
@@ -36,11 +37,18 @@ class SignupController extends GetxController {
         toFirestore: (users, _) => users.toJson(),
       );
   final tyedAgreementData = FirebaseFirestore.instance
-      .collection('tyedAgreements')
+      .collection('tyedAgreementData')
       .withConverter<TyedAgreementsModel>(
         fromFirestore: (snapshot, _) =>
             TyedAgreementsModel.fromJson(snapshot.data()!),
         toFirestore: (tyedAgreement, _) => tyedAgreement.toJson(),
+      );
+  final familyDocumentsData = FirebaseFirestore.instance
+      .collection('familyDocumentsData')
+      .withConverter<FamilyDocumentsModel>(
+        fromFirestore: (snapshot, _) =>
+            FamilyDocumentsModel.fromJson(snapshot.data()!),
+        toFirestore: (familyDocumentsModel, _) => familyDocumentsModel.toJson(),
       );
 
   // Sign Up Method
@@ -85,8 +93,6 @@ class SignupController extends GetxController {
               userPhoneNumber: userPhoneNumber,
               userDOB: userDOB,
               userPassword: userPassword,
-              unpaidTyedAgreementsList: [],
-              paidTyedAgreementsList: [],
               timeStamp: myTimeStamp.toDate().toString());
         }
       } on FirebaseAuthException catch (e) {
@@ -112,8 +118,6 @@ class SignupController extends GetxController {
       userAddress,
       userDOB,
       userPassword,
-      unpaidTyedAgreementsList,
-      paidTyedAgreementsList,
       timeStamp}) async {
     return await userData
         .doc(userID)
@@ -134,18 +138,33 @@ class SignupController extends GetxController {
         await tyedAgreementData
             .doc(userID)
             .set(TyedAgreementsModel(
-              unpaidTyedAgreementsList: unpaidTyedAgreementsList,
-              paidTyedAgreementsList: paidTyedAgreementsList,
+              unpaidTyedAgreementsList: [],
+              paidTyedAgreementsList: [],
             ))
             .then(
           (value) async {
-            Get.snackbar('Success', 'User Registered Successfully.',
-                colorText: Colors.white,
-                backgroundColor:
-                    AppColorsConstants.AppMainColor.withOpacity(0.5));
-            Get.offAllNamed(RoutesName.SignIn);
-            isSignUpLoading.value = false;
-            log("User Added");
+            await familyDocumentsData
+                .doc(userID)
+                .set(FamilyDocumentsModel(
+                  isPayment: false,
+                  activePlan: '',
+                  currentPlanUploadedDocuments: '',
+                  familyDocumentsList: [],
+                ))
+                .then(
+              (value) async {
+                Get.snackbar('Success', 'User Registered Successfully.',
+                    colorText: Colors.white,
+                    backgroundColor:
+                        AppColorsConstants.AppMainColor.withOpacity(0.5));
+                Get.offAllNamed(RoutesName.SignIn);
+                isSignUpLoading.value = false;
+                log("User Added");
+              },
+            ).catchError((error) {
+              isSignUpLoading.value = false;
+              log("Failed to add user: $error");
+            });
           },
         ).catchError((error) {
           isSignUpLoading.value = false;

@@ -39,7 +39,7 @@ class PDFController extends GetxController {
       log('Download URL for $fileName: $tyedAgreementsListUrl');
 
       return await FirebaseFirestore.instance
-          .collection('tyedAgreements')
+          .collection('tyedAgreementData')
           .doc(auth.currentUser!.uid)
           .update({
         'unpaidTyedAgreementsList':
@@ -72,7 +72,7 @@ class PDFController extends GetxController {
 
   updateTyedAgreementsPayment(currentIndexOfPdf) async {
     await FirebaseFirestore.instance
-        .collection('tyedAgreements')
+        .collection('tyedAgreementData')
         .doc(auth.currentUser!.uid)
         .update({
       'paidTyedAgreementsList': FieldValue.arrayUnion([
@@ -81,7 +81,7 @@ class PDFController extends GetxController {
     }).then(
       (value) async {
         await FirebaseFirestore.instance
-            .collection('tyedAgreements')
+            .collection('tyedAgreementData')
             .doc(auth.currentUser!.uid)
             .update({
           'unpaidTyedAgreementsList': FieldValue.arrayRemove([

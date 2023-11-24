@@ -12,7 +12,7 @@ class GetTyedAgreementDataController extends GetxController {
       Rxn<TyedAgreementsModel>();
 
   final tyedAgreements = FirebaseFirestore.instance
-      .collection('tyedAgreements')
+      .collection('tyedAgreementData')
       .withConverter<TyedAgreementsModel>(
         fromFirestore: (snapshot, _) =>
             TyedAgreementsModel.fromJson(snapshot.data()!),
@@ -29,5 +29,7 @@ class GetTyedAgreementDataController extends GetxController {
     getTyedAgreementsRxModel.value = tyedAgreementsModel;
 
     isGetTyedAgreementDataLoading.value = false;
+    log('getTyedAgreementsRxModel is Coming Fine. ${getTyedAgreementsRxModel.value!.paidTyedAgreementsList}');
+
   }
 }

@@ -9,6 +9,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../Constant/Constants/colors/Constants.dart';
 import '../../Constant/Constants/routes/routesName.dart';
 import '../../validations/validations.dart';
+import '../GetUserDataController/GetFamilyDocumentsController.dart';
 import '../GetUserDataController/GetTyedAgreementsController.dart';
 import '../GetUserDataController/GetUserDataController.dart';
 
@@ -18,6 +19,9 @@ class SignInController extends GetxController {
   GetTyedAgreementDataController tyedAgreementDataController = Get.put(
       GetTyedAgreementDataController(),
       tag: 'tyedAgreementDataController');
+  GetFamilyDocumentsDataController getFamilyDocumentsDataController = Get.put(
+      GetFamilyDocumentsDataController(),
+      tag: 'getFamilyDocumentsDataController');
 
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -43,6 +47,7 @@ class SignInController extends GetxController {
           await prefs.setBool('isLogin', true);
           getUserDataController.getUserData(userId: user.uid);
           tyedAgreementDataController.getTyedAgreementsData(userId: user.uid);
+          getFamilyDocumentsDataController.getFamilyDocumentsData(userId: user.uid);
 
           Get.offAllNamed(RoutesName.CustomBottomNavigationBar);
           isSignInLoading.value = false;
